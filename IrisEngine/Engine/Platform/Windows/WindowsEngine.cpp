@@ -62,18 +62,18 @@ bool FWindowsEngine::InitWindows(FWinMainCommandParameters InParameters)
 {
 	//注册窗口
 	WNDCLASSEX WindowsClass;
-	WindowsClass.cbSize = sizeof(WNDCLASSEX);//该对象实际占用多大内存
-	WindowsClass.cbClsExtra = 0;//是否需要额外空间
-	WindowsClass.cbWndExtra = 0;//是否需要额外内存
-	WindowsClass.hbrBackground = nullptr;//如果有设置哪就是GDI擦除
-	WindowsClass.hCursor = LoadCursor(NULL, IDC_ARROW);//设置一个箭头光标
-	WindowsClass.hIcon = nullptr; //应用程序放在磁盘上显示的图标
-	WindowsClass.hIconSm = NULL;//应用程序显示在左上角的图标
-	WindowsClass.hInstance = InParameters.HInstance; //窗口实例
-	WindowsClass.lpszClassName = L"IrisEngine";//窗口名字
-	WindowsClass.lpszMenuName = nullptr;//
-	WindowsClass.style = CS_VREDRAW | CS_HREDRAW;//怎么绘制窗口 垂直和水平重绘
-	WindowsClass.lpfnWndProc = EngineWindowProc;//消息处理函数
+	WindowsClass.cbSize = sizeof(WNDCLASSEX);				//该对象实际占用多大内存
+	WindowsClass.cbClsExtra = 0;							//是否需要额外空间
+	WindowsClass.cbWndExtra = 0;							//是否需要额外内存
+	WindowsClass.hbrBackground = nullptr;					//如果有设置哪就是GDI擦除
+	WindowsClass.hCursor = LoadCursor(NULL, IDC_ARROW);		//设置一个箭头光标
+	WindowsClass.hIcon = nullptr;							//应用程序放在磁盘上显示的图标
+	WindowsClass.hIconSm = NULL;							//应用程序显示在左上角的图标
+	WindowsClass.hInstance = InParameters.HInstance;		//窗口实例
+	WindowsClass.lpszClassName = L"IrisEngine";				//窗口名字
+	WindowsClass.lpszMenuName = nullptr;					//
+	WindowsClass.style = CS_VREDRAW | CS_HREDRAW;			//怎么绘制窗口 垂直和水平重绘
+	WindowsClass.lpfnWndProc = EngineWindowProc;			//消息处理函数
 
 	//注册窗口
 	ATOM RegisterAtom = RegisterClassEx(&WindowsClass);
@@ -94,16 +94,16 @@ bool FWindowsEngine::InitWindows(FWinMainCommandParameters InParameters)
 	int WindowHight = Rect.bottom - Rect.top;
 
 	HWND Hwnd = CreateWindowEx(
-		NULL,//窗口额外的风格
-		L"IrisEngine", //窗口名称
-		L"Iris Engine",//显示在窗口的标题栏的名称
-		WS_OVERLAPPEDWINDOW, //窗口风格
-		100, 100,//窗口的坐标
-		WindowWidth, WindowHight,//
-		NULL, //副窗口句柄
-		nullptr, //菜单句柄
-		InParameters.HInstance,//窗口实例
-		NULL //额外参数
+		NULL,												//窗口额外的风格
+		L"IrisEngine",										//窗口名称
+		L"Iris Engine",										//显示在窗口的标题栏的名称
+		WS_OVERLAPPEDWINDOW,								//窗口风格
+		100, 100,											//窗口的坐标
+		WindowWidth, WindowHight,							//
+		NULL,												//副窗口句柄
+		nullptr,											//菜单句柄
+		InParameters.HInstance,								//窗口实例
+		NULL												//额外参数
 	);
 
 	if (!Hwnd)
