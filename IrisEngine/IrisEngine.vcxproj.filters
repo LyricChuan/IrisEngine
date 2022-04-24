@@ -177,6 +177,9 @@
     <ClInclude Include="Engine\Platform\Windows\WindowsMessageProcessing.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Debug\EngineDebug.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="simple_library\private\simple_channel\simple_net_drive\simple_net_drive.cpp">
@@ -291,6 +294,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Platform\Windows\WindowsMessageProcessing.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Debug\EngineDebug.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
