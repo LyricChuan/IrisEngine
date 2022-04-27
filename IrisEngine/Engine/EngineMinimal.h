@@ -17,3 +17,4 @@
 #include <DirectXCollision.h>//碰撞相关，AABB，OBB，胶囊体等
 
 using namespace Microsoft::WRL;
+using namespace std;

@@ -9,8 +9,13 @@
 FWindowsEngine::FWindowsEngine()
 	: M4XQualityLevels(0)
 	, bMSAA4XEnabled(false)
+	, BackBufferFormat(DXGI_FORMAT::DXGI_FORMAT_R8G8B8A8_UNORM)
 {
-
+	for (int i = 0; i < FEngineRenderConfig::GetRenderConfig()->SwapChainCount; i++)
+	{
+		SwapChainBuffer.push_back(ComPtr<ID3D12Resource>());
+	}
+	
 }
 
 int FWindowsEngine::PreInit(FWinMainCommandParameters InParameters)
@@ -22,6 +27,13 @@ int FWindowsEngine::PreInit(FWinMainCommandParameters InParameters)
 
 	//处理命令
 
+
+	Engine_Log("Engine pre initialization complete.");
+	return 0;
+}
+
+int FWindowsEngine::Init(FWinMainCommandParameters InParameters)
+{
 	//
 
 	if (InitWindows(InParameters))
@@ -29,18 +41,36 @@ int FWindowsEngine::PreInit(FWinMainCommandParameters InParameters)
 
 	}
 
-	Engine_Log("Engine pre initialization complete.");
-	return 0;
-}
 
-int FWindowsEngine::Init()
-{
 	Engine_Log("Engine initialization complete.");
 	return 0;
 }
 
 int FWindowsEngine::PostInit()
 {
+	for (int i = 0; i < FEngineRenderConfig::GetRenderConfig()->SwapChainCount; i++)
+	{
+		SwapChainBuffer[i].Reset();
+	}
+	DepthStencilBuffer.Reset();
+
+	SwapChain->ResizeBuffers(
+		FEngineRenderConfig::GetRenderConfig()->SwapChainCount,
+		FEngineRenderConfig::GetRenderConfig()->ScreenWidth,
+		FEngineRenderConfig::GetRenderConfig()->ScreenHeight,
+		BackBufferFormat, DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH);
+
+	//拿到描述size
+	RTVDescriptorSize = D3dDevice->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
+	D3D12_CPU_DESCRIPTOR_HANDLE HeapHandle(RTVHeap->GetCPUDescriptorHandleForHeapStart());
+	HeapHandle.ptr = 0;
+	for (UINT i = 0; i < FEngineRenderConfig::GetRenderConfig()->SwapChainCount; i++)
+	{
+		SwapChain->GetBuffer(i, IID_PPV_ARGS(&SwapChainBuffer[i]));
+		D3dDevice->CreateRenderTargetView(SwapChainBuffer[i].Get(), nullptr, HeapHandle);
+		HeapHandle.ptr += RTVDescriptorSize;//从当前缓冲区偏移到下一个
+	}
+
 	Engine_Log("Engine post initialization complete.");
 	return 0;
 }
@@ -254,13 +284,34 @@ bool FWindowsEngine::InitDirect3D()
 	SwapChainDesc.Windowed = true;//以窗口运行
 	SwapChainDesc.SwapEffect = DXGI_SWAP_EFFECT::DXGI_SWAP_EFFECT_FLIP_DISCARD;
 	SwapChainDesc.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
-
+	SwapChainDesc.BufferDesc.Format = BackBufferFormat;//纹理格式
 	//多长采样设置
 	SwapChainDesc.SampleDesc.Count = bMSAA4XEnabled ? 4 : 1;
 	SwapChainDesc.SampleDesc.Quality = bMSAA4XEnabled ? (M4XQualityLevels - 1) : 0;
 
 	DXGIFactory->CreateSwapChain(CommandQueue.Get(), &SwapChainDesc, SwapChain.GetAddressOf());
 
+	//资源描述符
+////////////////////////////////////////////////////////////////////////////////////////	
+	//D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV		//CBV常量缓冲区视图 SRV着色器资源视图 UAV无序访问视图
+	//D3D12_DESCRIPTOR_HEAP_TYPE_SAMPLER			//采样器视图
+	//D3D12_DESCRIPTOR_HEAP_TYPE_RTV				//渲染目标的视图资源
+	//D3D12_DESCRIPTOR_HEAP_TYPE_DSV				//深度模板的视图资源
+	//RTV
+	D3D12_DESCRIPTOR_HEAP_DESC RTVDescriptorHeapDesc;
+	RTVDescriptorHeapDesc.NumDescriptors = FEngineRenderConfig::GetRenderConfig()->SwapChainCount;
+	RTVDescriptorHeapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_RTV;
+	RTVDescriptorHeapDesc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_NONE;
+	RTVDescriptorHeapDesc.NodeMask = 0;
+	D3dDevice->CreateDescriptorHeap(&RTVDescriptorHeapDesc, IID_PPV_ARGS(RTVHeap.GetAddressOf()));
+	
+	//DSV
+	D3D12_DESCRIPTOR_HEAP_DESC DSVDescriptorHeapDesc;
+	DSVDescriptorHeapDesc.NumDescriptors = 1;
+	DSVDescriptorHeapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_DSV;
+	DSVDescriptorHeapDesc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_NONE;
+	DSVDescriptorHeapDesc.NodeMask = 0;
+	D3dDevice->CreateDescriptorHeap(&DSVDescriptorHeapDesc, IID_PPV_ARGS(RTVHeap.GetAddressOf()));
 
 	return false;
 }

@@ -9,7 +9,7 @@ public:
 	FWindowsEngine();
 
 	virtual int PreInit(FWinMainCommandParameters InParameters);
-	virtual int Init();
+	virtual int Init(FWinMainCommandParameters InParameters);
 	virtual int PostInit();
 
 	virtual void Tick();
@@ -34,9 +34,19 @@ protected:
 
 	ComPtr<IDXGISwapChain> SwapChain;//交换链
 
+	//描述符对象和堆
+	ComPtr<ID3D12DescriptorHeap> RTVHeap;//渲染到目标视图描述符堆
+	ComPtr<ID3D12DescriptorHeap> DSVHeap;//深度模板视图描述符堆
+
+	std::vector<ComPtr<ID3D12Resource>> SwapChainBuffer;
+	ComPtr<ID3D12Resource> DepthStencilBuffer;
+
 protected:
 	HWND MainWindowsHandle;//主window句柄
 	UINT M4XQualityLevels;
 	bool bMSAA4XEnabled;
+	DXGI_FORMAT BackBufferFormat;
+
+	UINT RTVDescriptorSize;
 };
 #endif
