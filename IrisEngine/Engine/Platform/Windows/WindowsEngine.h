@@ -46,6 +46,7 @@ protected:
 	UINT M4XQualityLevels;
 	bool bMSAA4XEnabled;
 	DXGI_FORMAT BackBufferFormat;
+	DXGI_FORMAT DepthStencilFormat;
 
 	UINT RTVDescriptorSize;
 };

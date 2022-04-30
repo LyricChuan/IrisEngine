@@ -10,6 +10,7 @@ FWindowsEngine::FWindowsEngine()
 	: M4XQualityLevels(0)
 	, bMSAA4XEnabled(false)
 	, BackBufferFormat(DXGI_FORMAT::DXGI_FORMAT_R8G8B8A8_UNORM)
+	, DepthStencilFormat(DXGI_FORMAT::DXGI_FORMAT_D24_UNORM_S8_UINT)
 {
 	for (int i = 0; i < FEngineRenderConfig::GetRenderConfig()->SwapChainCount; i++)
 	{
@@ -62,14 +63,58 @@ int FWindowsEngine::PostInit()
 
 	//拿到描述size
 	RTVDescriptorSize = D3dDevice->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
-	D3D12_CPU_DESCRIPTOR_HANDLE HeapHandle(RTVHeap->GetCPUDescriptorHandleForHeapStart());
-	HeapHandle.ptr = 0;
+
+	CD3DX12_CPU_DESCRIPTOR_HANDLE HeapHandle(RTVHeap->GetCPUDescriptorHandleForHeapStart());
 	for (UINT i = 0; i < FEngineRenderConfig::GetRenderConfig()->SwapChainCount; i++)
 	{
 		SwapChain->GetBuffer(i, IID_PPV_ARGS(&SwapChainBuffer[i]));
 		D3dDevice->CreateRenderTargetView(SwapChainBuffer[i].Get(), nullptr, HeapHandle);
-		HeapHandle.ptr += RTVDescriptorSize;//从当前缓冲区偏移到下一个
+		HeapHandle.Offset(1, RTVDescriptorSize);//从当前缓冲区偏移到下一个
 	}
+
+	D3D12_RESOURCE_DESC ResourceDesc;
+	ResourceDesc.Width = FEngineRenderConfig::GetRenderConfig()->ScreenWidth;
+	ResourceDesc.Height = FEngineRenderConfig::GetRenderConfig()->ScreenHeight;
+	ResourceDesc.Alignment = 0;
+	ResourceDesc.MipLevels = 1;
+	ResourceDesc.DepthOrArraySize = 1;
+	ResourceDesc.Dimension = D3D12_RESOURCE_DIMENSION_TEXTURE2D;
+
+	ResourceDesc.SampleDesc.Count = bMSAA4XEnabled ? 4 : 1;
+	ResourceDesc.SampleDesc.Quality = bMSAA4XEnabled ? (M4XQualityLevels - 1) : 0;
+	ResourceDesc.Format = DXGI_FORMAT_R24G8_TYPELESS;
+	ResourceDesc.Flags = D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL;
+	ResourceDesc.Layout = D3D12_TEXTURE_LAYOUT_UNKNOWN;
+
+	D3D12_CLEAR_VALUE ClearValue;
+	ClearValue.DepthStencil.Depth = 1.f;
+	ClearValue.Format = DepthStencilFormat;
+
+	CD3DX12_HEAP_PROPERTIES Properties = CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_DEFAULT);
+	D3dDevice->CreateCommittedResource(
+		&Properties,
+		D3D12_HEAP_FLAG_NONE, &ResourceDesc,
+		D3D12_RESOURCE_STATE_COMMON,&ClearValue,
+		IID_PPV_ARGS(DepthStencilBuffer.GetAddressOf()));
+
+	D3D12_DEPTH_STENCIL_VIEW_DESC DSVDesc;
+	DSVDesc.Format = DepthStencilFormat;
+	DSVDesc.Texture2D.MipSlice = 0;
+	DSVDesc.ViewDimension = D3D12_DSV_DIMENSION_TEXTURE2D;
+	DSVDesc.Flags = D3D12_DSV_FLAG_NONE;
+	D3dDevice->CreateDepthStencilView(DepthStencilBuffer.Get(), &DSVDesc, DSVHeap->GetCPUDescriptorHandleForHeapStart());
+
+	CD3DX12_RESOURCE_BARRIER BARRIER = CD3DX12_RESOURCE_BARRIER::Transition(DepthStencilBuffer.Get(),
+		D3D12_RESOURCE_STATE_COMMON,
+		D3D12_RESOURCE_STATE_DEPTH_WRITE);
+	GraphicsCommandList->ResourceBarrier(1, &BARRIER);
+	
+	GraphicsCommandList->Close();
+
+	ID3D12CommandList* CommandList[] = { GraphicsCommandList.Get() };
+
+	CommandQueue->ExecuteCommandLists(_countof(CommandList), CommandList);
+
 
 	Engine_Log("Engine post initialization complete.");
 	return 0;
@@ -241,12 +286,17 @@ bool FWindowsEngine::InitDirect3D()
 		D3D12_COMMAND_LIST_TYPE::D3D12_COMMAND_LIST_TYPE_DIRECT,
 		IID_PPV_ARGS(CommandAllocator.GetAddressOf()));
 
-	D3dDevice->CreateCommandList(
+	HRESULT CMLResult = D3dDevice->CreateCommandList(
 		0, //默认单个Gpu 
 		D3D12_COMMAND_LIST_TYPE::D3D12_COMMAND_LIST_TYPE_DIRECT,//直接类型
 		CommandAllocator.Get(),//将Commandlist关联到Allocator
 		NULL,//ID3D12PipelineState,NULL会默认设置一个虚拟管线状态
 		IID_PPV_ARGS(GraphicsCommandList.GetAddressOf()));
+
+	if (FAILED(CMLResult))
+	{
+		Engine_Log_Error("Error = %i", (int)CMLResult);
+	}
 
 	GraphicsCommandList->Close();
 
@@ -285,11 +335,15 @@ bool FWindowsEngine::InitDirect3D()
 	SwapChainDesc.SwapEffect = DXGI_SWAP_EFFECT::DXGI_SWAP_EFFECT_FLIP_DISCARD;
 	SwapChainDesc.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
 	SwapChainDesc.BufferDesc.Format = BackBufferFormat;//纹理格式
+
 	//多长采样设置
 	SwapChainDesc.SampleDesc.Count = bMSAA4XEnabled ? 4 : 1;
 	SwapChainDesc.SampleDesc.Quality = bMSAA4XEnabled ? (M4XQualityLevels - 1) : 0;
-
-	DXGIFactory->CreateSwapChain(CommandQueue.Get(), &SwapChainDesc, SwapChain.GetAddressOf());
+	CMLResult = DXGIFactory->CreateSwapChain(CommandQueue.Get(), &SwapChainDesc, SwapChain.GetAddressOf());
+	if (FAILED(CMLResult))
+	{
+		Engine_Log_Error("Error = %i", (int)CMLResult);
+	}
 
 	//资源描述符
 ////////////////////////////////////////////////////////////////////////////////////////	
