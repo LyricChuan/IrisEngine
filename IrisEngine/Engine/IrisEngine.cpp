@@ -43,7 +43,9 @@ int Init(FEngine* InEngine, HINSTANCE hInstance, HINSTANCE prevInstance, PSTR cm
 
 void Tick(FEngine* InEngine)
 {
-	InEngine->Tick();
+	float DeltaTime = 0.03f;
+	InEngine->Tick(DeltaTime);
+	Sleep(30);//Ä£Äâ
 }
 
 int Exit(FEngine* InEngine)

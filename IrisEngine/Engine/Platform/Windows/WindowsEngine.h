@@ -12,18 +12,24 @@ public:
 	virtual int Init(FWinMainCommandParameters InParameters);
 	virtual int PostInit();
 
-	virtual void Tick();
+	virtual void Tick(float DeltaTime);
 
 	virtual int PreExit();
 	virtual int Exit();
 	virtual int PostExit();
 
+public:
+	ID3D12Resource* GetCurrentSwapBuff() const;
+	D3D12_CPU_DESCRIPTOR_HANDLE GetCurrentSwapBufferView() const;
+	D3D12_CPU_DESCRIPTOR_HANDLE GetCurrentDepthStencilBufferView() const;
 private:
 	bool InitWindows(FWinMainCommandParameters InParameters);
 
 	bool InitDirect3D();
 
 protected:
+	int CurrentSwapBuffIndex;
+
 	ComPtr<IDXGIFactory4> DXGIFactory;//创建 DirectX 图形基础结构 (DXGI) 对象
 	ComPtr<ID3D12Device> D3dDevice;//创建命令分配器、命令列表、命令队列、Fence、资源、管道状态对象、堆、根签名、采样器和许多资源视图
 	ComPtr<ID3D12Fence> Fence;//一个用于同步 CPU 和一个或多个 GPU 的对象
