@@ -86,10 +86,28 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE prevInstance, PSTR cmdLine, in
 		//初始化
 		Init(Engine, hInstance, prevInstance, cmdLine, showCmd);
 
+		MSG EngineMsg = { 0 };
+
 		//渲染
-		while (true)
+		while (EngineMsg.message != WM_QUIT)
 		{
-			Tick(Engine);
+			//PM_NOREMOVE 消息不从队列中移除
+			//PM_REMOVE	  消息从队列中移除
+			//PM_NOYIELD  此标志使系统不释放，等待调用程序空闲的线程
+			//
+			//PM_QS_INPUT 处理鼠标和键盘消息
+			//PM_QS_PAINT 处理画图消息
+			//PM_QS_POSTMESSAGE 处理所有被寄送的消息，包括计时器和热键
+			//PM_QS_SENDMESSAGE	处理所有发送消息
+			if (PeekMessage(&EngineMsg,0,0,0,PM_REMOVE))//从消息队列中提取消息，如果不是WM_QUIT就REMOVE
+			{
+				TranslateMessage(&EngineMsg);//翻译成字符串
+				DispatchMessage(&EngineMsg);//分发消息
+			}
+			else
+			{
+				Tick(Engine);
+			}
 		}
 
 		//退出

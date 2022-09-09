@@ -1,13 +1,15 @@
 #include "WindowsEngine.h"
 #include "../../Debug/EngineDebug.h"
 #include "../../../Config/EngineRenderConfig.h"
+#include "../../Rendering/Core/Rendering.h"
 
 #if defined(_WIN32)
 #include "WindowsMessageProcessing.h"
 
 
 FWindowsEngine::FWindowsEngine()
-	: M4XQualityLevels(0)
+	: CurrentFenceIndex(0)
+	, M4XQualityLevels(0)
 	, bMSAA4XEnabled(false)
 	, BackBufferFormat(DXGI_FORMAT::DXGI_FORMAT_R8G8B8A8_UNORM)
 	, DepthStencilFormat(DXGI_FORMAT::DXGI_FORMAT_D24_UNORM_S8_UINT)
@@ -50,6 +52,9 @@ int FWindowsEngine::Init(FWinMainCommandParameters InParameters)
 
 int FWindowsEngine::PostInit()
 {
+	//同步
+	WaitGPUCommandQueueComplete();
+
 	for (int i = 0; i < FEngineRenderConfig::GetRenderConfig()->SwapChainCount; i++)
 	{
 		SwapChainBuffer[i].Reset();
@@ -116,6 +121,22 @@ int FWindowsEngine::PostInit()
 
 	CommandQueue->ExecuteCommandLists(_countof(CommandList), CommandList);
 
+	//这些会覆盖原先windows画布
+	//描述视口尺寸
+	ViewportInfo.TopLeftX = 0;
+	ViewportInfo.TopLeftY = 0;
+	ViewportInfo.Width = FEngineRenderConfig::GetRenderConfig()->ScreenWidth;
+	ViewportInfo.Height = FEngineRenderConfig::GetRenderConfig()->ScreenHeight;
+	ViewportInfo.MinDepth = 0.f;
+	ViewportInfo.MaxDepth = 1.f;
+
+	//矩形
+	ViewportRect.left = 0;
+	ViewportRect.top = 0;
+	ViewportRect.right = FEngineRenderConfig::GetRenderConfig()->ScreenWidth;
+	ViewportRect.bottom = FEngineRenderConfig::GetRenderConfig()->ScreenHeight;
+
+	WaitGPUCommandQueueComplete();
 
 	Engine_Log("Engine post initialization complete.");
 	return 0;
@@ -134,6 +155,11 @@ void FWindowsEngine::Tick(float DeltaTime)
 		D3D12_RESOURCE_STATE_PRESENT, D3D12_RESOURCE_STATE_RENDER_TARGET);
 	GraphicsCommandList->ResourceBarrier(1, &ResourceBarrierPresent);
 
+	//需要每帧执行
+	//绑定矩形框
+	GraphicsCommandList->RSSetViewports(1, &ViewportInfo);
+	GraphicsCommandList->RSSetScissorRects(1, &ViewportRect);
+
 	//清除画布
 	GraphicsCommandList->ClearRenderTargetView(GetCurrentSwapBufferView(), DirectX::Colors::Red, 0, nullptr);
 	
@@ -148,6 +174,12 @@ void FWindowsEngine::Tick(float DeltaTime)
 	GraphicsCommandList->OMSetRenderTargets(1, &SwapBufferView,
 		true, &DepthStencilView);
 
+	//渲染其他内容
+	for (auto &Tmp : FRenderingInterface::RenderingInterface)
+	{
+		Tmp->Draw(DeltaTime);
+	}
+
 	CD3DX12_RESOURCE_BARRIER ResourceBarrierPresentRenderTarget = CD3DX12_RESOURCE_BARRIER::Transition(GetCurrentSwapBuff(),
 		D3D12_RESOURCE_STATE_RENDER_TARGET, D3D12_RESOURCE_STATE_PRESENT);
 	GraphicsCommandList->ResourceBarrier(1,&ResourceBarrierPresentRenderTarget);
@@ -159,10 +191,12 @@ void FWindowsEngine::Tick(float DeltaTime)
 	ID3D12CommandList* CommandList[] = { GraphicsCommandList.Get() };
 	CommandQueue->ExecuteCommandLists(_countof(CommandList), CommandList);
 
+	//交换两个buff缓冲区
 	SwapChain->Present(0,0);
 	CurrentSwapBuffIndex = !(bool)CurrentSwapBuffIndex;
 
 	//CPU等GPU
+	WaitGPUCommandQueueComplete();
 }
 
 int FWindowsEngine::PreExit()
@@ -200,6 +234,32 @@ D3D12_CPU_DESCRIPTOR_HANDLE FWindowsEngine::GetCurrentSwapBufferView() const
 D3D12_CPU_DESCRIPTOR_HANDLE FWindowsEngine::GetCurrentDepthStencilBufferView() const
 {
 	return DSVHeap->GetCPUDescriptorHandleForHeapStart();
+}
+
+void FWindowsEngine::WaitGPUCommandQueueComplete()
+{
+	CurrentFenceIndex++;
+
+	//向GPU设置新的隔离点 等待GPU处理完信号
+	CommandQueue->Signal(Fence.Get(), CurrentFenceIndex);
+
+	if (Fence->GetCompletedValue() < CurrentFenceIndex)
+	{
+		//创建或打开一个事件内核对象，并返回该内核对象的句柄
+		//SECURITY_ATTRIBUTES
+		//CREATE_EVENT_INITIAL_SET 0X00000002 (代表初始化对象是否被触发了)
+		//CREATE_EVENT_MANUAL_RESET 0X00000001 (该事件对象必须要用ResetEvents来重置)
+		//ResetEvents
+		HANDLE EventEX = CreateEventEx(NULL,NULL,0,EVENT_ALL_ACCESS);
+		//GPU完成后会通知当前的Handle
+		Fence->SetEventOnCompletion(CurrentFenceIndex, EventEX);
+		
+		//等待GPU，阻塞主线程
+		WaitForSingleObject(EventEX, INFINITE);
+
+		//完成后关闭
+		CloseHandle(EventEX);
+	}
 }
 
 bool FWindowsEngine::InitWindows(FWinMainCommandParameters InParameters)
