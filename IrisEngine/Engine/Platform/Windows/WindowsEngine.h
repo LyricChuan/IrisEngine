@@ -5,8 +5,10 @@
 
 class FWindowsEngine : public FEngine
 {
+	friend struct IRenderingInterface;
 public:
 	FWindowsEngine();
+	~FWindowsEngine();
 
 	virtual int PreInit(FWinMainCommandParameters InParameters);
 	virtual int Init(FWinMainCommandParameters InParameters);
@@ -22,12 +24,22 @@ public:
 	ID3D12Resource* GetCurrentSwapBuff() const;
 	D3D12_CPU_DESCRIPTOR_HANDLE GetCurrentSwapBufferView() const;
 	D3D12_CPU_DESCRIPTOR_HANDLE GetCurrentDepthStencilBufferView() const;
+public:
+	DXGI_FORMAT GetBackBufferFormat() { return BackBufferFormat; }
+	DXGI_FORMAT GetDepthStencilFormat() { return DepthStencilFormat; }
+	UINT GetDXGISampleCount() const;
+	UINT GetDXGISampleQuality() const;
+protected:
+	void WaitGPUCommandQueueComplete();
+
 private:
 	bool InitWindows(FWinMainCommandParameters InParameters);
 
 	bool InitDirect3D();
+	void PostInitDirect3D();
 
 protected:
+	UINT64 CurrentFenceIndex;
 	int CurrentSwapBuffIndex;
 
 	ComPtr<IDXGIFactory4> DXGIFactory;//创建 DirectX 图形基础结构 (DXGI) 对象
@@ -47,6 +59,9 @@ protected:
 	std::vector<ComPtr<ID3D12Resource>> SwapChainBuffer;
 	ComPtr<ID3D12Resource> DepthStencilBuffer;
 
+	//和屏幕视口有关
+	D3D12_VIEWPORT ViewportInfo;
+	D3D12_RECT ViewportRect;
 protected:
 	HWND MainWindowsHandle;//主window句柄
 	UINT M4XQualityLevels;
