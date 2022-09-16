@@ -44,30 +44,32 @@ void IRenderingInterface::PostDraw(float DeltaTime)
 
 }
 
-ComPtr<ID3D12Resource> IRenderingInterface::ConstructDefaultBuffer(ComPtr<ID3D12Resource>& OutTmpBuffer, const void* Indata, UINT64 InDataSize)
+ComPtr<ID3D12Resource> IRenderingInterface::ConstructDefaultBuffer(
+	ComPtr<ID3D12Resource>& OutTmpBuffer, 
+	const void* InData, UINT64 InDataSize)
 {
 	ComPtr<ID3D12Resource> Buffer;
 	//创建资源描述
 	CD3DX12_RESOURCE_DESC BufferResourceDESC = CD3DX12_RESOURCE_DESC::Buffer(InDataSize);
 	//创建默认堆
 	CD3DX12_HEAP_PROPERTIES BufferProperties = CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_DEFAULT);
-	GetD3dDevice()->CreateCommittedResource(
+	ANALYSIS_HRESULT(GetD3dDevice()->CreateCommittedResource(
 		&BufferProperties,
 		D3D12_HEAP_FLAG_NONE,
 		&BufferResourceDESC,
 		D3D12_RESOURCE_STATE_COMMON,
-		NULL, IID_PPV_ARGS(Buffer.GetAddressOf()));
+		NULL, IID_PPV_ARGS(Buffer.GetAddressOf())));
 
 	CD3DX12_HEAP_PROPERTIES UpdateBufferProperties = CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_UPLOAD);
-	GetD3dDevice()->CreateCommittedResource(
+	ANALYSIS_HRESULT(GetD3dDevice()->CreateCommittedResource(
 		&UpdateBufferProperties,
 		D3D12_HEAP_FLAG_NONE,
 		&BufferResourceDESC,
 		D3D12_RESOURCE_STATE_GENERIC_READ,
-		NULL, IID_PPV_ARGS(OutTmpBuffer.GetAddressOf()));
+		NULL, IID_PPV_ARGS(OutTmpBuffer.GetAddressOf())));
 
-	D3D12_SUBRESOURCE_DATA SubResourceData = { };
-	SubResourceData.pData = Indata;
+	D3D12_SUBRESOURCE_DATA SubResourceData = {};
+	SubResourceData.pData = InData;
 	SubResourceData.RowPitch = InDataSize;
 	SubResourceData.SlicePitch = SubResourceData.RowPitch;
 
@@ -89,7 +91,7 @@ ComPtr<ID3D12Resource> IRenderingInterface::ConstructDefaultBuffer(ComPtr<ID3D12
 		&SubResourceData);
 
 	CD3DX12_RESOURCE_BARRIER ReadDestBarrier = CD3DX12_RESOURCE_BARRIER::Transition(Buffer.Get(),
-		D3D12_RESOURCE_STATE_COMMON,
+		D3D12_RESOURCE_STATE_COPY_DEST,
 		D3D12_RESOURCE_STATE_GENERIC_READ);
 
 	return Buffer;
@@ -113,7 +115,7 @@ ComPtr<ID3D12GraphicsCommandList> IRenderingInterface::GetGraphicsCommandList()
 	return NULL;
 }
 
-Microsoft::WRL::ComPtr<ID3D12CommandAllocator> IRenderingInterface::GetCommandAllocator()
+ComPtr<ID3D12CommandAllocator> IRenderingInterface::GetCommandAllocator()
 {
 	if (FWindowsEngine* InEngine = GetEngine())
 	{
@@ -164,12 +166,12 @@ void FRenderingResourcesUpdate::Init(ID3D12Device* InDevice, UINT InElementSize,
 		nullptr, IID_PPV_ARGS(&UploadBuffer)
 	);
 
-	UploadBuffer->Map(0, nullptr, reinterpret_cast<void**>(&Data));
+	ANALYSIS_HRESULT(UploadBuffer->Map(0,nullptr,reinterpret_cast<void**>(&Data)));
 }
 
-void FRenderingResourcesUpdate::Update(int Index, const void* Indata)
+void FRenderingResourcesUpdate::Update(int Index, const void* InData)
 {
-	memcpy(&Data[Index * ElementSize], Indata, ElementSize);
+	memcpy(&Data[Index* ElementSize], InData, ElementSize);
 }
 
 UINT FRenderingResourcesUpdate::GetConstantBufferByteSize(UINT InTypeSize)

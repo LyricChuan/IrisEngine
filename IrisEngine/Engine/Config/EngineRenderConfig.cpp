@@ -3,12 +3,11 @@
 FEngineRenderConfig* FEngineRenderConfig::RenderConfig = nullptr;
 
 FEngineRenderConfig::FEngineRenderConfig()
-	: ScreenWidth(1280)
-	, ScreenHeight(720)
-	, refreshRate(60)
-	, SwapChainCount(2)
+	:ScrrenWidth(1280)
+	,ScrrenHight(720)
+	,RefreshRate(60)
+	,SwapChainCount(2)
 {
-
 }
 
 FEngineRenderConfig* FEngineRenderConfig::GetRenderConfig()
@@ -29,4 +28,3 @@ void FEngineRenderConfig::Destroy()
 		RenderConfig = nullptr;
 	}
 }
-

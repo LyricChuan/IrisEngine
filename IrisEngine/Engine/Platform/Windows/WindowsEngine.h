@@ -5,7 +5,7 @@
 
 class FWindowsEngine : public FEngine
 {
-	friend struct IRenderingInterface;
+	friend class IRenderingInterface;
 public:
 	FWindowsEngine();
 	~FWindowsEngine();
@@ -23,12 +23,12 @@ public:
 public:
 	ID3D12Resource* GetCurrentSwapBuff() const;
 	D3D12_CPU_DESCRIPTOR_HANDLE GetCurrentSwapBufferView() const;
-	D3D12_CPU_DESCRIPTOR_HANDLE GetCurrentDepthStencilBufferView() const;
+	D3D12_CPU_DESCRIPTOR_HANDLE GetCurrentDepthStencilView() const;
 public:
-	DXGI_FORMAT GetBackBufferFormat() { return BackBufferFormat; }
-	DXGI_FORMAT GetDepthStencilFormat() { return DepthStencilFormat; }
-	UINT GetDXGISampleCount() const;
-	UINT GetDXGISampleQuality() const;
+	DXGI_FORMAT GetBackBufferFormat() const { return BackBufferFormat; }
+	DXGI_FORMAT GetDepthStencilFormat() const { return DepthStencilFormat; }
+	UINT GetDXGISampleCount()const;
+	UINT GetDXGISampleQuality()const;
 protected:
 	void WaitGPUCommandQueueComplete();
 

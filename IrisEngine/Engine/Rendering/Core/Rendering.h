@@ -4,8 +4,7 @@
 #include "../../Platform/Windows/WindowsEngine.h"
 #else
 #endif
-
-struct IRenderingInterface
+class IRenderingInterface
 {
 	friend class FWindowsEngine;
 public:
@@ -26,9 +25,7 @@ public:
 	simple_c_guid GetGuid() { return Guid; }
 
 protected:
-	//OutTmpBuffer¼´Îªupdatebuffer
-	ComPtr<ID3D12Resource> ConstructDefaultBuffer(ComPtr<ID3D12Resource>& OutTmpBuffer, const void* Indata, UINT64 InDataSize);
-
+	ComPtr<ID3D12Resource> ConstructDefaultBuffer(ComPtr<ID3D12Resource>& OutTmpBuffer,const void* InData,UINT64 InDataSize);
 protected:
 	ComPtr<ID3D12Device> GetD3dDevice();
 	ComPtr<ID3D12GraphicsCommandList> GetGraphicsCommandList();
@@ -53,7 +50,7 @@ public:
 
 	void Init(ID3D12Device* InDevice, UINT InElementSize, UINT InElementCount);
 
-	void Update(int Index, const void* Indata);
+	void Update(int Index,const void *InData);
 
 	UINT GetConstantBufferByteSize(UINT InTypeSize);
 	UINT GetConstantBufferByteSize();

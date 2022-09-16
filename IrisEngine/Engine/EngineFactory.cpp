@@ -13,7 +13,8 @@ FEngine* FEngineFactory::CreateEngine()
 #if defined(_WIN32)
 	return new FWindowsEngine();
 #elif defined(__linux__)
+	return nullptr;
 #endif
 
-	return nullptr;
+	
 }

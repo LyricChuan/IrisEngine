@@ -1,7 +1,7 @@
 #pragma once
-#include "../EngineMinimal.h"
 
 #if defined(_WIN32)
+#include "../EngineMinimal.h"
 class FWinMainCommandParameters
 {
 public:

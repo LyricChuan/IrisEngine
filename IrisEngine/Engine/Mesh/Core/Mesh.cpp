@@ -112,11 +112,11 @@ void FMesh::BuildMesh(const FMeshRenderingData* InRenderingData)
 	VertexSizeInBytes = InRenderingData->VertexData.size() * VertexStrideInBytes;
 	IndexSizeInBytes = IndexSize * sizeof(uint16_t);
 
-	D3DCreateBlob(VertexSizeInBytes, &CPUVertexBufferPtr);
-	memcpy(CPUVertexBufferPtr->GetBufferPointer(), InRenderingData->VertexData.data(), VertexSizeInBytes);
+    ANALYSIS_HRESULT(D3DCreateBlob(VertexSizeInBytes, &CPUVertexBufferPtr));
+    memcpy(CPUVertexBufferPtr->GetBufferPointer(), InRenderingData->VertexData.data(), VertexSizeInBytes);
 
-	D3DCreateBlob(IndexSizeInBytes, &CPUIndexBufferPtr);
-	memcpy(CPUIndexBufferPtr->GetBufferPointer(), InRenderingData->IndexData.data(), IndexSizeInBytes);
+    ANALYSIS_HRESULT(D3DCreateBlob(IndexSizeInBytes, &CPUIndexBufferPtr));
+    memcpy(CPUIndexBufferPtr->GetBufferPointer(), InRenderingData->IndexData.data(), IndexSizeInBytes);
 
 	GPUVertexBufferPtr = ConstructDefaultBuffer(
 		VertexBufferTmpPtr,
@@ -162,7 +162,7 @@ void FMesh::BuildMesh(const FMeshRenderingData* InRenderingData)
 	GPSDesc.RTVFormats[0] = GetEngine()->GetBackBufferFormat();
 	GPSDesc.DSVFormat = GetEngine()->GetDepthStencilFormat();
 
-	GetD3dDevice()->CreateGraphicsPipelineState(&GPSDesc, IID_PPV_ARGS(&PSO));
+    ANALYSIS_HRESULT(GetD3dDevice()->CreateGraphicsPipelineState(&GPSDesc, IID_PPV_ARGS(&PSO)))
 }
 
 void FMesh::PreDraw(float DeltaTime)
