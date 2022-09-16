@@ -1,3 +1,3 @@
 #pragma once
-#include "../../EngineMinimal.h"
+#include "../EngineMinimal.h"
 #include <DirectXMath.h>
