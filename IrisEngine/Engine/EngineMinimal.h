@@ -16,6 +16,11 @@
 #include <DirectXPackedVector.h>
 #include <DirectXColors.h>
 #include <DirectXCollision.h>//碰撞相关，AABB，OBB，胶囊体等
+#include "Debug/EngineDebug.h"
 
 using namespace Microsoft::WRL;
 using namespace std;
+using namespace DirectX;
+using namespace DirectX::PackedVector;
+
+extern class FEngine* Engine;

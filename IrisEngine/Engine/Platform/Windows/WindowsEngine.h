@@ -5,8 +5,10 @@
 
 class FWindowsEngine : public FEngine
 {
+	friend struct IRenderingInterface;
 public:
 	FWindowsEngine();
+	~FWindowsEngine();
 
 	virtual int PreInit(FWinMainCommandParameters InParameters);
 	virtual int Init(FWinMainCommandParameters InParameters);
@@ -22,6 +24,11 @@ public:
 	ID3D12Resource* GetCurrentSwapBuff() const;
 	D3D12_CPU_DESCRIPTOR_HANDLE GetCurrentSwapBufferView() const;
 	D3D12_CPU_DESCRIPTOR_HANDLE GetCurrentDepthStencilBufferView() const;
+public:
+	DXGI_FORMAT GetBackBufferFormat() { return BackBufferFormat; }
+	DXGI_FORMAT GetDepthStencilFormat() { return DepthStencilFormat; }
+	UINT GetDXGISampleCount() const;
+	UINT GetDXGISampleQuality() const;
 protected:
 	void WaitGPUCommandQueueComplete();
 
@@ -29,6 +36,7 @@ private:
 	bool InitWindows(FWinMainCommandParameters InParameters);
 
 	bool InitDirect3D();
+	void PostInitDirect3D();
 
 protected:
 	UINT64 CurrentFenceIndex;
