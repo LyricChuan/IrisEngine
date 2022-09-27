@@ -1,13 +1,17 @@
 #pragma once
 
+#include "CoreObject/CoreMinimalObject.h"
+
 #if defined(_WIN32)
 #include "WinMainCommandParameters.h"
 
 #endif
 
-class FEngine
+class CEngine : public CCoreMinimalObject
 {
 public:
+	CEngine();
+
 	virtual int PreInit(
 #if defined(_WIN32)
 		FWinMainCommandParameters InParameters
@@ -20,7 +24,7 @@ public:
 	) = 0;
 	virtual int PostInit() = 0;
 
-	virtual void Tick(float DeltaTime) = 0;
+	virtual void Tick(float DeltaTime) {};
 
 	virtual int PreExit() = 0;
 	virtual int Exit() = 0;

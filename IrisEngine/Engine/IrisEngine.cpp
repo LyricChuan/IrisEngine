@@ -2,7 +2,7 @@
 #include "EngineFactory.h"
 #include "Debug/Log/SimpleLog.h"
 
-int Init(FEngine* InEngine, HINSTANCE hInstance, HINSTANCE prevInstance, PSTR cmdLine, int showCmd)
+int Init(CEngine* InEngine, HINSTANCE hInstance, HINSTANCE prevInstance, PSTR cmdLine, int showCmd)
 {
 #if defined(_WIN32)
 	FWinMainCommandParameters WinMainParameters(hInstance, prevInstance, cmdLine, showCmd);
@@ -16,7 +16,7 @@ int Init(FEngine* InEngine, HINSTANCE hInstance, HINSTANCE prevInstance, PSTR cm
 
 	if (ReturnValue != 0)
 	{
-		Engine_Log_Error("[&i]Engine pre initialization error, check the initialization problem.", ReturnValue);
+		Engine_Log_Error("[%i]Engine pre initialization error, check the initialization problem.", ReturnValue);
 		return ReturnValue;
 	}
 
@@ -27,54 +27,54 @@ int Init(FEngine* InEngine, HINSTANCE hInstance, HINSTANCE prevInstance, PSTR cm
 	);
 	if (ReturnValue != 0)
 	{
-		Engine_Log_Error("[&i]Engine initialization error, check the initialization problem.", ReturnValue);
+		Engine_Log_Error("[%i]Engine initialization error, check the initialization problem.", ReturnValue);
 		return ReturnValue;
 	}
 
 	ReturnValue = InEngine->PostInit();
 	if (ReturnValue != 0)
 	{
-		Engine_Log_Error("[&i]Engine post initialization error, check the initialization problem.", ReturnValue);
+		Engine_Log_Error("[%i]Engine post initialization error, check the initialization problem.", ReturnValue);
 		return ReturnValue;
 	}
 
 	return ReturnValue;
 }
 
-void Tick(FEngine* InEngine)
+void Tick(CEngine* InEngine)
 {
 	float DeltaTime = 0.03f;
 	InEngine->Tick(DeltaTime);
-	Sleep(30);//模拟
+	//Sleep(30);//模拟
 }
 
-int Exit(FEngine* InEngine)
+int Exit(CEngine* InEngine)
 {
 	int ReturnValue = InEngine->PreExit();
 	if (ReturnValue != 0)
 	{
-		Engine_Log_Error("[&i]Engine pre exit failed.", ReturnValue);
+		Engine_Log_Error("[%i]Engine pre exit failed.", ReturnValue);
 		return ReturnValue;
 	}
 
 	ReturnValue = InEngine->Exit();
 	if (ReturnValue != 0)
 	{
-		Engine_Log_Error("[&i]Engine exit failed.", ReturnValue);
+		Engine_Log_Error("[%i]Engine exit failed.", ReturnValue);
 		return ReturnValue;
 	}
 
 	ReturnValue = InEngine->PostExit();
 	if (ReturnValue != 0)
 	{
-		Engine_Log_Error("[&i]Engine post exit failed.", ReturnValue);
+		Engine_Log_Error("[%i]Engine post exit failed.", ReturnValue);
 		return ReturnValue;
 	}
 
 	return ReturnValue;
 }
 
-FEngine* Engine = NULL;
+CEngine* Engine = NULL;
 
 //hInstance 自己的实例
 //prevInstance 上次的实例
@@ -115,13 +115,12 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE prevInstance, PSTR cmdLine, in
 
 		//退出
 		ReturnValue = Exit(Engine);
-
-		ReturnValue = 0;//成功
 	}
 	else
 	{
 		ReturnValue = 1;
 	}
 
+	Engine_Log("[%i]The engine has exited.", ReturnValue);
 	return ReturnValue;
 }

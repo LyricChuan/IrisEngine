@@ -1,12 +1,14 @@
 #pragma once
+#include "../../Core/CoreObject/GuidInterface.h"
 #include "../../Core/Engine.h"
 #if defined(_WIN32)
 #include "../../Platform/Windows/WindowsEngine.h"
 #else
 #endif
-class IRenderingInterface
+//提供渲染内容的接口
+class IRenderingInterface //:public IGuidInterface
 {
-	friend class FWindowsEngine;
+	friend class CDirectXRenderingEngine;
 public:
 	IRenderingInterface();
 	virtual ~IRenderingInterface();
@@ -16,14 +18,6 @@ public:
 	virtual void PreDraw(float DeltaTime);
 	virtual void Draw(float DeltaTime);
 	virtual void PostDraw(float DeltaTime);
-
-	bool operator==(const IRenderingInterface& InOther)
-	{
-		return guid_equal(&Guid, &InOther.Guid);
-	}
-
-	simple_c_guid GetGuid() { return Guid; }
-
 protected:
 	ComPtr<ID3D12Resource> ConstructDefaultBuffer(ComPtr<ID3D12Resource>& OutTmpBuffer,const void* InData,UINT64 InDataSize);
 protected:
@@ -32,32 +26,11 @@ protected:
 	ComPtr<ID3D12CommandAllocator> GetCommandAllocator();
 
 #if defined(_WIN32)
-	FWindowsEngine* GetEngine();
+	CWindowsEngine* GetEngine();
 #else
-	FEngine* GetEngine();
-#endif		
-
-private:
-	static vector<IRenderingInterface*> RenderingInterface;
-	simple_c_guid Guid;
-};
-
-class FRenderingResourcesUpdate : public enable_shared_from_this<FRenderingResourcesUpdate>
-{
-public:
-	FRenderingResourcesUpdate();
-	~FRenderingResourcesUpdate();
-
-	void Init(ID3D12Device* InDevice, UINT InElementSize, UINT InElementCount);
-
-	void Update(int Index,const void *InData);
-
-	UINT GetConstantBufferByteSize(UINT InTypeSize);
-	UINT GetConstantBufferByteSize();
-
-	ID3D12Resource* GetBuffer() { return UploadBuffer.Get(); }
-private:
-	ComPtr<ID3D12Resource> UploadBuffer;
-	UINT ElementSize;
-	BYTE* Data;
+	CEngine* GetEngine();
+#endif
+//		
+//private:
+//	static vector<IRenderingInterface*> RenderingInterface;
 };

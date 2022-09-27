@@ -1,31 +1,29 @@
 #include "Rendering.h"
 #include "../../Debug/EngineDebug.h"
 #include "../../Platform/Windows/WindowsEngine.h"
+#include "../../Rendering/Enigne/DirectX/Core/DirectXRenderingEngine.h"
 
-vector<IRenderingInterface*> IRenderingInterface::RenderingInterface;
+//vector<IRenderingInterface*> IRenderingInterface::RenderingInterface;
 
 IRenderingInterface::IRenderingInterface()
 {
-	create_guid(&Guid);
-
-	RenderingInterface.push_back(this);
+	//RenderingInterface.push_back(this);
 }
 
 IRenderingInterface::~IRenderingInterface()
 {
-	for (auto Iter = RenderingInterface.begin(); Iter != RenderingInterface.end(); ++Iter)
+/*	for (auto Iter = RenderingInterface.begin(); Iter != RenderingInterface.end(); ++Iter)
 	{
 		if (*Iter == this)//需要重载操作符
 		{
 			RenderingInterface.erase(Iter);
 			break;
 		}
-	}
+	}*/
 }
 
 void IRenderingInterface::Init()
 {
-
 }
 
 void IRenderingInterface::PreDraw(float DeltaTime)
@@ -41,7 +39,6 @@ void IRenderingInterface::Draw(float DeltaTime)
 
 void IRenderingInterface::PostDraw(float DeltaTime)
 {
-
 }
 
 ComPtr<ID3D12Resource> IRenderingInterface::ConstructDefaultBuffer(
@@ -99,94 +96,49 @@ ComPtr<ID3D12Resource> IRenderingInterface::ConstructDefaultBuffer(
 
 ComPtr<ID3D12Device> IRenderingInterface::GetD3dDevice()
 {
-	if (FWindowsEngine* InEngine = GetEngine())
+	if (CWindowsEngine* InEngine = GetEngine())
 	{
-		return InEngine->D3dDevice;
+		if (InEngine->GetRenderingEngine())
+		{
+			return InEngine->GetRenderingEngine()->D3dDevice;
+		}	
 	}
 	return NULL;
 }
 
 ComPtr<ID3D12GraphicsCommandList> IRenderingInterface::GetGraphicsCommandList()
 {
-	if (FWindowsEngine* InEngine = GetEngine())
+	if (CWindowsEngine* InEngine = GetEngine())
 	{
-		return InEngine->GraphicsCommandList;
+		if (InEngine->GetRenderingEngine())
+		{
+			return InEngine->GetRenderingEngine()->GraphicsCommandList;
+		}
 	}
 	return NULL;
 }
 
 ComPtr<ID3D12CommandAllocator> IRenderingInterface::GetCommandAllocator()
 {
-	if (FWindowsEngine* InEngine = GetEngine())
+	if (CWindowsEngine* InEngine = GetEngine())
 	{
-		return InEngine->CommandAllocator;
+		if (InEngine->GetRenderingEngine())
+		{
+			return InEngine->GetRenderingEngine()->CommandAllocator;
+		}
 	}
 
 	return NULL;
 }
 
 #if defined(_WIN32)
-FWindowsEngine* IRenderingInterface::GetEngine()
+CWindowsEngine* IRenderingInterface::GetEngine()
 {
-	return dynamic_cast<FWindowsEngine*>(Engine);
+	return dynamic_cast<CWindowsEngine*>(Engine);
 }
 #else
-FEngine* IRenderingInterface::GetEngine()
+CEngine* IRenderingInterface::GetEngine()
 {
 	return Engine;
 }
 #endif
-
-FRenderingResourcesUpdate::FRenderingResourcesUpdate()
-{
-
-}
-
-FRenderingResourcesUpdate::~FRenderingResourcesUpdate()
-{
-	if (UploadBuffer)
-	{
-		UploadBuffer->Unmap(0, nullptr);
-		UploadBuffer = nullptr;
-	}
-}
-
-void FRenderingResourcesUpdate::Init(ID3D12Device* InDevice, UINT InElementSize, UINT InElementCount)
-{
-	assert(InDevice);
-
-	ElementSize = InElementSize;
-	CD3DX12_HEAP_PROPERTIES HeapProperties = CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_UPLOAD);
-	CD3DX12_RESOURCE_DESC ResourceDesc = CD3DX12_RESOURCE_DESC::Buffer(InElementSize * InElementCount);
-	InDevice->CreateCommittedResource(
-		&HeapProperties,
-		D3D12_HEAP_FLAG_NONE,
-		&ResourceDesc,
-		D3D12_RESOURCE_STATE_GENERIC_READ,
-		nullptr, IID_PPV_ARGS(&UploadBuffer)
-	);
-
-	ANALYSIS_HRESULT(UploadBuffer->Map(0,nullptr,reinterpret_cast<void**>(&Data)));
-}
-
-void FRenderingResourcesUpdate::Update(int Index, const void* InData)
-{
-	memcpy(&Data[Index* ElementSize], InData, ElementSize);
-}
-
-UINT FRenderingResourcesUpdate::GetConstantBufferByteSize(UINT InTypeSize)
-{
-	/*if (!(InTypeSize % 256))
-	{
-		float NewFloat = (float)InTypeSize / 256.f;
-		int Num = (NewFloat += 1);
-		InTypeSize = Num * 256;
-	}*/
-
-	return (InTypeSize + 255) & ~255;//需要返回255的倍数 ~代表取反
-}
-
-UINT FRenderingResourcesUpdate::GetConstantBufferByteSize()
-{
-	return GetConstantBufferByteSize(ElementSize);
-}
