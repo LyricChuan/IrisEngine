@@ -1,7 +1,7 @@
 #include "InputType.h"
 
 FInputKey::FInputKey()
-	:PressState(EPressState::PRESS)
+	:PressState(EPressState::Press)
 {
 
 }

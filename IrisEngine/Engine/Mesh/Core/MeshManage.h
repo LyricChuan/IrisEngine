@@ -3,10 +3,15 @@
 #include "../../Shader/Core/Shader.h"
 #include "MeshType.h"
 #include "Mesh.h"
+#include "../../Interface/DirectXDeviceInterface.h"
+#include "../../Core/Viewport/ViewportInfo.h"
 
 class FRenderingResourcesUpdate;
 
-class CMeshManage :public CCoreMinimalObject,public IRenderingInterface
+class CMeshManage 
+	:public CCoreMinimalObject
+	,public IRenderingInterface
+	,public IDirectXDeviceInterface
 {
 public:
 	CMeshManage();
@@ -14,6 +19,7 @@ public:
 	virtual void Init();
 
 	virtual void BuildMesh(const FMeshRenderingData* InRenderingData);
+	virtual void UpdateCalculations(float DeltaTime, const FViewportInfo& ViewportInfo);
 
 	virtual void PreDraw(float DeltaTime);
 	virtual void Draw(float DeltaTime);
@@ -74,6 +80,7 @@ protected:
 
 	//对象常量
 	shared_ptr<FRenderingResourcesUpdate> ObjectConstants;
+	shared_ptr<FRenderingResourcesUpdate> ViewportConstants;
 
 	ComPtr<ID3D12PipelineState> PSO;
 
@@ -90,6 +97,5 @@ protected:
 	UINT IndexSize;
 
 	XMFLOAT4X4 WorldMatrix;
-	XMFLOAT4X4 ViewMatrix;
-	XMFLOAT4X4 ProjectMatrix;
+
 };

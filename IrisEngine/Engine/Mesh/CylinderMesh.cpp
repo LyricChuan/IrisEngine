@@ -39,7 +39,7 @@ void CCylinderMesh::CreateMesh(FMeshRenderingData& MeshData, float InTopRadius, 
 			MeshData.VertexData.push_back(FVertex(
 				XMFLOAT3(
 					Radius * cosf(j*BetaValue),//x
-					Y,//y
+					Y,//y ≥Ø…œ
 					Radius * sinf(j*BetaValue)), //z
 				XMFLOAT4(Colors::White)));
 		}

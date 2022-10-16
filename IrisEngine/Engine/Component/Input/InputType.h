@@ -3,8 +3,8 @@
 
 enum EPressState
 {
-	PRESS,
-	RELEASE,
+	Press ,//╟╢об
+	Release ,//ки©╙
 };
 
 struct FInputKey

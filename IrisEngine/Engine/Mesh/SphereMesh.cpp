@@ -33,11 +33,11 @@ void CSphereMesh::CreateMesh(FMeshRenderingData& MeshData, float InRadius, uint3
 
 	for (uint32_t i = 1; i < InAxialSubdivision; ++i)
 	{
-		float Beta = i * BetaValue;
+		float Beta = i * BetaValue;// Beta 理解为竖直的高度角，180°
 
 		for (uint32_t j = 0; j <= InHeightSubdivision; ++j)
 		{
-			float Theta = j * ThetaValue;
+			float Theta = j * ThetaValue;// Theta 理解为水平转一圈的角度，360°
 
 			//球面坐标转为笛卡尔坐标
 			MeshData.VertexData.push_back(FVertex(

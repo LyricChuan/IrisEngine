@@ -10,6 +10,7 @@
 #include "../../Mesh/CustomMesh.h"
 #include "../../Core/CoreObject/CoreMinimalObject.h"
 #include "../../Core/World.h"
+#include "../../Core/Camera.h"
 
 #include "../../Rendering/Enigne/DirectX/DirectX12RenderingEngine.h"
 
@@ -54,7 +55,7 @@ int CWindowsEngine::Init(FWinMainCommandParameters InParameters)
 
 	RenderingEngine->Init(InParameters);
 
-	CWorld* World = CreateObject<CWorld>(new CWorld());
+	World = CreateObject<CWorld>(new CWorld());
 
 	Engine_Log("Engine initialization complete.");
 	return 0;
@@ -84,7 +85,18 @@ void CWindowsEngine::Tick(float DeltaTime)
 		}
 	}
 
-	RenderingEngine->Tick(DeltaTime);
+	if (World)
+	{
+		if (World->GetCamera())
+		{
+			FViewportInfo ViewportInfo;
+			ViewportInfo.ViewMatrix = World->GetCamera()->ViewMatrix;
+			ViewportInfo.ProjectMatrix = World->GetCamera()->ProjectMatrix;
+			RenderingEngine->UpdateCalculations(DeltaTime, ViewportInfo);
+
+			RenderingEngine->Tick(DeltaTime);
+		}
+	}
 }
 
 int CWindowsEngine::PreExit()

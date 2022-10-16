@@ -1,10 +1,11 @@
 #pragma once
 #include "../../Core/RenderingEngine.h"
+#include "../../../../Core/Viewport/ViewportInfo.h"
 
 class CMeshManage;
 class CDirectXRenderingEngine :public CRenderingEngine
 {
-	friend class IRenderingInterface;
+	friend class IDirectXDeviceInterface;
 public:
 	CDirectXRenderingEngine();
 	~CDirectXRenderingEngine();
@@ -14,6 +15,7 @@ public:
 	virtual int Init(FWinMainCommandParameters InParameters);
 	virtual int PostInit();
 
+	virtual void UpdateCalculations(float DeltaTime, const FViewportInfo &ViewportInfo);
 	virtual void Tick(float DeltaTime);
 
 	virtual int PreExit();

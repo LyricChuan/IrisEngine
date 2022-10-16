@@ -1,5 +1,5 @@
 #pragma once
-#include "../../EngineMinimal.h"
+
 #include "../../Platform/Windows/WindowsPlatform.h"
 #include "../../CodeReflection/CodeReflectionMacroTag.h"
 #include "GuidInterface.h"
