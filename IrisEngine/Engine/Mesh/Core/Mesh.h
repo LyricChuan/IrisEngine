@@ -1,11 +1,16 @@
 #pragma once
 #include "../../Rendering/Core/Rendering.h"
 #include "MeshType.h"
+#include "../../Actor/Core/ActorObject.h"
 
-class CMesh :public CCoreMinimalObject, public IRenderingInterface
+class CTransformationComponent;
+class GMesh :public GActorObject, public IRenderingInterface
 {
+	CVARIABLE()
+	CTransformationComponent* TransformationComponent;
+
 public:
-	CMesh();
+	GMesh();
 
 	virtual void Init();
 

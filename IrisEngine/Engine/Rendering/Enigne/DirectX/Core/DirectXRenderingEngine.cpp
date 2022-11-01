@@ -47,8 +47,31 @@ int CDirectXRenderingEngine::PreInit(FWinMainCommandParameters InParameters)
 
 int CDirectXRenderingEngine::Init(FWinMainCommandParameters InParameters)
 {
+	/**
+	*	1)D3D12GetDebugInterface
+	*	2)CreateDXGIFactory
+	*	3)D3D12CreateDevice
+	*	4)CreateFence
+	*	5)CreateCommandQueue
+	*	6)CreateCommandAllocator
+	*	7)CreateCommandList
+	*	8)CheckFeatureSupport
+	*	9)CreateSwapChain
+	*	10)CreateDescriptorHeap - RTVHeap & DSVHeap
+	*/
 	InitDirect3D();
 
+	/**
+	*	1)WaitGPUCommandQueueComplete
+	*	2)CommandAllocator - Reset
+	*	3)SwapChainBuffer - Reset
+	*	4)ResizeBuffers - 自适应屏幕大小变化
+	*	5)CreateRenderTargetView - SwapChainBuffer
+	*	6)CreateCommittedResource
+	*	7)CreateDepthStencilView
+	*	8)ExecuteCommandLists
+	*	9)ViewportInfo
+	*/
 	PostInitDirect3D();
 
 	MeshManage->Init();
@@ -66,14 +89,40 @@ int CDirectXRenderingEngine::PostInit()
 	{
 		//构建Mesh
 	//	CBoxMesh* Box = CBoxMesh::CreateMesh();
-		MeshManage->CreateBoxMesh(4.f,3.f,1.5f);
-		//MeshManage->CreatePlaneMesh(4.f, 3.f, 20, 20);
+		if (GMesh* BoxMesh = MeshManage->CreateBoxMesh(4.f, 3.f, 1.5f))
+		{
+			BoxMesh->SetPosition(XMFLOAT3(4,3,5));
+			BoxMesh->SetRotation(fvector_3d(60.f, 1.f, 20.f));
+		}
+
+		//MeshManage->CreateBoxMesh(4.f, 3.f, 1.5f);
+		//MeshManage->CreateBoxMesh(4.f, 3.f, 1.5f);
+		MeshManage->CreatePlaneMesh(4.f, 3.f, 20, 20);
+		if (GMesh* SphereMesh = MeshManage->CreateSphereMesh(2.f, 20, 20))
+		{
+			SphereMesh->SetPosition(XMFLOAT3(1,2,4));
+			SphereMesh->SetScale(fvector_3d(3.f, 3.f,3.f));
+		}
+
+		if (GMesh* CylinderMesh = MeshManage->CreateCylinderMesh(1.f, 1.f, 5.f, 20, 20))
+		{
+			CylinderMesh->SetPosition(XMFLOAT3(1, -2, -4));
+		}
+
+		if (GMesh* ConeMesh = MeshManage->CreateConeMesh(1.f, 5.f, 20, 20))
+		{
+			ConeMesh->SetPosition(XMFLOAT3(-1, 1, 9));
+			ConeMesh->SetRotation(fvector_3d(90.f, 1.f, 20.f));
+		}
+
 		//	string MeshObjPath = "../RenZhaiEngine/Mesh.obj";
 		//	MeshManage->CreateMesh(MeshObjPath);
 		//	CSphereMesh* SphereMesh = CSphereMesh::CreateMesh(2.f, 20, 20);
 		//	CCylinderMesh* CylinderMesh = CCylinderMesh::CreateMesh(1.f,1.f,5.f,20,20);
 		//	CConeMesh* ConeMesh = CConeMesh::CreateMesh(1.f, 5.f, 20, 20);
 	}
+	//
+	MeshManage->BuildMesh();
 
 	ANALYSIS_HRESULT(GraphicsCommandList->Close());
 

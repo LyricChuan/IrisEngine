@@ -2,9 +2,11 @@
 
 CTransformationComponent::CTransformationComponent()
 	: Position(0.f,0.f,0.f)
-	, ForwardVector(1.f,0.f,0.f)
-	, RightVector(0.f,1.f,0.f)
-	, UpVector(0.f,0.f,1.f)
+	,Rotation(0.f, 0.f, 0.f)
+	,Scale(1.f,1.f, 1.f)
+	,ForwardVector(0.f,0.f,1.f)
+	,RightVector(1.f,0.f,0.f)
+	, UpVector(0.f,1.f,0.f)
 
 {
 
@@ -13,6 +15,32 @@ CTransformationComponent::CTransformationComponent()
 void CTransformationComponent::SetPosition(const XMFLOAT3& InNewPosition)
 {
 	Position = InNewPosition;
+}
+
+void CTransformationComponent::SetRotation(const fvector_3d& InNewRotation)
+{
+	float RollRadians = XMConvertToRadians(InNewRotation.z);
+	float PithRadians = XMConvertToRadians(InNewRotation.x);
+	float YawRadians = XMConvertToRadians(InNewRotation.y);
+	
+	//旋转矩阵-规定先Roll，再Pitch，最后Yaw
+	XMMATRIX RotationRollPitchYawMatrix = XMMatrixRotationRollPitchYaw(
+		PithRadians, YawRadians,RollRadians);
+
+	XMVECTOR Right = XMLoadFloat3(&RightVector);
+	XMVECTOR Up = XMLoadFloat3(&UpVector);
+	XMVECTOR Forward = XMLoadFloat3(&ForwardVector);
+
+	XMStoreFloat3(&RightVector, XMVector3TransformNormal(XMLoadFloat3(&RightVector), RotationRollPitchYawMatrix));
+	XMStoreFloat3(&UpVector, XMVector3TransformNormal(XMLoadFloat3(&UpVector), RotationRollPitchYawMatrix));
+	XMStoreFloat3(&ForwardVector, XMVector3TransformNormal(XMLoadFloat3(&ForwardVector), RotationRollPitchYawMatrix));
+}
+
+void CTransformationComponent::SetScale(const fvector_3d& InNewScale)
+{
+	Scale.x = InNewScale.x;
+	Scale.y = InNewScale.y;
+	Scale.z = InNewScale.z;
 }
 
 void CTransformationComponent::SetForwardVector(const XMFLOAT3& InForwardVector)

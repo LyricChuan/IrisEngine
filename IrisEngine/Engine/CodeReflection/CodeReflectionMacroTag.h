@@ -1,4 +1,4 @@
 #pragma once
 
-#define CVARIABLE(...)
-#define CDIAPER(...)
+#define CVARIABLE(...) 
+#define CDIAPER(...) 

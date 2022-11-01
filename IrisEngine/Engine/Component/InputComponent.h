@@ -9,6 +9,8 @@ DEFINITION_SIMPLE_SINGLE_DELEGATE(FCaptureOnMouseWheelDelegate, void, int, int,f
 class CInputComponent : public CComponent
 {
 public:
+	//这里成员变量提供的代理是为更上层业务提供响应的，如camera;
+	//而InputComponent自身的消息来源于input.h中提供的输入代理注册
 	CVARIABLE()
 	FCaptureKeyBoardInforDelegate CaptureKeyBoardInforDelegate;
 

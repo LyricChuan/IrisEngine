@@ -2,9 +2,9 @@
 
 #include "Core/Mesh.h"
 
-class CPlaneMesh :public CMesh
+class CPlaneMesh :public GMesh
 {
-	typedef CMesh Super;
+	typedef GMesh Super;
 public:
 	virtual void Init();
 

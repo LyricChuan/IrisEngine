@@ -3,11 +3,11 @@
 #include "../Component/TransformationComponent.h"
 #include "CameraType.h"
 
-CCamera::CCamera()
+GCamera::GCamera()
+	:GActorObject()
 {
 	InputComponent = CreateObject<CInputComponent>(new CInputComponent());
-	TransformationComponent = CreateObject<CTransformationComponent>(new CTransformationComponent());
-
+	
 	MouseSensitivity = 0.7f;
 	CmeraType = ECmeraType::CameraRoaming;
 
@@ -16,24 +16,24 @@ CCamera::CCamera()
 	B = XM_PI;
 }
 
-void CCamera::BeginInit()
+void GCamera::BeginInit()
 {
 	//初始化我们的投影矩阵
 	ViewportInit();
 
-	InputComponent->CaptureKeyBoardInforDelegate.Bind(this, &CCamera::ExecuteKeyBoard);
-	InputComponent->OnMouseButtonDownDelegate.Bind(this, &CCamera::OnMouseButtonDown);
-	InputComponent->OnMouseButtonUpDelegate.Bind(this, &CCamera::OnMouseButtonUp);
-	InputComponent->OnMouseMoveDelegate.Bind(this, &CCamera::OnMouseMove);
-	InputComponent->OnMouseWheelDelegate.Bind(this, &CCamera::OnMouseWheel);
+	InputComponent->CaptureKeyBoardInforDelegate.Bind(this, &GCamera::ExecuteKeyBoard);
+	InputComponent->OnMouseButtonDownDelegate.Bind(this, &GCamera::OnMouseButtonDown);
+	InputComponent->OnMouseButtonUpDelegate.Bind(this, &GCamera::OnMouseButtonUp);
+	InputComponent->OnMouseMoveDelegate.Bind(this, &GCamera::OnMouseMove);
+	InputComponent->OnMouseWheelDelegate.Bind(this, &GCamera::OnMouseWheel);
 }
 
-void CCamera::Tick(float DeltaTime)
+void GCamera::Tick(float DeltaTime)
 {
 	BuildViewMatrix(DeltaTime);
 }
 
-void CCamera::ExecuteKeyBoard(const FInputKey& InputKey)
+void GCamera::ExecuteKeyBoard(const FInputKey& InputKey)
 {
 	if (InputKey.KeyName == "W")
 	{
@@ -61,23 +61,23 @@ void CCamera::ExecuteKeyBoard(const FInputKey& InputKey)
 	}
 }
 
-void CCamera::BuildViewMatrix(float DeltaTime)
+void GCamera::BuildViewMatrix(float DeltaTime)
 {
 	switch (CmeraType)
 	{
 		case CameraRoaming:
 		{
 			//计算和矫正轴
-			TransformationComponent->CorrectionVector();
+			GetTransformationComponent()->CorrectionVector();
 
 	//算出按自身方向移动意图
 	fvector_3d V3;//获取矫正后的位置，以便于转换成自身的
-	TransformationComponent->GetCorrectionPosition(V3);
+			GetTransformationComponent()->GetCorrectionPosition(V3);
 
 	//构建Viewmatrix 当前拿到的是列向量
-	XMFLOAT3 RightVector = TransformationComponent->GetRightVector();
-	XMFLOAT3 UpVector = TransformationComponent->GetUpVector();
-	XMFLOAT3 ForwardVector = TransformationComponent->GetForwardVector();
+	XMFLOAT3 RightVector = GetTransformationComponent()->GetRightVector();
+	XMFLOAT3 UpVector = GetTransformationComponent()->GetUpVector();
+	XMFLOAT3 ForwardVector = GetTransformationComponent()->GetForwardVector();
 
 			ViewMatrix = {
 				RightVector.x,	UpVector.x,	ForwardVector.x,	0.f,
@@ -89,7 +89,7 @@ void CCamera::BuildViewMatrix(float DeltaTime)
 		}
 		case ObservationObject:
 		{
-			XMFLOAT3 &CameraPos = TransformationComponent->GetPosition();
+			XMFLOAT3 &CameraPos = GetTransformationComponent()->GetPosition();
 
 			CameraPos.x = Radius * sinf(B) * cosf(A);
 			CameraPos.z = Radius * sinf(B) * sinf(A);
@@ -107,7 +107,7 @@ void CCamera::BuildViewMatrix(float DeltaTime)
 	}
 }
 
-void CCamera::OnMouseButtonDown(int X, int Y)
+void GCamera::OnMouseButtonDown(int X, int Y)
 {
 	bLeftMouseDown = true;
 
@@ -117,7 +117,7 @@ void CCamera::OnMouseButtonDown(int X, int Y)
 	SetCapture(GetMainWindowsHandle());
 }
 
-void CCamera::OnMouseButtonUp(int X, int Y)
+void GCamera::OnMouseButtonUp(int X, int Y)
 {
 	bLeftMouseDown = false;
 
@@ -127,7 +127,7 @@ void CCamera::OnMouseButtonUp(int X, int Y)
 	LastMousePosition.y = Y;
 }
 
-void CCamera::OnMouseMove(int X, int Y)
+void GCamera::OnMouseMove(int X, int Y)
 {
 	if (bLeftMouseDown)
 	{
@@ -157,7 +157,7 @@ void CCamera::OnMouseMove(int X, int Y)
 	LastMousePosition.y = Y;
 }
 
-void CCamera::OnMouseWheel(int X, int Y, float InDelta)
+void GCamera::OnMouseWheel(int X, int Y, float InDelta)
 {
 	if (CmeraType == ECmeraType::ObservationObject)
 	{
@@ -168,66 +168,66 @@ void CCamera::OnMouseWheel(int X, int Y, float InDelta)
 	}
 }
 
-void CCamera::MoveForward(float InValue)
+void GCamera::MoveForward(float InValue)
 {
 	if (CmeraType == ECmeraType::CameraRoaming)
 	{
-		XMFLOAT3 AT3Position = TransformationComponent->GetPosition();
-		XMFLOAT3 AT3ForwardVector = TransformationComponent->GetForwardVector();
+		XMFLOAT3 AT3Position = GetTransformationComponent()->GetPosition();
+		XMFLOAT3 AT3ForwardVector = GetTransformationComponent()->GetForwardVector();
 
 		XMVECTOR AmountMovement = XMVectorReplicate(InValue * 1.f);
 		XMVECTOR Forward = XMLoadFloat3(&AT3ForwardVector);
 		XMVECTOR Position = XMLoadFloat3(&AT3Position);
 
 	XMStoreFloat3(&AT3Position, XMVectorMultiplyAdd(AmountMovement, Forward, Position));//赋值回去
-	TransformationComponent->SetPosition(AT3Position);
+	GetTransformationComponent()->SetPosition(AT3Position);
 	}
 }
 
-void CCamera::MoveRight(float InValue)
+void GCamera::MoveRight(float InValue)
 {
 	if (CmeraType == ECmeraType::CameraRoaming)
 	{
-		XMFLOAT3 AT3Position = TransformationComponent->GetPosition();
-		XMFLOAT3 AT3RightVector = TransformationComponent->GetRightVector();
+		XMFLOAT3 AT3Position = GetTransformationComponent()->GetPosition();
+		XMFLOAT3 AT3RightVector = GetTransformationComponent()->GetRightVector();
 
 		XMVECTOR AmountMovement = XMVectorReplicate(InValue * 1.f);
 		XMVECTOR Right = XMLoadFloat3(&AT3RightVector);
 		XMVECTOR Position = XMLoadFloat3(&AT3Position);
 
 		XMStoreFloat3(&AT3Position, XMVectorMultiplyAdd(AmountMovement, Right, Position));
-		TransformationComponent->SetPosition(AT3Position);
+		GetTransformationComponent()->SetPosition(AT3Position);
 	}
 }
 
-void CCamera::RotateAroundYAxis(float InRotateDegrees)
+void GCamera::RotateAroundYAxis(float InRotateDegrees)
 {
 	//拿到相机的方向
-	XMFLOAT3 RightVector = TransformationComponent->GetRightVector();
-	XMFLOAT3 UPVector = TransformationComponent->GetUpVector();
-	XMFLOAT3 ForwardVector = TransformationComponent->GetForwardVector();
+	XMFLOAT3 RightVector = GetTransformationComponent()->GetRightVector();
+	XMFLOAT3 UPVector = GetTransformationComponent()->GetUpVector();
+	XMFLOAT3 ForwardVector = GetTransformationComponent()->GetForwardVector();
 
 	//拿到关于Y的旋转矩阵
-	XMMATRIX RotationY = XMMatrixRotationAxis(XMLoadFloat3(&TransformationComponent->GetRightVector()),InRotateDegrees);
+	XMMATRIX RotationY = XMMatrixRotationAxis(XMLoadFloat3(&GetTransformationComponent()->GetRightVector()),InRotateDegrees);
 
 	//计算各个方向和按照Z轴旋转后的最终效果
 	//XMStoreFloat3(&TransformationComponent->GetRightVector(), XMVector3TransformNormal(XMLoadFloat3(&RightVector), RotationY));
-	XMStoreFloat3(&TransformationComponent->GetUpVector(), XMVector3TransformNormal(XMLoadFloat3(&UPVector), RotationY));
-	XMStoreFloat3(&TransformationComponent->GetForwardVector(), XMVector3TransformNormal(XMLoadFloat3(&ForwardVector), RotationY));
+	XMStoreFloat3(&GetTransformationComponent()->GetUpVector(), XMVector3TransformNormal(XMLoadFloat3(&UPVector), RotationY));
+	XMStoreFloat3(&GetTransformationComponent()->GetForwardVector(), XMVector3TransformNormal(XMLoadFloat3(&ForwardVector), RotationY));
 }
 
-void CCamera::RotateAroundZAxis(float InRotateDegrees)
+void GCamera::RotateAroundZAxis(float InRotateDegrees)
 {
 	//拿到相机的方向
-	XMFLOAT3 RightVector = TransformationComponent->GetRightVector();
-	XMFLOAT3 UPVector = TransformationComponent->GetUpVector();
-	XMFLOAT3 ForwardVector = TransformationComponent->GetForwardVector();
+	XMFLOAT3 RightVector = GetTransformationComponent()->GetRightVector();
+	XMFLOAT3 UPVector = GetTransformationComponent()->GetUpVector();
+	XMFLOAT3 ForwardVector = GetTransformationComponent()->GetForwardVector();
 
 	//拿到关于Z的旋转矩阵
 	XMMATRIX RotationZ = XMMatrixRotationZ(InRotateDegrees);
 
 	//计算各个方向和按照Z轴旋转后的最终效果
-	XMStoreFloat3(&TransformationComponent->GetRightVector(), XMVector3TransformNormal(XMLoadFloat3(&RightVector), RotationZ));
-	XMStoreFloat3(&TransformationComponent->GetUpVector(), XMVector3TransformNormal(XMLoadFloat3(&UPVector), RotationZ));
-	XMStoreFloat3(&TransformationComponent->GetForwardVector(), XMVector3TransformNormal(XMLoadFloat3(&ForwardVector), RotationZ));
+	XMStoreFloat3(&GetTransformationComponent()->GetRightVector(), XMVector3TransformNormal(XMLoadFloat3(&RightVector), RotationZ));
+	XMStoreFloat3(&GetTransformationComponent()->GetUpVector(), XMVector3TransformNormal(XMLoadFloat3(&UPVector), RotationZ));
+	XMStoreFloat3(&GetTransformationComponent()->GetForwardVector(), XMVector3TransformNormal(XMLoadFloat3(&ForwardVector), RotationZ));
 }

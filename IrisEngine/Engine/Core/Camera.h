@@ -1,25 +1,22 @@
 #pragma once
 #include "Viewport/Viewport.h"
-#include "CoreObject/CoreMinimalObject.h"
+#include "../Actor/Core/ActorObject.h"
 #include "../CodeReflection/CodeReflectionMacroTag.h"
 #include "../Interface/DirectXDeviceInterface.h"
-#include "CameraType.h"
 
+enum ECmeraType;
 struct FInputKey;
 class CTransformationComponent;
 class CInputComponent;
 
-class CCamera :public CCoreMinimalObject
+class GCamera :public GActorObject
 	,public FViewport
 	,public IDirectXDeviceInterface
 {
 	CVARIABLE()
-	CTransformationComponent* TransformationComponent;
-	
-	CVARIABLE()
 	CInputComponent* InputComponent;
 public:
-	CCamera();
+	GCamera();
 
 	virtual void BeginInit();
 	virtual void Tick(float DeltaTime);
@@ -40,7 +37,6 @@ protected:
 	void RotateAroundZAxis(float InRotateDegrees);
 public:
 	FORCEINLINE CInputComponent* GetInputComponent() { return InputComponent; }
-	FORCEINLINE	CTransformationComponent* GetTransformationComponent() { return TransformationComponent; }
 
 protected:
 	POINT LastMousePosition;
