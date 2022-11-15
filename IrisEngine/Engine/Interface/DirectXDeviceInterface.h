@@ -6,13 +6,18 @@ class CWindowsEngine;
 #else
 class CEngine;
 #endif
-
+class CLightManage;
+class CMeshManage;
+class CWorld;
 //提供渲染内容的接口
 class IDirectXDeviceInterface
 {
 public:
 	ComPtr<ID3D12Fence> GetFence();
 	ComPtr<ID3D12Device> GetD3dDevice();
+	CLightManage* GetLightManage();
+	CMeshManage* GetMeshManage();
+	CWorld* GetWorld();
 
 	ComPtr<ID3D12GraphicsCommandList> GetGraphicsCommandList();
 	ComPtr<ID3D12CommandAllocator> GetCommandAllocator();
@@ -34,6 +39,9 @@ struct IDirectXDeviceInterface_Struct
 public:
 	ComPtr<ID3D12Fence> GetFence();
 	ComPtr<ID3D12Device> GetD3dDevice();
+	CLightManage* GetLightManage();
+	CMeshManage* GetMeshManage();
+	CWorld* GetWorld();
 
 	ComPtr<ID3D12GraphicsCommandList> GetGraphicsCommandList();
 	ComPtr<ID3D12CommandAllocator> GetCommandAllocator();

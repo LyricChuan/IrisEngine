@@ -8,8 +8,8 @@ FDirectXRootSignature::FDirectXRootSignature()
 
 void FDirectXRootSignature::BuildRootSignature()
 {
-	//构建根签名
-	CD3DX12_ROOT_PARAMETER RootParam[2];
+    //构建根签名
+    CD3DX12_ROOT_PARAMETER RootParam[4];
 
 	//ObjCBV描述表
 	CD3DX12_DESCRIPTOR_RANGE DescriptorRangeObjCBV;
@@ -19,11 +19,21 @@ void FDirectXRootSignature::BuildRootSignature()
 	CD3DX12_DESCRIPTOR_RANGE DescriptorRangeViewportCBV;
 	DescriptorRangeViewportCBV.Init(D3D12_DESCRIPTOR_RANGE_TYPE_CBV, 1, 1);
 
-	RootParam[0].InitAsDescriptorTable(1, &DescriptorRangeObjCBV);//第一个参数:当前有多少个描述符
-	RootParam[1].InitAsDescriptorTable(1, &DescriptorRangeViewportCBV);
+    //Material描述表
+    CD3DX12_DESCRIPTOR_RANGE DescriptorRangeMaterialCBV;
+    DescriptorRangeMaterialCBV.Init(D3D12_DESCRIPTOR_RANGE_TYPE_CBV, 1, 2);
+
+    //Light描述表
+    CD3DX12_DESCRIPTOR_RANGE DescriptorRangeLightCBV;
+    DescriptorRangeLightCBV.Init(D3D12_DESCRIPTOR_RANGE_TYPE_CBV, 1, 3);
+
+    RootParam[0].InitAsDescriptorTable(1, &DescriptorRangeObjCBV);
+    RootParam[1].InitAsDescriptorTable(1, &DescriptorRangeViewportCBV);
+    RootParam[2].InitAsDescriptorTable(1, &DescriptorRangeMaterialCBV);
+    RootParam[3].InitAsDescriptorTable(1, &DescriptorRangeLightCBV);
 
 	CD3DX12_ROOT_SIGNATURE_DESC RootSignatureDesc(
-		2,//参数个数
+		4,//参数个数
 		RootParam,
 		0,
 		nullptr,

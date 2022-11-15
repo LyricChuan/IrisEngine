@@ -2,18 +2,15 @@
 
 #include "Core/Mesh.h"
 
-class CCylinderMesh :public GMesh
+class GCylinderMesh :public GMesh
 {
 	typedef GMesh Super;
 public:
 	virtual void Init();
 
-	virtual void BuildMesh(const FMeshRenderingData* InRenderingData);
-
 	virtual void Draw(float DeltaTime);
 
 	void CreateMesh(
-		FMeshRenderingData& MeshData,
 		float InTopRadius, 
 		float InBottomRadius,
 		float InHeight,

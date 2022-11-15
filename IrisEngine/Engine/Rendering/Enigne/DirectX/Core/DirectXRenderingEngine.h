@@ -2,10 +2,13 @@
 #include "../../Core/RenderingEngine.h"
 #include "../../../../Core/Viewport/ViewportInfo.h"
 
+class CLightManage;
 class CMeshManage;
+class CWorld;
 class CDirectXRenderingEngine :public CRenderingEngine
 {
 	friend class IDirectXDeviceInterface;
+	friend class CWindowsEngine;
 public:
 	CDirectXRenderingEngine();
 	~CDirectXRenderingEngine();
@@ -30,6 +33,9 @@ public:
 	DXGI_FORMAT GetDepthStencilFormat() const { return DepthStencilFormat; }
 	UINT GetDXGISampleCount()const;
 	UINT GetDXGISampleQuality()const;
+
+	CMeshManage* GetMeshManage(){ return MeshManage; }
+	CLightManage* GetLightManage() { return LightManage; }
 protected:
 	void WaitGPUCommandQueueComplete();
 
@@ -37,7 +43,9 @@ protected:
 	void PostInitDirect3D();
 
 protected:
+	CLightManage* LightManage;
 	CMeshManage* MeshManage;
+	CWorld* World;
 protected:
 	UINT64 CurrentFenceIndex;
 	int CurrentSwapBuffIndex;

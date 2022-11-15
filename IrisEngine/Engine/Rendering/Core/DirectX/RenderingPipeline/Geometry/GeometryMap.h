@@ -10,8 +10,8 @@ struct FGeometry :public IDirectXDeviceInterface_Struct
 {
 	friend struct FGeometryMap;
 
-	bool bRenderingDataExistence(GMesh* InKey);//判断是否存在
-	void BuildMesh(GMesh* InMesh, const FMeshRenderingData& MeshData);
+	bool bRenderingDataExistence(CMeshComponent* InKey);
+	void BuildMesh(CMeshComponent* InMesh, const FMeshRenderingData& MeshData);
 
 	//构建模型
 	void Build();
@@ -49,7 +49,7 @@ struct FGeometryMap :public IDirectXDeviceInterface_Struct
 
 	void UpdateCalculations(float DeltaTime, const FViewportInfo& ViewportInfo);
 
-	void BuildMesh(GMesh* InMesh, const FMeshRenderingData& MeshData);
+	void BuildMesh(CMeshComponent* InMesh, const FMeshRenderingData& MeshData);
 
 	//构建模型
 	void Build();
@@ -57,16 +57,29 @@ struct FGeometryMap :public IDirectXDeviceInterface_Struct
 	//描述堆
 	void BuildDescriptorHeap();
 
-	//构建常量缓冲区
-	void BuildConstantBuffer();
+	//构建Mesh常量缓冲区
+	void BuildMeshConstantBuffer();
+
+	//构建Material常量缓冲区
+	void BuildMaterialConstantBuffer();
+
+	//构建Material常量缓冲区
+	void BuildLightConstantBuffer();
 
 	//该接口会有变化
-	UINT GetDrawObjectNumber();
+	UINT GetDrawMeshObjectNumber();
+
+	//该接口会有变化
+	UINT GetDrawMaterialObjectNumber();
+
+	//该接口会有变化
+	UINT GetDrawLightObjectNumber();
 
 	//构建我们的视口常量缓冲区视图
 	void BuildViewportConstantBufferView();
 
 public:
+	void DrawLight(float DeltaTime);
 	void DrawViewport(float DeltaTime);
 	void DrawMesh(float DeltaTime);
 public:
@@ -77,6 +90,8 @@ protected:
 	FDirectXDescriptorHeap DescriptorHeap;
 
 	//常量缓冲区
-	FConstantBufferViews ObjectConstantBufferViews;
+	FConstantBufferViews MeshConstantBufferViews;
+	FConstantBufferViews MaterialConstantBufferViews;
 	FConstantBufferViews ViewportConstantBufferViews;
+	FConstantBufferViews LightConstantBufferViews;
 };

@@ -33,8 +33,8 @@ public:
 	virtual void MoveForward(float InValue);
 	virtual void MoveRight(float InValue);
 protected:
+	void RotateAroundXAxis(float InRotateDegrees);
 	void RotateAroundYAxis(float InRotateDegrees);
-	void RotateAroundZAxis(float InRotateDegrees);
 public:
 	FORCEINLINE CInputComponent* GetInputComponent() { return InputComponent; }
 
@@ -49,4 +49,6 @@ protected:
 	float Radius;
 	float A;//Theta
 	float B;//
+
+	class CMeshComponent* SphereMesh;
 };

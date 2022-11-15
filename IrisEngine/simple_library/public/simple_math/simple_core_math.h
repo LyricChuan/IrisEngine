@@ -16,4 +16,3 @@
 
 //ͼԪ
 #include "transformation/primitives/triangle.h"
-#include "transformation/primitives/line.h"

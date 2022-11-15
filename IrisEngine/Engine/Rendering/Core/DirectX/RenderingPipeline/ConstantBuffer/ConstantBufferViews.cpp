@@ -20,7 +20,7 @@ void FConstantBufferViews::BuildConstantBuffer(
     UINT DescriptorOffset = GetD3dDevice()->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
     D3D12_GPU_VIRTUAL_ADDRESS Addr = Constant->GetBuffer()->GetGPUVirtualAddress();
 
-    for(int i = 0;i < InConstantBufferNum; i++)
+    for(UINT i = 0;i < InConstantBufferNum; i++)
     {
         //每一帧都是起始地址：重新赋值，确保每次偏移是正确的
         CD3DX12_CPU_DESCRIPTOR_HANDLE Handle = InHandle;

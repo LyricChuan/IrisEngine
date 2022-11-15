@@ -11,7 +11,7 @@
 #include "../../Core/CoreObject/CoreMinimalObject.h"
 #include "../../Core/World.h"
 #include "../../Core/Camera.h"
-
+#include "../../Mesh/Core/MeshManage.h"
 #include "../../Rendering/Enigne/DirectX/DirectX12RenderingEngine.h"
 
 #if defined(_WIN32)
@@ -55,7 +55,9 @@ int CWindowsEngine::Init(FWinMainCommandParameters InParameters)
 
 	RenderingEngine->Init(InParameters);
 
+	//×¢²á¶ÔÓ¦µÄworld
 	World = CreateObject<CWorld>(new CWorld());
+	RenderingEngine->World = World;
 
 	Engine_Log("Engine initialization complete.");
 	return 0;
@@ -64,13 +66,12 @@ int CWindowsEngine::Init(FWinMainCommandParameters InParameters)
 int CWindowsEngine::PostInit()
 {
 	Engine_Log("Engine post initialization complete.");
-
-	RenderingEngine->PostInit();
-
 	for (auto& Tmp : GObjects)
 	{
 		Tmp->BeginInit();
 	}
+	RenderingEngine->PostInit();
+
 
 	return 0;
 }
@@ -90,6 +91,10 @@ void CWindowsEngine::Tick(float DeltaTime)
 		if (World->GetCamera())
 		{
 			FViewportInfo ViewportInfo;
+			
+			XMFLOAT3 ViewPosition = World->GetCamera()->GetPosition();
+			ViewportInfo.ViewPosition = XMFLOAT4(ViewPosition.x, ViewPosition.y, ViewPosition.z, 1.f);
+			
 			ViewportInfo.ViewMatrix = World->GetCamera()->ViewMatrix;
 			ViewportInfo.ProjectMatrix = World->GetCamera()->ProjectMatrix;
 			RenderingEngine->UpdateCalculations(DeltaTime, ViewportInfo);
@@ -123,6 +128,11 @@ int CWindowsEngine::PostExit()
 
 	Engine_Log("Engine post exit complete.");
 	return 0;
+}
+
+CMeshManage* CWindowsEngine::GetMeshManage()
+{
+	return RenderingEngine->GetMeshManage();
 }
 
 bool CWindowsEngine::InitWindows(FWinMainCommandParameters InParameters)

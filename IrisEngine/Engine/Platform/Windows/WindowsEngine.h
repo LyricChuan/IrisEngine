@@ -6,7 +6,7 @@
 
 class CDirectXRenderingEngine;
 class CWorld;
-
+class CMeshManage;
 class CWindowsEngine :public CEngine
 {
 	friend class IDirectXDeviceInterface;
@@ -25,6 +25,9 @@ public:
 	virtual int PostExit();
 
 	CDirectXRenderingEngine* GetRenderingEngine() { return RenderingEngine; }
+public:
+	CMeshManage* GetMeshManage();
+	CWorld* GetWorld() { return World; }
 public:
 
 	bool InitWindows(FWinMainCommandParameters InParameters);

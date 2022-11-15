@@ -10,15 +10,14 @@ public:
 
 	fvector_2d(float in_x, float in_y);
 
-	fvector_2d(float in_value);
-
-	static float dot(const fvector_2d& a, const fvector_2d& b);
+	float dot(const fvector_2d& a)const;
 
 	static float cross_product(const fvector_2d& a, const fvector_2d& b);
 
+	float cross_product(const fvector_2d& a)const;
+
 	char *to_string(char *buff)const;
 
-	void normalize();
 public:
 	fvector_2d operator+(const fvector_2d& a)const
 	{
@@ -59,13 +58,6 @@ public:
 	fvector_2d operator/(float k)const
 	{
 		return fvector_2d(x / k, y / k);
-	}
-
-	fvector_2d operator/=(float k)
-	{
-		*this = *this / k;
-
-		return *this;
 	}
 
 	fvector_2d operator*(const fvector_2d& a)const
