@@ -102,10 +102,12 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE prevInstance, PSTR cmdLine, in
 			//PM_QS_PAINT 处理画图消息
 			//PM_QS_POSTMESSAGE 处理所有被寄送的消息，包括计时器和热键
 			//PM_QS_SENDMESSAGE	处理所有发送消息
+			//PeekMessage 检查 message queue中是否有message，如果有的话将其到msg中，返回非0的值
+			//PM_REMOVE 除了WM_PAINT类型的message外，其他的message会在执行完PeekMessage后被移出 message queue
 			if (PeekMessage(&EngineMsg,0,0,0,PM_REMOVE))//从消息队列中提取消息，如果不是WM_QUIT就REMOVE
 			{
 				TranslateMessage(&EngineMsg);//翻译成字符串
-				DispatchMessage(&EngineMsg);//分发消息
+				DispatchMessage(&EngineMsg);//分发消息 会触发 WindowProc 函数
 			}
 			else
 			{

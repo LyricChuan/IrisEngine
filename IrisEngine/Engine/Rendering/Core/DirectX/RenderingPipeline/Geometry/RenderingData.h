@@ -20,12 +20,17 @@ public:
 	UINT IndexTypeSize;
 
 public:
+	size_t MeshHash;
+	int GeometryKey;
+	int MeshObjectIndex;
+public:
 	UINT GetVertexSizeInBytes()const { return VertexSize * VertexTypeSize; }
 	UINT GetIndexSizeInBytes()const { return IndexSize * IndexTypeSize; }
 public:
 	DXGI_FORMAT IndexFormat;
 
 	XMFLOAT4X4 WorldMatrix;
+	XMFLOAT4X4 TextureTransform;
 
 	CMeshComponent* Mesh;//key
 };

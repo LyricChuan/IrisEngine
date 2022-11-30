@@ -6,17 +6,21 @@
 #include "../ConstantBuffer/ConstantBufferViews.h"
 #include "../../../../../Core/Viewport/ViewportInfo.h"
 
+class CMaterial;
 struct FGeometry :public IDirectXDeviceInterface_Struct
 {
 	friend struct FGeometryMap;
 
-	bool bRenderingDataExistence(CMeshComponent* InKey);
-	void BuildMesh(CMeshComponent* InMesh, const FMeshRenderingData& MeshData);
+	bool IsRenderingDataExistence(CMeshComponent* InKey);
+
+	void BuildMesh(const size_t InMeshHash,CMeshComponent* InMesh, const FMeshRenderingData& MeshData,int InKey);
+	void DuplicateMesh(CMeshComponent* InMesh, const FRenderingData& MeshData, int InKey);
+	bool FindMeshRenderingDataByHash(const size_t& InHash, FRenderingData& MeshData,int InRenderLayerIndex = -1);
 
 	//构建模型
 	void Build();
 
-	UINT GetDrawObjectNumber() const { return DescribeMeshRenderingData.size(); }
+	UINT GetDrawObjectNumber() const;
 
 	D3D12_VERTEX_BUFFER_VIEW GetVertexBufferView();
 	D3D12_INDEX_BUFFER_VIEW GetIndexBufferView();
@@ -33,15 +37,15 @@ protected:
 	ComPtr<ID3D12Resource> IndexBufferTmpPtr;
 
 	FMeshRenderingData MeshRenderingData;
-
-	//DescribeMeshRenderingData
-	vector<FRenderingData> DescribeMeshRenderingData;
 };
 
 //提供渲染内容的接口
 struct FGeometryMap :public IDirectXDeviceInterface_Struct
 {
+	friend class FRenderLayer;
+
 	FGeometryMap();
+	~FGeometryMap();
 
 	void PreDraw(float DeltaTime);
 	void Draw(float DeltaTime);
@@ -49,7 +53,13 @@ struct FGeometryMap :public IDirectXDeviceInterface_Struct
 
 	void UpdateCalculations(float DeltaTime, const FViewportInfo& ViewportInfo);
 
-	void BuildMesh(CMeshComponent* InMesh, const FMeshRenderingData& MeshData);
+	void UpdateMaterialShaderResourceView(float DeltaTime, const FViewportInfo& ViewportInfo);
+
+	void BuildMesh(const size_t InMeshHash, CMeshComponent* InMesh, const FMeshRenderingData& MeshData);
+	void DuplicateMesh(CMeshComponent* InMesh, const FRenderingData& MeshData);
+	bool FindMeshRenderingDataByHash(const size_t& InHash, FRenderingData& MeshData, int InRenderLayerIndex = -1);
+
+	void LoadTexture();
 
 	//构建模型
 	void Build();
@@ -61,7 +71,7 @@ struct FGeometryMap :public IDirectXDeviceInterface_Struct
 	void BuildMeshConstantBuffer();
 
 	//构建Material常量缓冲区
-	void BuildMaterialConstantBuffer();
+	void BuildMaterialShaderResourceView();
 
 	//构建Material常量缓冲区
 	void BuildLightConstantBuffer();
@@ -74,6 +84,12 @@ struct FGeometryMap :public IDirectXDeviceInterface_Struct
 
 	//该接口会有变化
 	UINT GetDrawLightObjectNumber();
+	
+	//贴图数量
+	UINT GetDrawTextureResourcesNumber();
+
+	//构建我们的贴图SRV视图
+	void BuildTextureConstantBuffer();
 
 	//构建我们的视口常量缓冲区视图
 	void BuildViewportConstantBufferView();
@@ -82,6 +98,8 @@ public:
 	void DrawLight(float DeltaTime);
 	void DrawViewport(float DeltaTime);
 	void DrawMesh(float DeltaTime);
+	void DrawMaterial(float DeltaTime);
+	void DrawTexture(float DeltaTime);
 public:
 	ID3D12DescriptorHeap* GetHeap()const {return DescriptorHeap.GetHeap();}
 
@@ -94,4 +112,7 @@ protected:
 	FConstantBufferViews MaterialConstantBufferViews;
 	FConstantBufferViews ViewportConstantBufferViews;
 	FConstantBufferViews LightConstantBufferViews;
+
+	std::shared_ptr<class FRenderingTextureResourcesUpdate> RenderingTextureResources;
+	std::vector<CMaterial*> Materials;
 };

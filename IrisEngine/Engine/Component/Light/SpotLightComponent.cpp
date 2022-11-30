@@ -9,7 +9,7 @@ CSpotLightComponent::CSpotLightComponent()
 	, ConicalOuterCorner(60.f)
 {
 	//读取模型资源
-	string MeshPath = "../RenZhaiEngine/Asset/SpotMesh.obj";
+	string MeshPath = "../IrisEngine/Asset/SpotMesh.obj";
 	SetLightMesh(GetMeshManage()->CreateMeshComponent(MeshPath));
 
 	if (GetLightMesh())

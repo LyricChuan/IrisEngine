@@ -24,6 +24,9 @@ void CPlaneMeshComponent::CreateMesh(FMeshRenderingData& MeshData, float InHeigh
 	float HeightSubdivideValue = SubdivideValue(InHeight, InHeightSubdivide);
 	float WidthSubdivideValue = SubdivideValue(InWidth, InWidthSubdivide);
 
+	float HorizontalAverageSubdivision = 1.f / ((float)InWidthSubdivide - 1.f);
+	float VerticalAverageSubdivision = 1.f / ((float)InHeightSubdivide - 1.f);
+
 	//绘制点的位置
 	for (uint32_t i = 0; i < InHeightSubdivide; ++i)
 	{
@@ -36,7 +39,9 @@ void CPlaneMeshComponent::CreateMesh(FMeshRenderingData& MeshData, float InHeigh
 					X,//x
 					0.f,//y
 					Z), //z
-				XMFLOAT4(Colors::Gray), XMFLOAT3(0.f, 1.f, 0.f)));
+				XMFLOAT4(Colors::Gray), 
+				XMFLOAT3(0.f, 1.f, 0.f),//法线
+				XMFLOAT2(VerticalAverageSubdivision * i,HorizontalAverageSubdivision*j)));//UV自动展开
 		}
 	}
 
@@ -68,4 +73,17 @@ void CPlaneMeshComponent::CreateMesh(FMeshRenderingData& MeshData, float InHeigh
 			MeshData.IndexData.push_back((i + 1) * InWidthSubdivide + j);
 		}
 	}
+}
+
+void CPlaneMeshComponent::BuildKey(size_t& OutHashKey, float InHeight, float InWidth, uint32_t InHeightSubdivide, uint32_t InWidthSubdivide)
+{
+	std::hash<float> FloatHash;
+	std::hash<int> IntHash;
+
+	OutHashKey = 6;
+	OutHashKey += FloatHash(InHeight);
+	OutHashKey += FloatHash(InWidth);
+
+	OutHashKey += IntHash._Do_hash(InHeightSubdivide);
+	OutHashKey += IntHash._Do_hash(InWidthSubdivide);
 }

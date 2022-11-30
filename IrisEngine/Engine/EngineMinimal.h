@@ -14,8 +14,9 @@
 #include <wrl.h>//提供了智能指针，事件等，方便创建window应用平台程序
 #include <dxgi1_4.h>//提供dxgi适配器，dxgi工厂，交换链等接口
 //#include <d3d12.h>//d3d的api
-#include "../Rendering/DirectX12/d3dx12.h"//d3d的api拓展
-#include <d3dcompiler.h>//提供用于编译作色代码
+#include "Rendering/DirectX12/d3dx12.h"//
+#include "Rendering/DirectX12/DDSTextureLoader.h"//
+#include <D3Dcompiler.h>//
 #include <DirectXMath.h>
 #include <DirectXPackedVector.h>
 #include <DirectXColors.h>

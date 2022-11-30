@@ -15,15 +15,15 @@ void GSpotLight::Tick(float DeltaTime)
 {
 	index_test += DeltaTime;
 	
-	float O = 5.f;
-	float I = 3.f;
+	float O = 50.f;
+	float I = 30.f;
 	
 	SetConicalInnerCorner(I * fabsf(cos(index_test)) + 10.f);
-	//SetConicalOuterCorner(O * fabsf(cos(index_test)) + 20.f);
+	SetConicalOuterCorner(O * fabsf(cos(index_test)) + 20.f);
 
 	fvector_3d v3 = GetRotation();
-	v3.x += DeltaTime * 2.f;
-	v3.y += DeltaTime * 2.f;
+	v3.x += DeltaTime * 40.f;
+	v3.y += DeltaTime * 40.f;
 	////v3.z += DeltaTime * 100.f;
 
 	SetRotation(v3);

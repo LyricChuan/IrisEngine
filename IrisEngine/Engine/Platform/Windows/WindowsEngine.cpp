@@ -178,7 +178,7 @@ bool CWindowsEngine::InitWindows(FWinMainCommandParameters InParameters)
 		100, 100,											//窗口的坐标
 		WindowWidth, WindowHight,							//
 		NULL,												//副窗口句柄
-		nullptr,											//菜单句柄
+		NULL,												//菜单句柄
 		InParameters.HInstance,								//窗口实例
 		NULL												//额外参数
 	);

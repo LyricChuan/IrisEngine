@@ -10,4 +10,5 @@ public:
 	GPointLight();
 
 	virtual void Tick(float DeltaTime);
+	float time;
 };

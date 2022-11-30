@@ -65,6 +65,12 @@ void init_def_c_paths(def_c_paths *c_paths)
 	memset(c_paths->paths,0,sizeof(c_paths->paths) - 1);
 }
 
+void init_def_c_paths_w(def_c_paths_w* c_paths)
+{
+	c_paths->index = 0;
+	memset(c_paths->paths, 0, sizeof(c_paths->paths) - 1);
+}
+
 int copy_file(char *Src, char *Dest)
 {
 	//当前的缓存 缓存1MB大小，如果超过就会出问题 这个会在std C课程里面继续扩展
@@ -97,7 +103,7 @@ void find_files(char const *in_path, def_c_paths *str, bool b_recursion)
 	struct _finddata_t finddata;
 
 	long hfile = 0;
-	char tmp_path[8196] = { 0 };
+	char tmp_path[1024] = { 0 };
 	strcpy(tmp_path, in_path);
 	strcat(tmp_path, "\\*");
 	if ((hfile = _findfirst(tmp_path, &finddata)) != -1)
@@ -114,7 +120,7 @@ void find_files(char const *in_path, def_c_paths *str, bool b_recursion)
 						continue;
 					}
 
-					char new_path[8196] = { 0 };
+					char new_path[1024] = { 0 };
 					strcpy(new_path, in_path);
 					strcat(new_path, "\\");
 					strcat(new_path, finddata.name);

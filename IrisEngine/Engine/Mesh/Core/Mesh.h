@@ -3,10 +3,11 @@
 #include "MeshType.h"
 #include "../../Actor/Core/ActorObject.h"
 #include "../../Interface/DirectXDeviceInterface.h"
-
+#include "../Core/MeshManage.h"
 class CTransformationComponent;
 class CMeshComponent;
 class CMaterial;
+enum EMeshRenderLayerType;
 
 class GMesh 
 	:public GActorObject,
@@ -35,6 +36,14 @@ public:
 	virtual void SetScale(const fvector_3d& InNewScale);
 public:
 	virtual CMeshComponent * GetMeshComponent() { return MeshComponent; }
+	
+	template<class T>
+	T* GetMeshComponent()
+	{
+		return dynamic_cast<T*>(MeshComponent);
+	}
+public:
+	virtual void SetMeshRenderLayerType(EMeshRenderLayerType InRenderLayerType);
 protected:
 	virtual void SetMeshComponent(CMeshComponent* InMeshComponent);
 public:

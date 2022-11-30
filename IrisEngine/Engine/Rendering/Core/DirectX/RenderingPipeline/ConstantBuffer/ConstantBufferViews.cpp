@@ -1,9 +1,9 @@
 #include "ConstantBufferViews.h"
 
-void FConstantBufferViews::CreateConstant(UINT ObjectSize, UINT ObjectCount)
+void FConstantBufferViews::CreateConstant(UINT ObjectSize, UINT ObjectCount, bool bConstBuffer)
 {
 	Constant = make_shared<FRenderingResourcesUpdate>();
-	Constant->Init(GetD3dDevice().Get(), ObjectSize, ObjectCount);
+	Constant->Init(GetD3dDevice().Get(), ObjectSize, ObjectCount, bConstBuffer);
 }
 
 void FConstantBufferViews::Update(int Index, const void* InData)
@@ -16,7 +16,7 @@ void FConstantBufferViews::BuildConstantBuffer(
     UINT InConstantBufferNum,
     UINT InHandleOffset)
 {
-    //通过地址偏移来构建
+    //通过地址偏移来构建。 D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV类型的descriptor heap用来存放CBV
     UINT DescriptorOffset = GetD3dDevice()->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
     D3D12_GPU_VIRTUAL_ADDRESS Addr = Constant->GetBuffer()->GetGPUVirtualAddress();
 

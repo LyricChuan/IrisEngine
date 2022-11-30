@@ -2,7 +2,9 @@
 
 void FDirectXDescriptorHeap::Build(UINT InNumDescriptor)
 {
-    //构建CBV栈描述
+    //构建CBV栈描述 
+    //D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV类型的descriptor heap用来存放CBV
+    //D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE用于指定是提供给shader使用的
     D3D12_DESCRIPTOR_HEAP_DESC HeapDesc;
     HeapDesc.NumDescriptors = InNumDescriptor;
     HeapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;

@@ -3,6 +3,7 @@
 #include "../../Platform/Windows/WindowsPlatform.h"
 #include "../../CodeReflection/CodeReflectionMacroTag.h"
 #include "GuidInterface.h"
+#include "../Construction/ObjectConstruction.h"
 
 class CCoreMinimalObject : public IGuidInterface
 {
@@ -13,11 +14,11 @@ public:
 	virtual void BeginInit() {}
 	virtual void Tick(float DeltaTime) {}
 
-	template<class T>
-	T* CreateObject(CCoreMinimalObject* NewObject)
-	{
-		return dynamic_cast<T*>(NewObject);
-	}
+	//template<class T>
+	//T* CreateObject(CCoreMinimalObject* NewObject)
+	//{
+	//	return dynamic_cast<T*>(NewObject);
+	//}
 
 	bool IsTick() const { return bTick; }
 protected:
