@@ -2,6 +2,8 @@
 #include "RenderLayer/AlphaTestRenderLayer.h"
 #include "RenderLayer/OpaqueRenderLayer.h"
 #include "RenderLayer/TransparentRenderLayer.h"
+#include "RenderLayer/BackgroundRenderLayer.h"
+#include "RenderLayer/OpaqueReflectorRenderLayer.h"
 
 std::vector<std::shared_ptr<FRenderLayer>> FRenderLayerManage::RenderLayers;
 
@@ -9,9 +11,11 @@ FRenderLayerManage::FRenderLayerManage()
 {
 	RenderLayers.clear();
 
-	CreateRenderLayer<FAlphaTestRenderLayer>();
+	CreateRenderLayer<FBackgroundRenderLayer>();
+//	CreateRenderLayer<FAlphaTestRenderLayer>();
 	CreateRenderLayer<FOpaqueRenderLayer>();
 	CreateRenderLayer<FTransparentRenderLayer>();
+	CreateRenderLayer<FOpaqueReflectorRenderLayer>();
 }
 
 FRenderLayerManage::~FRenderLayerManage()
@@ -32,14 +36,6 @@ void FRenderLayerManage::UpdateCalculations(float DeltaTime, const FViewportInfo
 	for (auto& Tmp : RenderLayers)
 	{
 		Tmp->UpdateCalculations(DeltaTime,ViewportInfo);
-	}
-}
-
-void FRenderLayerManage::BuildShader()
-{
-	for (auto& Tmp : RenderLayers)
-	{
-		Tmp->BuildShader();
 	}
 }
 
@@ -96,5 +92,29 @@ void FRenderLayerManage::PostDraw(float DeltaTime)
 	for (auto& Tmp : RenderLayers)
 	{
 		Tmp->PostDraw(DeltaTime);
+	}
+}
+
+void FRenderLayerManage::Draw(int InLayer, float DeltaTime)
+{
+	for (auto& Tmp : RenderLayers)
+	{
+		if (Tmp->GetRenderLayerType() == InLayer)
+		{
+			Tmp->Draw(DeltaTime);
+			break;
+		}
+	}
+}
+
+void FRenderLayerManage::FindObjectDraw(float DeltaTime, int InLayer, const CMeshComponent* InKey)
+{
+	for (auto& Tmp : RenderLayers)
+	{
+		if (Tmp->GetRenderLayerType() == InLayer)
+		{
+			Tmp->FindObjectDraw(DeltaTime, InKey);
+			break;
+		}
 	}
 }

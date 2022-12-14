@@ -1,9 +1,13 @@
+#ifndef SHADERCOMMON_HLSL
+#define SHADERCOMMON_HLSL
+
 #include "Light.hlsl"
 
 SamplerState TextureSampler: register(s0);
 SamplerState AnisotropicSampler : register(s1);
 
-Texture2D    SimpleTexture2DMap[TEXTURE2D_MAP_NUM] : register(t3);
+Texture2D    SimpleTexture2DMap[TEXTURE2D_MAP_NUM] : register(t1);
+TextureCube  SimpleCubeMap: register(t0);
 
 cbuffer ObjectConstBuffer : register(b0)//b0->b14
 {
@@ -26,6 +30,17 @@ cbuffer LightConstBuffer : register(b2)//b0->b14
 	Light SceneLights[16];
 };
 
+cbuffer FogConstBuffer : register(b3)//b0->b14
+{
+	float3 FogColor;
+	float FogStart;
+
+	float FogRange;
+	float FogHeight;
+	float FogTransparentCoefficient;
+	float xxx2;
+};
+
 struct MaterialConstBuffer
 {
 	int MaterialType;
@@ -34,16 +49,19 @@ struct MaterialConstBuffer
 	int NormalIndex;
 
 	int SpecularIndex;
-	int XX1;
-	int XX2;
-	int XX3;
+	int Padding1;
+	int Padding2;
+	int Padding3;
 
 	float4 BaseColor;
 
 	float3 SpecularColor;
-	int XX6;
+	float Padding4;
 
+	float3 FresnelF0;
+	float Transparency;
 	float4x4 TransformInformation;
 };
 
-StructuredBuffer<MaterialConstBuffer> Materials : register(t4, Space1);
+StructuredBuffer<MaterialConstBuffer> Materials : register(t0, Space1);
+#endif

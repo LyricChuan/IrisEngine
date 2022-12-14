@@ -6,12 +6,14 @@
 #include "../../../../../Mesh/Core/Material/MaterialConstantBuffer.h"
 #include "../../../../../Component/Light/Core/LightConstantBuffer.h"
 #include "../../../../../Component/Light/SpotLightComponent.h"
+#include "../../../../../Component/Sky/FogComponent.h"
 #include "../../../../../Mesh/Core/Material/Material.h"
 #include "../../../../../Component/Mesh/Core/MeshComponent.h"
 #include "../../../../../Manage/LightManage.h"
 #include "../../../../../Component/Light/Core/LightComponent.h"
 #include "../../../RenderingTextureResourcesUpdate.h"
 #include "../RenderLayer/RenderLayerManage.h"
+#include "../../../../../Component/Sky/SkyConstantBuffer.h"
 
 UINT MeshObjectCount = 0;
 
@@ -19,7 +21,13 @@ FGeometryMap::FGeometryMap()
 {
 	Geometrys.insert(pair<int,FGeometry>(0,FGeometry()));
 
-	RenderingTextureResources = std::make_shared<FRenderingTextureResourcesUpdate>();
+	RenderingTexture2DResources = std::make_shared<FRenderingTextureResourcesUpdate>();
+	RenderingTexture2DResources->SetViewDimension(D3D12_SRV_DIMENSION_TEXTURE2D);
+
+	RenderingCubeMapResources = std::make_shared<FRenderingTextureResourcesUpdate>();
+	RenderingCubeMapResources->SetViewDimension(D3D12_SRV_DIMENSION_TEXTURECUBE);
+
+	Fog = NULL;
 }
 
 FGeometryMap::~FGeometryMap()
@@ -35,16 +43,22 @@ void FGeometryMap::PreDraw(float DeltaTime)
 void FGeometryMap::Draw(float DeltaTime)
 {
 	//渲染视口
-	DrawViewport(DeltaTime);
+	//DrawViewport(DeltaTime);
 
 	//绘制灯光
 	DrawLight(DeltaTime);
 
 	//绘制贴图
-	DrawTexture(DeltaTime);
+	Draw2DTexture(DeltaTime);
+
+	//绘制立方体贴图
+	DrawCubeMapTexture(DeltaTime);
 
 	//绘制材质
 	DrawMaterial(DeltaTime);
+
+	//绘制雾气
+	DrawFog(DeltaTime);
 }
 
 void FGeometryMap::PostDraw(float DeltaTime)
@@ -54,9 +68,7 @@ void FGeometryMap::PostDraw(float DeltaTime)
 
 void FGeometryMap::UpdateCalculations(float DeltaTime, const FViewportInfo& ViewportInfo)
 {
-	UpdateMaterialShaderResourceView(DeltaTime,ViewportInfo);
-	XMMATRIX ViewMatrix = XMLoadFloat4x4(&ViewportInfo.ViewMatrix);
-	XMMATRIX ProjectMatrix = XMLoadFloat4x4(&ViewportInfo.ProjectMatrix);
+	UpdateMaterialShaderResourceView(DeltaTime, ViewportInfo);
 
 	//更新灯光
 	FLightConstantBuffer LightConstantBuffer;
@@ -99,14 +111,44 @@ void FGeometryMap::UpdateCalculations(float DeltaTime, const FViewportInfo& View
 	LightConstantBufferViews.Update(0, &LightConstantBuffer);
 
 	//更新视口
+	UpdateCalculationsViewport(DeltaTime, ViewportInfo,0);
+
+	//更新雾
+	if (Fog)
+	{
+		if (Fog->IsDirty())
+		{
+			FFogConstantBuffer FogConstantBuffer;
+			{
+				fvector_color FogColor = Fog->GetFogColor();
+				FogConstantBuffer.FogColor = XMFLOAT3(FogColor.r, FogColor.g, FogColor.b);
+
+				FogConstantBuffer.FogStart = Fog->GetFogStart();
+				FogConstantBuffer.FogRange = Fog->GetFogRange();
+				FogConstantBuffer.FogHeight = Fog->GetFogHeight();
+				FogConstantBuffer.FogTransparentCoefficient = Fog->GetFogTransparentCoefficient();
+			}
+
+			FogConstantBufferViews.Update(0, &FogConstantBuffer);
+
+			Fog->SetDirty(false);
+		}
+	}
+}
+
+void FGeometryMap::UpdateCalculationsViewport(float DeltaTime, const FViewportInfo& ViewportInfo, UINT InConstantBufferOffset)
+{
+	XMMATRIX ViewMatrix = XMLoadFloat4x4(&ViewportInfo.ViewMatrix);
+	XMMATRIX ProjectMatrix = XMLoadFloat4x4(&ViewportInfo.ProjectMatrix);
 	XMMATRIX ViewProject = XMMatrixMultiply(ViewMatrix, ProjectMatrix);
+
 	FViewportTransformation ViewportTransformation;
 	XMStoreFloat4x4(&ViewportTransformation.ViewProjectionMatrix, XMMatrixTranspose(ViewProject));
-	
+
 	//拿到视口位置
 	ViewportTransformation.ViewportPosition = ViewportInfo.ViewPosition;
 
-	ViewportConstantBufferViews.Update(0, &ViewportTransformation);
+	ViewportConstantBufferViews.Update(InConstantBufferOffset, &ViewportTransformation);
 }
 
 void FGeometryMap::UpdateMaterialShaderResourceView(float DeltaTime, const FViewportInfo& ViewportInfo)
@@ -131,21 +173,28 @@ void FGeometryMap::UpdateMaterialShaderResourceView(float DeltaTime, const FView
 
 				//类型输入
 				MaterialConstantBuffer.MaterialType = InMaterial->GetMaterialType();
+				
+				//F0输入
+				fvector_3d F0 = InMaterial->GetFresnelF0();
+				MaterialConstantBuffer.FresnelF0 = XMFLOAT3(F0.x, F0.y, F0.z);
+
+				//透明度
+				MaterialConstantBuffer.Transparency = InMaterial->GetTransparency();
 
 				//外部资源导入
 				{
 					//这个是BaseColor
-					if (auto BaseColorTextureResourcesPtr = RenderingTextureResources->FindRenderingTexture(InMaterial->GetBaseColorIndexKey()))
+					if (auto BaseColorTextureResourcesPtr = FindRenderingTexture(InMaterial->GetBaseColorIndexKey()))
 					{
 						MaterialConstantBuffer.BaseColorIndex = (*BaseColorTextureResourcesPtr)->RenderingTextureID;
 					}
-					else
+					else 
 					{
 						MaterialConstantBuffer.BaseColorIndex = -1;
 					}
 
 					//法线
-					if (auto NormalTextureResourcesPtr = RenderingTextureResources->FindRenderingTexture(InMaterial->GetNormalIndexKey()))
+					if (auto NormalTextureResourcesPtr = FindRenderingTexture(InMaterial->GetNormalIndexKey()))
 					{
 						MaterialConstantBuffer.NormalIndex = (*NormalTextureResourcesPtr)->RenderingTextureID;
 					}
@@ -156,7 +205,7 @@ void FGeometryMap::UpdateMaterialShaderResourceView(float DeltaTime, const FView
 
 
 					//高光
-					if (auto SpecularTextureResourcesPtr = RenderingTextureResources->FindRenderingTexture(InMaterial->GetSpecularKey()))
+					if (auto SpecularTextureResourcesPtr = FindRenderingTexture(InMaterial->GetSpecularKey()))
 					{
 						MaterialConstantBuffer.SpecularIndex = (*SpecularTextureResourcesPtr)->RenderingTextureID;
 					}
@@ -175,6 +224,32 @@ void FGeometryMap::UpdateMaterialShaderResourceView(float DeltaTime, const FView
 
 				MaterialConstantBufferViews.Update(InMaterial->GetMaterialIndex(), &MaterialConstantBuffer);
 			}	
+		}
+	}
+}
+
+void FGeometryMap::BuildFog()
+{
+	for (auto &Tmp : GObjects)
+	{
+		if (CFogComponent* InFogComponent = dynamic_cast<CFogComponent*>(Tmp))
+		{
+			Fog = InFogComponent;
+			break;
+		}
+	}
+}
+
+void FGeometryMap::BuildDynamicReflectionMesh()
+{
+	for (auto& Tmp : GObjects)
+	{
+		if (CMeshComponent* InMeshComponent = dynamic_cast<CMeshComponent*>(Tmp))
+		{
+			if (InMeshComponent->IsDynamicReflection())
+			{
+				DynamicReflectionMeshComponents.push_back(InMeshComponent);
+			}
 		}
 	}
 }
@@ -226,7 +301,17 @@ void FGeometryMap::LoadTexture()
 			wchar_t TexturePath[1024] = { 0 };
 			char_to_wchar_t(TexturePath, 1024, Paths.paths[i]);
 
-			RenderingTextureResources->LoadTextureResources(TexturePath);
+			if (wfind_string(TexturePath,L"_CubeMap.")!= -1 || 
+				wfind_string(TexturePath, L"_cubemap.") != -1)
+			{
+				//CubeMap
+				RenderingCubeMapResources->LoadTextureResources(TexturePath);
+			}
+			else
+			{
+				//Texture2D
+				RenderingTexture2DResources->LoadTextureResources(TexturePath);
+			}
 		}	
 	}
 }
@@ -244,10 +329,9 @@ void FGeometryMap::BuildDescriptorHeap()
 {
 	//+1摄像机
 	DescriptorHeap.Build(
-		GetDrawMeshObjectNumber() +
-		1 + //摄像机
-		GetDrawLightObjectNumber() + 
-		GetDrawTextureResourcesNumber());//贴图
+		GetDrawTexture2DResourcesNumber() + //Texture2D
+		GetDrawCubeMapResourcesNumber() + //静态Cube贴图
+		1);//动态Cube贴图
 }
 
 void FGeometryMap::BuildMeshConstantBuffer()
@@ -255,11 +339,17 @@ void FGeometryMap::BuildMeshConstantBuffer()
 	//创建常量缓冲区
 	MeshConstantBufferViews.CreateConstant(sizeof(FObjectTransformation),GetDrawMeshObjectNumber());
 
-	//Handle
-	CD3DX12_CPU_DESCRIPTOR_HANDLE DesHandle = CD3DX12_CPU_DESCRIPTOR_HANDLE(GetHeap()->GetCPUDescriptorHandleForHeapStart());
+	////Handle
+	//CD3DX12_CPU_DESCRIPTOR_HANDLE DesHandle = CD3DX12_CPU_DESCRIPTOR_HANDLE(GetHeap()->GetCPUDescriptorHandleForHeapStart());
+	//
+	////构建常量缓冲区
+	//MeshConstantBufferViews.BuildConstantBuffer(DesHandle,GetDrawMeshObjectNumber());
+}
 
-	//构建常量缓冲区
-	MeshConstantBufferViews.BuildConstantBuffer(DesHandle,GetDrawMeshObjectNumber());
+void FGeometryMap::BuildFogConstantBuffer()
+{
+	//创建常量缓冲区
+	FogConstantBufferViews.CreateConstant(sizeof(FFogConstantBuffer),1);
 }
 
 void FGeometryMap::BuildMaterialShaderResourceView()
@@ -295,14 +385,14 @@ void FGeometryMap::BuildLightConstantBuffer()
 	//创建常量缓冲区
 	LightConstantBufferViews.CreateConstant(sizeof(FLightConstantBuffer), GetDrawLightObjectNumber());
 
-	//Handle
-	CD3DX12_CPU_DESCRIPTOR_HANDLE DesHandle = CD3DX12_CPU_DESCRIPTOR_HANDLE(GetHeap()->GetCPUDescriptorHandleForHeapStart());
-
-	//构建常量缓冲区
-	LightConstantBufferViews.BuildConstantBuffer(
-		DesHandle,
-		GetDrawLightObjectNumber(),
-		GetDrawMeshObjectNumber());
+	////Handle
+	//CD3DX12_CPU_DESCRIPTOR_HANDLE DesHandle = CD3DX12_CPU_DESCRIPTOR_HANDLE(GetHeap()->GetCPUDescriptorHandleForHeapStart());
+	//
+	////构建常量缓冲区
+	//LightConstantBufferViews.BuildConstantBuffer(
+	//	DesHandle,
+	//	GetDrawLightObjectNumber(),
+	//	GetDrawMeshObjectNumber());
 }
 
 UINT FGeometryMap::GetDrawMeshObjectNumber()
@@ -320,58 +410,101 @@ UINT FGeometryMap::GetDrawLightObjectNumber()
 	return 1;
 }
 
-UINT FGeometryMap::GetDrawTextureResourcesNumber()
+UINT FGeometryMap::GetDrawTexture2DResourcesNumber()
 {
-	return RenderingTextureResources->Size();
+	return RenderingTexture2DResources->Size();
+}
+
+UINT FGeometryMap::GetDrawCubeMapResourcesNumber()
+{
+	return RenderingCubeMapResources->Size();
+}
+
+UINT FGeometryMap::GetDynamicReflectionViewportNum()
+{
+	return DynamicReflectionMeshComponents.size() * 6;
 }
 
 void FGeometryMap::BuildTextureConstantBuffer()
 {
-	RenderingTextureResources->BuildTextureConstantBuffer(
-		DescriptorHeap.GetHeap(), 
-		GetDrawMeshObjectNumber() + 
-		GetDrawLightObjectNumber() +
-		1);//视口
+	//构建Texture2D
+	RenderingTexture2DResources->BuildTextureConstantBuffer(
+		DescriptorHeap.GetHeap(),0);//视口
+
+	//构建CubeMap
+	RenderingCubeMapResources->BuildTextureConstantBuffer(
+		DescriptorHeap.GetHeap(),
+		GetDrawTexture2DResourcesNumber());//视口
 }
 
-void FGeometryMap::BuildViewportConstantBufferView()
+void FGeometryMap::BuildViewportConstantBufferView(UINT InViewportOffset)
 {
 	//创建常量缓冲区
-	ViewportConstantBufferViews.CreateConstant(sizeof(FViewportTransformation), 1);
+	ViewportConstantBufferViews.CreateConstant(sizeof(FViewportTransformation), 
+		1 + //主视口 摄像机
+		GetDynamicReflectionViewportNum() + //这个是动态反射的视口
+		InViewportOffset);
 
-	//Handle
-	CD3DX12_CPU_DESCRIPTOR_HANDLE DesHandle = CD3DX12_CPU_DESCRIPTOR_HANDLE(GetHeap()->GetCPUDescriptorHandleForHeapStart());
+	////Handle
+	//CD3DX12_CPU_DESCRIPTOR_HANDLE DesHandle = CD3DX12_CPU_DESCRIPTOR_HANDLE(GetHeap()->GetCPUDescriptorHandleForHeapStart());
+	//
+	////构建常量缓冲区
+	//ViewportConstantBufferViews.BuildConstantBuffer(DesHandle,
+	//	1,
+	//	GetDrawMeshObjectNumber() + 
+	//	GetDrawLightObjectNumber());
+}
 
-	//构建常量缓冲区
-	ViewportConstantBufferViews.BuildConstantBuffer(DesHandle,
-		1,
-		GetDrawMeshObjectNumber() + 
-		GetDrawLightObjectNumber());
+bool FGeometryMap::IsStartUpFog()
+{
+	return Fog != NULL;
+}
+
+std::unique_ptr<FRenderingTexture>* FGeometryMap::FindRenderingTexture(const std::string& InKey)
+{
+	if (auto RenderingTexture2DPtr = RenderingTexture2DResources->FindRenderingTexture(InKey))
+	{
+		return RenderingTexture2DPtr;
+	}
+	else if (auto RenderingCubeMapPtr = RenderingCubeMapResources->FindRenderingTexture(InKey))
+	{
+		return RenderingCubeMapPtr;
+	}
+
+	return nullptr;
 }
 
 void FGeometryMap::DrawLight(float DeltaTime)
 {
 	//D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV类型的descriptor heap用来存放CBV
-	UINT DescriptorOffset = GetD3dDevice()->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
+	//UINT DescriptorOffset = GetD3dDevice()->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
+	//
+	//auto DesHandle = CD3DX12_GPU_DESCRIPTOR_HANDLE(GetHeap()->GetGPUDescriptorHandleForHeapStart());
+	//DesHandle.Offset(
+	//	GetDrawMeshObjectNumber(), DescriptorOffset);
+	//
+	//GetGraphicsCommandList()->SetGraphicsRootDescriptorTable(2, DesHandle);//3是根参数里面的2
 
-	auto DesHandle = CD3DX12_GPU_DESCRIPTOR_HANDLE(GetHeap()->GetGPUDescriptorHandleForHeapStart());
-	DesHandle.Offset(
-		GetDrawMeshObjectNumber(), DescriptorOffset);
-
-	GetGraphicsCommandList()->SetGraphicsRootDescriptorTable(2, DesHandle);//3是根参数里面的2
+	GetGraphicsCommandList()->SetGraphicsRootConstantBufferView(
+		2,
+		LightConstantBufferViews.GetBuffer()->GetGPUVirtualAddress());
 }
 
 void FGeometryMap::DrawViewport(float DeltaTime)
 {
 	//D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV类型的descriptor heap用来存放CBV
-	UINT DescriptorOffset = GetD3dDevice()->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
+	//UINT DescriptorOffset = GetD3dDevice()->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
+	//
+	//auto DesHandle = CD3DX12_GPU_DESCRIPTOR_HANDLE(GetHeap()->GetGPUDescriptorHandleForHeapStart());
+	//DesHandle.Offset(
+	//	GetDrawMeshObjectNumber()+
+	//	GetDrawLightObjectNumber(), DescriptorOffset);
+	//
+	//GetGraphicsCommandList()->SetGraphicsRootDescriptorTable(1, DesHandle);
 
-	auto DesHandle = CD3DX12_GPU_DESCRIPTOR_HANDLE(GetHeap()->GetGPUDescriptorHandleForHeapStart());
-	DesHandle.Offset(
-		GetDrawMeshObjectNumber()+
-		GetDrawLightObjectNumber(), DescriptorOffset);
-
-	GetGraphicsCommandList()->SetGraphicsRootDescriptorTable(1, DesHandle);
+	GetGraphicsCommandList()->SetGraphicsRootConstantBufferView(
+		1,
+		ViewportConstantBufferViews.GetBuffer()->GetGPUVirtualAddress());
 }
 
 void FGeometryMap::DrawMesh(float DeltaTime)
@@ -386,16 +519,31 @@ void FGeometryMap::DrawMaterial(float DeltaTime)
 		MaterialConstantBufferViews.GetBuffer()->GetGPUVirtualAddress());
 }
 
-void FGeometryMap::DrawTexture(float DeltaTime)
+void FGeometryMap::Draw2DTexture(float DeltaTime)
 {
-	UINT DescriptorOffset = GetD3dDevice()->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
+	UINT DescriptorOffset = GetDescriptorHandleIncrementSizeByCBV_SRV_UAV();
 
 	auto DesHandle = CD3DX12_GPU_DESCRIPTOR_HANDLE(GetHeap()->GetGPUDescriptorHandleForHeapStart());
-	DesHandle.Offset(
-		GetDrawMeshObjectNumber() +
-		GetDrawLightObjectNumber() + 1, DescriptorOffset);
+	DesHandle.Offset(0, DescriptorOffset);
 
-	GetGraphicsCommandList()->SetGraphicsRootDescriptorTable(3, DesHandle);
+	GetGraphicsCommandList()->SetGraphicsRootDescriptorTable(5, DesHandle);
+}
+
+void FGeometryMap::DrawCubeMapTexture(float DeltaTime)
+{
+	UINT DescriptorOffset = GetDescriptorHandleIncrementSizeByCBV_SRV_UAV();
+
+	auto DesHandle = CD3DX12_GPU_DESCRIPTOR_HANDLE(GetHeap()->GetGPUDescriptorHandleForHeapStart());
+	DesHandle.Offset(GetDrawTexture2DResourcesNumber(), DescriptorOffset);
+
+	GetGraphicsCommandList()->SetGraphicsRootDescriptorTable(6, DesHandle);
+}
+
+void FGeometryMap::DrawFog(float DeltaTime)
+{
+	GetGraphicsCommandList()->SetGraphicsRootConstantBufferView(
+		3,
+		FogConstantBufferViews.GetBuffer()->GetGPUVirtualAddress());
 }
 
 bool FGeometry::IsRenderingDataExistence(CMeshComponent* InKey)
@@ -434,18 +582,18 @@ void FGeometry::BuildMesh(
 			InRenderingData.MeshHash = InMeshHash;
 			InRenderingData.GeometryKey = InKey;
 
-		InRenderingData.IndexSize = MeshData.IndexData.size();
-		InRenderingData.VertexSize = MeshData.VertexData.size();
+			InRenderingData.IndexSize = MeshData.IndexData.size();
+			InRenderingData.VertexSize = MeshData.VertexData.size();
 
-		InRenderingData.IndexOffsetPosition = MeshRenderingData.IndexData.size();
-		InRenderingData.VertexOffsetPosition = MeshRenderingData.VertexData.size();
+			InRenderingData.IndexOffsetPosition = MeshRenderingData.IndexData.size();
+			InRenderingData.VertexOffsetPosition = MeshRenderingData.VertexData.size();
 
-		//高效的插入
-		//索引的合并
-		MeshRenderingData.IndexData.insert(
-			MeshRenderingData.IndexData.end(),
-			MeshData.IndexData.begin(),
-			MeshData.IndexData.end());
+			//高效的插入
+			//索引的合并
+			MeshRenderingData.IndexData.insert(
+				MeshRenderingData.IndexData.end(),
+				MeshData.IndexData.begin(),
+				MeshData.IndexData.end());
 
 			//顶点的合并
 			MeshRenderingData.VertexData.insert(

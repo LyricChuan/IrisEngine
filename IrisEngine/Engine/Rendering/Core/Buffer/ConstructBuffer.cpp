@@ -17,6 +17,7 @@ namespace ConstructBuffer
 		*/
 		//´´½¨Ä¬ÈÏ¶Ñ
 		CD3DX12_HEAP_PROPERTIES BufferProperties = CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_DEFAULT);
+		if (GetD3dDevice())
 		ANALYSIS_HRESULT(GetD3dDevice()->CreateCommittedResource(
 			&BufferProperties,
 			D3D12_HEAP_FLAG_NONE,
@@ -25,6 +26,7 @@ namespace ConstructBuffer
 			NULL, IID_PPV_ARGS(Buffer.GetAddressOf())));
 
 		CD3DX12_HEAP_PROPERTIES UpdateBufferProperties = CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_UPLOAD);
+		if (GetD3dDevice())
 		ANALYSIS_HRESULT(GetD3dDevice()->CreateCommittedResource(
 			&UpdateBufferProperties,
 			D3D12_HEAP_FLAG_NONE,

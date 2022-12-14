@@ -1,0 +1,405 @@
+[LOG] [Mon Dec 12 14:24:11 2022] Log Init. 
+[LOG] [Mon Dec 12 14:24:11 2022] Engine pre initialization complete. 
+[LOG] [Mon Dec 12 14:24:11 2022] DirectXRenderingEngine pre initialization complete. 
+[LOG] [Mon Dec 12 14:24:11 2022] InitWindows complete. 
+[SUCCESS] [Mon Dec 12 14:24:11 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:11 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:11 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:11 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:11 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:11 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:11 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:11 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:11 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:11 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:11 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:11 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:11 2022] Success ! 
+[LOG] [Mon Dec 12 14:24:11 2022] DirectXRenderingEngine initialization complete. 
+[LOG] [Mon Dec 12 14:24:11 2022] Engine initialization complete. 
+[LOG] [Mon Dec 12 14:24:11 2022] Engine post initialization complete. 
+[LOG] [Mon Dec 12 14:24:11 2022] Engine post initialization complete. 
+[SUCCESS] [Mon Dec 12 14:24:11 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:12 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:12 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:12 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:12 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:12 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:12 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:12 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:12 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:12 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:12 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:12 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:12 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:12 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:12 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:12 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:12 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:12 2022] Success ! 
+[ERROR] [Mon Dec 12 14:24:12 2022] C:\Users\qinchuan\source\repos\IrisEngine\IrisEngine\Shader\Sky.hlsl(34,17-69): warning X3206: 'Sample': implicit truncation of vector type
+C:\Users\qinchuan\source\repos\IrisEngine\IrisEngine\Shader\Sky.hlsl(37,10-42): warning X3206: 'GetFogValue': implicit truncation of vector type
+ 
+[SUCCESS] [Mon Dec 12 14:24:12 2022] Success ! 
+[ERROR] [Mon Dec 12 14:24:12 2022] C:\Users\qinchuan\source\repos\IrisEngine\IrisEngine\Shader\Sky.hlsl(34,17-69): warning X3206: 'Sample': implicit truncation of vector type
+C:\Users\qinchuan\source\repos\IrisEngine\IrisEngine\Shader\Sky.hlsl(37,10-42): warning X3206: 'GetFogValue': implicit truncation of vector type
+ 
+[SUCCESS] [Mon Dec 12 14:24:12 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:12 2022] Success ! 
+[ERROR] [Mon Dec 12 14:24:12 2022] Material.hlsl(75,2-57): warning X3206: implicit truncation of vector type
+C:\Users\qinchuan\source\repos\IrisEngine\IrisEngine\Shader\Hello.hlsl(370,16-60): warning X3206: 'GetFogValue': implicit truncation of vector type
+ 
+[SUCCESS] [Mon Dec 12 14:24:12 2022] Success ! 
+[ERROR] [Mon Dec 12 14:24:12 2022] Material.hlsl(75,2-57): warning X3206: implicit truncation of vector type
+C:\Users\qinchuan\source\repos\IrisEngine\IrisEngine\Shader\Hello.hlsl(370,16-60): warning X3206: 'GetFogValue': implicit truncation of vector type
+Material.hlsl(23,2): warning X4000: use of potentially uninitialized variable (GetMaterialBaseColor)
+Material.hlsl(56,2): warning X4000: use of potentially uninitialized variable (GetMaterialSpecular)
+Material.hlsl(46,2): warning X4000: use of potentially uninitialized variable (GetMaterialNormals)
+Material.hlsl(56,2): warning X4000: use of potentially uninitialized variable (GetMaterialSpecular)
+Light.hlsl(34,2): warning X4000: use of potentially uninitialized variable (GetLightDirection)
+Light.hlsl(75,3): warning X4000: use of potentially uninitialized variable (ComputeLightStrength)
+Light.hlsl(123,4): warning X4000: use of potentially uninitialized variable (ComputeLightStrength)
+Light.hlsl(124,3): warning X4000: use of potentially uninitialized variable (ComputeLightStrength)
+Light.hlsl(125,2): warning X4000: use of potentially uninitialized variable (ComputeLightStrength)
+ 
+[SUCCESS] [Mon Dec 12 14:24:12 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:12 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:12 2022] Success ! 
+[ERROR] [Mon Dec 12 14:24:12 2022] Material.hlsl(75,2-57): warning X3206: implicit truncation of vector type
+C:\Users\qinchuan\source\repos\IrisEngine\IrisEngine\Shader\Hello.hlsl(370,16-60): warning X3206: 'GetFogValue': implicit truncation of vector type
+ 
+[SUCCESS] [Mon Dec 12 14:24:12 2022] Success ! 
+[ERROR] [Mon Dec 12 14:24:12 2022] Material.hlsl(75,2-57): warning X3206: implicit truncation of vector type
+C:\Users\qinchuan\source\repos\IrisEngine\IrisEngine\Shader\Hello.hlsl(370,16-60): warning X3206: 'GetFogValue': implicit truncation of vector type
+Material.hlsl(23,2): warning X4000: use of potentially uninitialized variable (GetMaterialBaseColor)
+Material.hlsl(56,2): warning X4000: use of potentially uninitialized variable (GetMaterialSpecular)
+Material.hlsl(46,2): warning X4000: use of potentially uninitialized variable (GetMaterialNormals)
+Material.hlsl(56,2): warning X4000: use of potentially uninitialized variable (GetMaterialSpecular)
+Light.hlsl(34,2): warning X4000: use of potentially uninitialized variable (GetLightDirection)
+Light.hlsl(75,3): warning X4000: use of potentially uninitialized variable (ComputeLightStrength)
+Light.hlsl(123,4): warning X4000: use of potentially uninitialized variable (ComputeLightStrength)
+Light.hlsl(124,3): warning X4000: use of potentially uninitialized variable (ComputeLightStrength)
+Light.hlsl(125,2): warning X4000: use of potentially uninitialized variable (ComputeLightStrength)
+ 
+[SUCCESS] [Mon Dec 12 14:24:12 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[ERROR] [Mon Dec 12 14:24:13 2022] Material.hlsl(75,2-57): warning X3206: implicit truncation of vector type
+C:\Users\qinchuan\source\repos\IrisEngine\IrisEngine\Shader\Hello.hlsl(370,16-60): warning X3206: 'GetFogValue': implicit truncation of vector type
+ 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[ERROR] [Mon Dec 12 14:24:13 2022] Material.hlsl(75,2-57): warning X3206: implicit truncation of vector type
+C:\Users\qinchuan\source\repos\IrisEngine\IrisEngine\Shader\Hello.hlsl(370,16-60): warning X3206: 'GetFogValue': implicit truncation of vector type
+Material.hlsl(23,2): warning X4000: use of potentially uninitialized variable (GetMaterialBaseColor)
+Material.hlsl(56,2): warning X4000: use of potentially uninitialized variable (GetMaterialSpecular)
+Material.hlsl(46,2): warning X4000: use of potentially uninitialized variable (GetMaterialNormals)
+Material.hlsl(56,2): warning X4000: use of potentially uninitialized variable (GetMaterialSpecular)
+Light.hlsl(34,2): warning X4000: use of potentially uninitialized variable (GetLightDirection)
+Light.hlsl(75,3): warning X4000: use of potentially uninitialized variable (ComputeLightStrength)
+Light.hlsl(123,4): warning X4000: use of potentially uninitialized variable (ComputeLightStrength)
+Light.hlsl(124,3): warning X4000: use of potentially uninitialized variable (ComputeLightStrength)
+Light.hlsl(125,2): warning X4000: use of potentially uninitialized variable (ComputeLightStrength)
+ 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:13 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:14 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:24:15 2022] Success ! 

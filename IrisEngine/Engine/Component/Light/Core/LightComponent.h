@@ -4,7 +4,7 @@
 #include "LightType.h"
 
 class CMeshComponent;
-class CLightComponent :public CTransformationComponent,public IDirectXDeviceInterface
+class CLightComponent : public CTransformationComponent, public IDirectXDeviceInterface
 {
 	typedef CTransformationComponent Super;
 

@@ -3,6 +3,7 @@
 #include "../../../../../../Interface/DirectXDeviceInterface.h"
 #include "../../../../../../Shader/Core/Shader.h"
 #include "../../Geometry/RenderingData.h"
+#include "../../../../../../Shader/Core/ShaderType.h"
 
 struct FDirectXPipelineState;
 struct FGeometryMap;
@@ -25,16 +26,21 @@ public:
 	virtual void Draw(float DeltaTime);
 	virtual void PostDraw(float DeltaTime);
 
-	virtual void BuildPSO(){}
+	virtual void DrawObject(float DeltaTime, const FRenderingData& InRenderingData);
+	virtual void FindObjectDraw(float DeltaTime, const CMeshComponent* InKey);
+
+	virtual void BuildPSO();
 
 	void RegisterRenderLayer();
+
+	virtual void BuildShaderMacro(std::vector<ShaderType::FShaderMacro> &InMacro);
 
 	virtual void UpdateCalculations(float DeltaTime, const FViewportInfo& ViewportInfo);
 public:
 	const UINT GetRenderPriority()const { return RenderPriority; }
 
 public:
-	virtual void BuildShader() = 0;
+	virtual void BuildShader() {};
 	virtual int GetRenderLayerType()const = 0;
 protected:
 	UINT RenderPriority;

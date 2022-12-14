@@ -14,6 +14,8 @@ struct FConstantBufferViews :public IDirectXDeviceInterface_Struct
 		UINT InConstantBufferNum,
 		UINT InHandleOffset = 0);
 
+	UINT GetConstantBufferByteSize();
+
 	ID3D12Resource* GetBuffer() { return Constant->GetBuffer(); }
 protected:
 	shared_ptr<FRenderingResourcesUpdate> Constant;

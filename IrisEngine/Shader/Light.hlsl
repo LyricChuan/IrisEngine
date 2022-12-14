@@ -1,3 +1,5 @@
+#ifndef LIGHT_HLSL
+#define LIGHT_HLSL
 
 struct Light
 {
@@ -40,7 +42,7 @@ float4 AttenuationPointLights1(Light L,float Distance)
 
 	float AttenuationRange = L.EndAttenuation - L.StartAttenuation;
 
-	return LightStrength * (Distance / AttenuationRange);
+	return LightStrength * (1 - Distance / AttenuationRange);
 }
 
 float4 AttenuationPointLights2(Light L,float Distance,float C,float I,float Q)
@@ -57,7 +59,7 @@ float4 ComputeLightStrength(Light L,float3 InObjectPointNormal,float3 InObjectWo
 	}
 	else if (L.LightType == 1) //spot
 	{
-		float4 LightStrength = float4(1.f, 1.f, 1.f, 1.f);
+		float4 LightStrength = float4(L.LightIntensity, 1.f);
 		float3 LightVector = L.Position - InObjectWorldLocation;;
 		float Distance = length(LightVector);
 
@@ -97,7 +99,7 @@ float4 ComputeLightStrength(Light L,float3 InObjectPointNormal,float3 InObjectWo
 			float DotValue = max(dot(NormalizeLightDirection, L.LightDirection), 0.f);
 			//float4 LightStrength = float4(1.f, 1.f, 1.f, 1.f) * pow(DotValue,1.f);
 			
-			float4 LightStrength = float4(1.f, 1.f, 1.f, 1.f) * float4(L.LightIntensity, 1.f);
+			float4 LightStrength = float4(L.LightIntensity, 1.f);
 			
 			float Theta1 = acos(DotValue);
 			
@@ -124,3 +126,4 @@ float4 ComputeLightStrength(Light L,float3 InObjectPointNormal,float3 InObjectWo
 
 	return float4( 0.f,0.f,0.f,1.f );
 }
+#endif

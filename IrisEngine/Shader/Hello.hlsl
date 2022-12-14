@@ -1,5 +1,6 @@
 #include "Material.hlsl"
 #include "PBR.hlsl"
+#include "SkyFunction.hlsl"
 
 struct MeshVertexIn
 {
@@ -64,11 +65,10 @@ float4 PixelShaderMain(MeshVertexOut MVOut) :SV_TARGET
 	//获取BaseColor
 	Material.BaseColor = GetMaterialBaseColor(MatConstBuffer, MVOut.TexCoord);
 
-	//拿到Specular
-	float4 Specular = GetMaterialSpecular(MatConstBuffer, MVOut.TexCoord);
 	//BaseColor
 	if (MatConstBuffer.MaterialType == 12)
 	{
+		float4 Specular = GetMaterialSpecular(MatConstBuffer, MVOut.TexCoord);
 		return Material.BaseColor * Specular + Material.BaseColor + 0.1f;
 	}
 	else if (MatConstBuffer.MaterialType == 13)
@@ -88,13 +88,16 @@ float4 PixelShaderMain(MeshVertexOut MVOut) :SV_TARGET
 
 	float DotValue = 0;
 
-	float4 LightStrengths = { 0.f,0.f,0.f,1.f };
+	float4 FinalColor = { 0.f,0.f,0.f,1.f };
 
 
 	for (int i = 0; i < 16; i++)
 	{
 		if (length(SceneLights[i].LightIntensity.xyz) > 0.f)
 		{
+			//拿到Specular
+			float4 Specular = GetMaterialSpecular(MatConstBuffer, MVOut.TexCoord);
+
 			float3 NormalizeLightDirection = normalize(GetLightDirection(SceneLights[i],MVOut.WorldPosition.xyz));
 
 			float4 LightStrength = ComputeLightStrength(SceneLights[i], ModelNormal, MVOut.WorldPosition.xyz, NormalizeLightDirection);
@@ -273,6 +276,11 @@ float4 PixelShaderMain(MeshVertexOut MVOut) :SV_TARGET
 
 				DotValue = NormalLight * (A + B * max(0, Phiri) * sin(Alpha) * tan(Beta));
 			}
+			else if (MatConstBuffer.MaterialType == 15)//透明物体
+			{
+				float DiffuseReflection = dot(ModelNormal, NormalizeLightDirection);
+				DotValue = max((DiffuseReflection * 0.5f + 0.5f), 0.0);//[-1,1] => [0,1]
+			}
 			else if (MatConstBuffer.MaterialType == 20)//PBR
 			{
 				float3 L = NormalizeLightDirection;
@@ -322,23 +330,44 @@ float4 PixelShaderMain(MeshVertexOut MVOut) :SV_TARGET
 				//Specular.xyz = FresnelSchlickMethod(F0, ModelNormal, ViewDirection, 3).xyz;
 			}
 
-			LightStrengths += saturate(LightStrength * DotValue * float4(SceneLights[i].LightIntensity,1.f));
-			LightStrengths.w = 1.f;
-
-			//把这些属性限制到 0-1
-			LightStrengths = saturate(LightStrengths);
+			float4 Diffuse = Material.BaseColor;;
 			Specular = saturate(Specular);
-			Material.BaseColor = saturate(Material.BaseColor);
+
+			FinalColor += saturate((Diffuse + Specular) * LightStrength * DotValue);
 		}
 	}
 
 	//最终颜色贡献
-	MVOut.Color = LightStrengths*(Material.BaseColor //漫反射
-		+ Specular * Material.BaseColor)+ //高光
-
+	MVOut.Color = FinalColor + //最终颜色
 		AmbientLight * Material.BaseColor; //间接光
+
+	switch (MatConstBuffer.MaterialType)
+	{
+		case 2:
+		case 3:
+		case 9:
+		case 15:
+		{
+			//计算天空盒反射(静态反射)
+			float3 ReflectionColor = GetReflectionColor(MatConstBuffer, ModelNormal, MVOut.WorldPosition.xyz);
+			MVOut.Color.xyz += ReflectionColor;
+			break;
+		}
+	}
+
+	if (MatConstBuffer.MaterialType == 15)
+	{
+		//透明的
+		MVOut.Color.a = MatConstBuffer.Transparency;
+	}
+	else
+	{
+		//透明的
+		MVOut.Color.a = Material.BaseColor.a;
+	}
 	
-	MVOut.Color.a = Material.BaseColor.a;
+	//计算雾
+	MVOut.Color = GetFogValue(MVOut.Color, MVOut.WorldPosition);
 
 	return MVOut.Color;
 }

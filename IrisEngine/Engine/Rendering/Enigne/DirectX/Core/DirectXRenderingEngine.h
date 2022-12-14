@@ -25,6 +25,11 @@ public:
 	virtual int Exit();
 	virtual int PostExit();
 public:
+	void StartSetMainViewportRenderTarget();
+	void EndSetMainViewportRenderTarget();
+	void ClearMainSwapChainCanvas();
+
+public:
 	ID3D12Resource* GetCurrentSwapBuff() const;
 	D3D12_CPU_DESCRIPTOR_HANDLE GetCurrentSwapBufferView() const;
 	D3D12_CPU_DESCRIPTOR_HANDLE GetCurrentDepthStencilView() const;

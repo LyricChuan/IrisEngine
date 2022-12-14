@@ -21,4 +21,8 @@ public:
 	EMeshRenderLayerType GetRenderLayerType()const { return MeshRenderLayerType; }
 	vector<CMaterial*>* GetMaterials() { return &Materials; }
 	EMeshRenderLayerType MeshRenderLayerType;
+
+public:
+	//¶¯Ì¬·´Éä
+	bool IsDynamicReflection() const;
 };

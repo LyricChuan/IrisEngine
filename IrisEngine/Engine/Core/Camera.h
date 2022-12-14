@@ -1,6 +1,6 @@
 #pragma once
 #include "Viewport/Viewport.h"
-#include "../Actor/Core/ActorObject.h"
+#include "Viewport/ClientViewport.h"
 #include "../CodeReflection/CodeReflectionMacroTag.h"
 #include "../Interface/DirectXDeviceInterface.h"
 
@@ -9,10 +9,11 @@ struct FInputKey;
 class CTransformationComponent;
 class CInputComponent;
 
-class GCamera :public GActorObject
-	,public FViewport
+class GCamera :public GClientViewport
 	,public IDirectXDeviceInterface
 {
+	typedef GClientViewport Super;
+
 	CVARIABLE()
 	CInputComponent* InputComponent;
 public:

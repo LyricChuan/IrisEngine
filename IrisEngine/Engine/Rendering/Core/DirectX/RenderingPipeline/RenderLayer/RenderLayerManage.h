@@ -18,7 +18,9 @@ public:
 	virtual void Draw(float DeltaTime);
 	virtual void PostDraw(float DeltaTime);
 
-	virtual void BuildShader();
+	//ÐèÒªäÖÈ¾ÄÄ¸ö²ã
+	virtual void Draw(int InLayer,float DeltaTime);
+	virtual void FindObjectDraw(float DeltaTime, int InLayer, const CMeshComponent* InKey);
 
 	virtual void BuildPSO();
 

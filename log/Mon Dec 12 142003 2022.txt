@@ -1,0 +1,53 @@
+[LOG] [Mon Dec 12 14:20:03 2022] Log Init. 
+[LOG] [Mon Dec 12 14:20:03 2022] Engine pre initialization complete. 
+[LOG] [Mon Dec 12 14:20:03 2022] DirectXRenderingEngine pre initialization complete. 
+[LOG] [Mon Dec 12 14:20:03 2022] InitWindows complete. 
+[SUCCESS] [Mon Dec 12 14:20:03 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:20:03 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:20:03 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:20:03 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:20:03 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:20:03 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:20:03 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:20:03 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:20:03 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:20:03 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:20:03 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:20:03 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:20:03 2022] Success ! 
+[LOG] [Mon Dec 12 14:20:03 2022] DirectXRenderingEngine initialization complete. 
+[LOG] [Mon Dec 12 14:20:03 2022] Engine initialization complete. 
+[LOG] [Mon Dec 12 14:20:03 2022] Engine post initialization complete. 
+[LOG] [Mon Dec 12 14:20:03 2022] Engine post initialization complete. 
+[SUCCESS] [Mon Dec 12 14:20:03 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:20:04 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:20:04 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:20:04 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:20:04 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:20:04 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:20:04 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:20:04 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:20:04 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:20:04 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:20:04 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:20:04 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:20:04 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:20:04 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:20:04 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:20:04 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:20:04 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:20:04 2022] Success ! 
+[ERROR] [Mon Dec 12 14:20:04 2022] C:\Users\qinchuan\source\repos\IrisEngine\IrisEngine\Shader\Sky.hlsl(34,17-69): warning X3206: 'Sample': implicit truncation of vector type
+C:\Users\qinchuan\source\repos\IrisEngine\IrisEngine\Shader\Sky.hlsl(37,10-42): warning X3206: 'GetFogValue': implicit truncation of vector type
+ 
+[SUCCESS] [Mon Dec 12 14:20:04 2022] Success ! 
+[ERROR] [Mon Dec 12 14:20:04 2022] C:\Users\qinchuan\source\repos\IrisEngine\IrisEngine\Shader\Sky.hlsl(34,17-69): warning X3206: 'Sample': implicit truncation of vector type
+C:\Users\qinchuan\source\repos\IrisEngine\IrisEngine\Shader\Sky.hlsl(37,10-42): warning X3206: 'GetFogValue': implicit truncation of vector type
+ 
+[SUCCESS] [Mon Dec 12 14:20:04 2022] Success ! 
+[SUCCESS] [Mon Dec 12 14:20:04 2022] Success ! 
+[ERROR] [Mon Dec 12 14:20:04 2022] Material.hlsl(75,2-57): warning X3206: implicit truncation of vector type
+Material.hlsl(96,49-57): error X3004: undeclared identifier 'shininess'
+Material.hlsl(96,2-58): error X3080: 'GetReflectionColor': function must return a value
+ 
+[ERROR] [Mon Dec 12 14:20:04 2022] Error = -2147467259 

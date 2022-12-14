@@ -1,0 +1,285 @@
+[LOG] [Sat Dec  3 17:13:12 2022] Log Init. 
+[LOG] [Sat Dec  3 17:13:12 2022] Engine pre initialization complete. 
+[LOG] [Sat Dec  3 17:13:12 2022] DirectXRenderingEngine pre initialization complete. 
+[LOG] [Sat Dec  3 17:13:12 2022] InitWindows complete. 
+[SUCCESS] [Sat Dec  3 17:13:12 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:13 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:13 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:13 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:13 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:13 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:13 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:13 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:13 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:13 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:13 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:13 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:13 2022] Success ! 
+[LOG] [Sat Dec  3 17:13:13 2022] DirectXRenderingEngine initialization complete. 
+[LOG] [Sat Dec  3 17:13:13 2022] Engine initialization complete. 
+[LOG] [Sat Dec  3 17:13:13 2022] Engine post initialization complete. 
+[LOG] [Sat Dec  3 17:13:13 2022] Engine post initialization complete. 
+[SUCCESS] [Sat Dec  3 17:13:13 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:13 2022] Success ! 
+[ERROR] [Sat Dec  3 17:13:13 2022] Material.hlsl(20,2): warning X4000: use of potentially uninitialized variable (GetMaterialBaseColor)
+Material.hlsl(53,2): warning X4000: use of potentially uninitialized variable (GetMaterialSpecular)
+Material.hlsl(43,2): warning X4000: use of potentially uninitialized variable (GetMaterialNormals)
+Light.hlsl(32,2): warning X4000: use of potentially uninitialized variable (GetLightDirection)
+Light.hlsl(73,3): warning X4000: use of potentially uninitialized variable (ComputeLightStrength)
+Light.hlsl(121,4): warning X4000: use of potentially uninitialized variable (ComputeLightStrength)
+Light.hlsl(122,3): warning X4000: use of potentially uninitialized variable (ComputeLightStrength)
+Light.hlsl(123,2): warning X4000: use of potentially uninitialized variable (ComputeLightStrength)
+ 
+[SUCCESS] [Sat Dec  3 17:13:13 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:13 2022] Success ! 
+[ERROR] [Sat Dec  3 17:13:13 2022] Material.hlsl(20,2): warning X4000: use of potentially uninitialized variable (GetMaterialBaseColor)
+Material.hlsl(53,2): warning X4000: use of potentially uninitialized variable (GetMaterialSpecular)
+Material.hlsl(43,2): warning X4000: use of potentially uninitialized variable (GetMaterialNormals)
+Light.hlsl(32,2): warning X4000: use of potentially uninitialized variable (GetLightDirection)
+Light.hlsl(73,3): warning X4000: use of potentially uninitialized variable (ComputeLightStrength)
+Light.hlsl(121,4): warning X4000: use of potentially uninitialized variable (ComputeLightStrength)
+Light.hlsl(122,3): warning X4000: use of potentially uninitialized variable (ComputeLightStrength)
+Light.hlsl(123,2): warning X4000: use of potentially uninitialized variable (ComputeLightStrength)
+ 
+[SUCCESS] [Sat Dec  3 17:13:13 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:13 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:13 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:13 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:13 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:13 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:13 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:13 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[ERROR] [Sat Dec  3 17:13:14 2022] Material.hlsl(20,2): warning X4000: use of potentially uninitialized variable (GetMaterialBaseColor)
+Material.hlsl(53,2): warning X4000: use of potentially uninitialized variable (GetMaterialSpecular)
+Material.hlsl(43,2): warning X4000: use of potentially uninitialized variable (GetMaterialNormals)
+Light.hlsl(32,2): warning X4000: use of potentially uninitialized variable (GetLightDirection)
+Light.hlsl(73,3): warning X4000: use of potentially uninitialized variable (ComputeLightStrength)
+Light.hlsl(121,4): warning X4000: use of potentially uninitialized variable (ComputeLightStrength)
+Light.hlsl(122,3): warning X4000: use of potentially uninitialized variable (ComputeLightStrength)
+Light.hlsl(123,2): warning X4000: use of potentially uninitialized variable (ComputeLightStrength)
+ 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[ERROR] [Sat Dec  3 17:13:14 2022] Material.hlsl(20,2): warning X4000: use of potentially uninitialized variable (GetMaterialBaseColor)
+Material.hlsl(53,2): warning X4000: use of potentially uninitialized variable (GetMaterialSpecular)
+Material.hlsl(43,2): warning X4000: use of potentially uninitialized variable (GetMaterialNormals)
+Light.hlsl(32,2): warning X4000: use of potentially uninitialized variable (GetLightDirection)
+Light.hlsl(73,3): warning X4000: use of potentially uninitialized variable (ComputeLightStrength)
+Light.hlsl(121,4): warning X4000: use of potentially uninitialized variable (ComputeLightStrength)
+Light.hlsl(122,3): warning X4000: use of potentially uninitialized variable (ComputeLightStrength)
+Light.hlsl(123,2): warning X4000: use of potentially uninitialized variable (ComputeLightStrength)
+ 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:14 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
+[SUCCESS] [Sat Dec  3 17:13:15 2022] Success ! 
