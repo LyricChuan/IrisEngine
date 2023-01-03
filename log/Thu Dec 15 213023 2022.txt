@@ -1,0 +1,4 @@
+[LOG] [Thu Dec 15 21:30:23 2022] Log Init. 
+[LOG] [Thu Dec 15 21:30:23 2022] Engine pre initialization complete. 
+[LOG] [Thu Dec 15 21:30:24 2022] DirectXRenderingEngine pre initialization complete. 
+[LOG] [Thu Dec 15 21:30:26 2022] InitWindows complete. 

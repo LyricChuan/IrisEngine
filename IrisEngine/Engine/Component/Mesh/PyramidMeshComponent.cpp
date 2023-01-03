@@ -54,6 +54,9 @@ void CPyramidMeshComponent::CreateMesh(
 			XMVECTOR B = XMLoadFloat3(&bitangent);
 			XMVECTOR N = -XMVector3Normalize(XMVector3Cross(T, B));
 			XMStoreFloat3(&Vertex.Normal, N);
+
+			Vertex.TexCoord.x = (float)j / (float)InAxialSubdivision;
+			Vertex.TexCoord.y = (float)i / (float)InHeightSubdivide;
 		}
 	}
 

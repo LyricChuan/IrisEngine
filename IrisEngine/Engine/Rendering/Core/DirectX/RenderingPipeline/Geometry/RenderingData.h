@@ -3,9 +3,12 @@
 #include "../../../RenderingResourcesUpdate.h"
 
 class CMeshComponent;
+struct FMeshRenderingData;
 
 //提供渲染内容的接口
-struct FRenderingData :public IDirectXDeviceInterface_Struct
+struct FRenderingData 
+	:public IDirectXDeviceInterface_Struct
+	,public std::enable_shared_from_this<FRenderingData>
 {
 public:
 	FRenderingData();
@@ -20,6 +23,8 @@ public:
 	UINT IndexTypeSize;
 
 public:
+	BoundingBox Bounds;//AABB
+
 	size_t MeshHash;
 	int GeometryKey;
 	int MeshObjectIndex;
@@ -33,4 +38,6 @@ public:
 	XMFLOAT4X4 TextureTransform;
 
 	CMeshComponent* Mesh;//key
+
+	FMeshRenderingData *MeshRenderingData;
 };

@@ -1,6 +1,16 @@
 #include "PipeMeshComponent.h"
 #include "../../Mesh/Core/MeshType.h"
 
+struct FPipeMeshUVCalculationInfo
+{
+	fvector_2d OuterStart;
+	fvector_2d OuterOffset;
+	fvector_2d InnerStart;
+	fvector_2d InnerOffset;
+	fvector_2d TopRadiusStart;
+	fvector_2d BottomRadiusStart;
+};
+
 CPipeMeshComponent::CPipeMeshComponent()
 {
 
@@ -52,6 +62,9 @@ void CPipeMeshComponent::BuildRadiusPoint(
 				XMVECTOR B = XMLoadFloat3(&Bitangent);
 				XMVECTOR N = XMVector3Normalize(XMVector3Cross(T, B));
 				XMStoreFloat3(&MyVertex.Normal, N);
+
+				MyVertex.TexCoord.x = (float)j / (float)InAxialSubdivision;
+				MyVertex.TexCoord.y = (float)i / (float)InHeightSubdivision;
 			}
 
 			//绘制内圈
@@ -74,6 +87,9 @@ void CPipeMeshComponent::BuildRadiusPoint(
 				XMVECTOR B = XMLoadFloat3(&Bitangent);
 				XMVECTOR N = -XMVector3Normalize(XMVector3Cross(T, B));
 				XMStoreFloat3(&MyVertex.Normal, N);
+
+				MyVertex.TexCoord.x = (float)j / (float)InAxialSubdivision;
+				MyVertex.TexCoord.y = (float)i / (float)InHeightSubdivision;
 			}
 		}
 	}
@@ -155,6 +171,11 @@ void CPipeMeshComponent::CreateMesh(
 						OuterRadius * BetaValueSin), //z
 					XMFLOAT4(Colors::White), XMFLOAT3(0.f,1.f,0.f)));
 
+				FVertex &InOuterVertex = MeshData.VertexData[MeshData.VertexData.size()-1];
+				
+				InOuterVertex.TexCoord.x =(BetaValueCos * 0.5f)+0.5f;
+				InOuterVertex.TexCoord.y =(BetaValueSin * 0.5f)+0.5f;
+
 				//绘制内圈
 				MeshData.VertexData.push_back(FVertex(
 					XMFLOAT3(
@@ -162,6 +183,13 @@ void CPipeMeshComponent::CreateMesh(
 						Y,//y
 						InnerRadius * BetaValueSin), //z
 					XMFLOAT4(Colors::White), XMFLOAT3(0.f, 1.f, 0.f)));
+
+				FVertex& InnerVertex = MeshData.VertexData[MeshData.VertexData.size() - 1];
+
+				float ExtraRadiusRatio = (OuterRadius - InnerRadius) / InTopRadius;
+
+				InnerVertex.TexCoord.x = ((1.f - ExtraRadiusRatio)*BetaValueCos * 0.5f)+0.5f;
+				InnerVertex.TexCoord.y = ((1.f - ExtraRadiusRatio)*BetaValueSin * 0.5f)+0.5f;
 			}
 		}
 		int BaseIndex = (InHeightSubdivision + 2) * (InAxialSubdivision ) * 2 + 2;
@@ -203,6 +231,10 @@ void CPipeMeshComponent::CreateMesh(
 						OuterRadius * BetaValueSin), //z
 					XMFLOAT4(Colors::White), XMFLOAT3(0.f, -1.f, 0.f)));
 
+				FVertex& InOuterVertex = MeshData.VertexData[MeshData.VertexData.size() - 1];
+				InOuterVertex.TexCoord.x = (BetaValueCos * 0.5f) + 0.5f;
+				InOuterVertex.TexCoord.y = (BetaValueSin * 0.5f) + 0.5f;
+
 				//绘制内圈
 				MeshData.VertexData.push_back(FVertex(
 					XMFLOAT3(
@@ -210,6 +242,13 @@ void CPipeMeshComponent::CreateMesh(
 						Y,//y
 						InnerRadius * BetaValueSin), //z
 					XMFLOAT4(Colors::White), XMFLOAT3(0.f, -1.f, 0.f)));
+
+				FVertex& InnerVertex = MeshData.VertexData[MeshData.VertexData.size() - 1];
+
+				float ExtraRadiusRatio = (OuterRadius - InnerRadius) / InTopRadius;
+
+				InnerVertex.TexCoord.x = ((1.f - ExtraRadiusRatio) * BetaValueCos * 0.5f) + 0.5f;
+				InnerVertex.TexCoord.y = ((1.f - ExtraRadiusRatio) * BetaValueSin * 0.5f) + 0.5f;
 			}
 		}
 

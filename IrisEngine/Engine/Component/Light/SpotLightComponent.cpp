@@ -10,7 +10,9 @@ CSpotLightComponent::CSpotLightComponent()
 {
 	//读取模型资源
 	string MeshPath = "../IrisEngine/Asset/SpotMesh.obj";
-	SetLightMesh(GetMeshManage()->CreateMeshComponent(MeshPath));
+	FCreateObjectParam Param;
+	Param.Outer = this;
+	SetLightMesh(GetMeshManage()->CreateMeshComponent(Param, MeshPath));
 
 	if (GetLightMesh())
 	{

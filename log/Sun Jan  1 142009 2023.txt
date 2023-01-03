@@ -1,0 +1,8 @@
+[LOG] [Sun Jan  1 14:20:09 2023] Log Init. 
+[LOG] [Sun Jan  1 14:20:09 2023] Engine pre initialization complete. 
+[LOG] [Sun Jan  1 14:20:09 2023] DirectXRenderingEngine pre initialization complete. 
+[LOG] [Sun Jan  1 14:20:09 2023] InitWindows complete. 
+[LOG] [Sun Jan  1 14:20:09 2023] DirectXRenderingEngine initialization complete. 
+[LOG] [Sun Jan  1 14:20:09 2023] Engine initialization complete. 
+[LOG] [Sun Jan  1 14:20:09 2023] Engine post initialization complete. 
+[LOG] [Sun Jan  1 14:20:09 2023] Engine post initialization complete. 

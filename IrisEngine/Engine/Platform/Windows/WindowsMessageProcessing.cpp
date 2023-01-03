@@ -2,11 +2,17 @@
 #include "../../Component/Input/Input.h"
 #include <WindowsX.h>
 
+extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 //消息队列
 //window 鼠标键盘响应的回调会激活该函数，然后执行中间层input.h中定义好的输入代理，
 //当更上层的业务(如，InputComponent)包含input.h文件并注册需要的代理后，便可把逻辑执行到该上层业务中
 LRESULT CALLBACK EngineWindowProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
+	if (ImGui_ImplWin32_WndProcHandler(hwnd, msg, wParam, lParam))//IMGUI的鼠标键盘等响应消息队列
+	{
+		return true;
+	}
+
 	switch (msg)
 	{
 	case WM_CLOSE:

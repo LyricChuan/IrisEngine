@@ -17,7 +17,7 @@ Root Signature中的一个Descriptor Table，可以定义一个或多个的Descriptor Range 。
 void FDirectXRootSignature::BuildRootSignature(UINT InTextureNum)
 {
     //构建根签名
-    CD3DX12_ROOT_PARAMETER RootParam[7];//这里的数组就是对应descriptor table ，这样设置就可以每帧只更新需要更新的表
+    CD3DX12_ROOT_PARAMETER RootParam[9];//这里的数组就是对应descriptor table ，这样设置就可以每帧只更新需要更新的表
 
 	//ObjCBV描述表
 	//CD3DX12_DESCRIPTOR_RANGE DescriptorRangeObjCBV;
@@ -34,10 +34,18 @@ void FDirectXRootSignature::BuildRootSignature(UINT InTextureNum)
     //texture描述表
     CD3DX12_DESCRIPTOR_RANGE DescriptorRangeTextureSRV;
     DescriptorRangeTextureSRV.Init(D3D12_DESCRIPTOR_RANGE_TYPE_SRV,
-	 InTextureNum, 1);
+	 InTextureNum, 3);//3对应shader中定义的t3
 
     CD3DX12_DESCRIPTOR_RANGE DescriptorRangeCubeMapSRV;
-    DescriptorRangeCubeMapSRV.Init(D3D12_DESCRIPTOR_RANGE_TYPE_SRV, 1, 0);
+    DescriptorRangeCubeMapSRV.Init(D3D12_DESCRIPTOR_RANGE_TYPE_SRV, 1, 0);//0对应shader中定义的t0
+
+    //ShadowMap 平行光，聚光
+    CD3DX12_DESCRIPTOR_RANGE DescriptorShadowMapSRV;
+    DescriptorShadowMapSRV.Init(D3D12_DESCRIPTOR_RANGE_TYPE_SRV, 1, 2);//2对应shader中定义的t2
+
+    //ShadowCubeMap 点光源使用
+    CD3DX12_DESCRIPTOR_RANGE DescriptorShadowCubeMapSRV;
+    DescriptorShadowCubeMapSRV.Init(D3D12_DESCRIPTOR_RANGE_TYPE_SRV, 1, 1);//1对应shader中定义的t1
 
     RootParam[0].InitAsConstantBufferView(0);//对象
     RootParam[1].InitAsConstantBufferView(1);//视口
@@ -50,12 +58,18 @@ void FDirectXRootSignature::BuildRootSignature(UINT InTextureNum)
     //2D贴图
     RootParam[5].InitAsDescriptorTable(1, &DescriptorRangeTextureSRV, D3D12_SHADER_VISIBILITY_PIXEL);
     RootParam[6].InitAsDescriptorTable(1, &DescriptorRangeCubeMapSRV, D3D12_SHADER_VISIBILITY_PIXEL);
+   
+    //ShadowMap
+    RootParam[7].InitAsDescriptorTable(1, &DescriptorShadowMapSRV, D3D12_SHADER_VISIBILITY_PIXEL);
+    
+    //ShadowCubeMap
+    RootParam[8].InitAsDescriptorTable(1, &DescriptorShadowCubeMapSRV, D3D12_SHADER_VISIBILITY_PIXEL);
 
     //构建静态采样
     StaticSamplerObject.BuildStaticSampler();
 
     CD3DX12_ROOT_SIGNATURE_DESC RootSignatureDesc(
-        7,
+        9,
         RootParam,
         StaticSamplerObject.GetSize(),//采样数量
         StaticSamplerObject.GetData(),//采样PTR

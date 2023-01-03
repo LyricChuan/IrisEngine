@@ -8,7 +8,9 @@ CPointLightComponent::CPointLightComponent()
 {
 	//读取模型资源
 	string MeshPath = "../IrisEngine/Asset/PointMesh.obj";
-	SetLightMesh(GetMeshManage()->CreateMeshComponent(MeshPath));
+	FCreateObjectParam Param;
+	Param.Outer = this;
+	SetLightMesh(GetMeshManage()->CreateMeshComponent(Param,MeshPath));
 
 	//设置太阳为线框模式
 	if (GetLightMesh())

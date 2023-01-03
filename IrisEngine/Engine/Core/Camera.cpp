@@ -2,11 +2,16 @@
 #include "../Component/InputComponent.h"
 #include "../Component/TransformationComponent.h"
 #include "CameraType.h"
+#include "../Config/EngineRenderConfig.h"
+#include "../Library/RaycastSystemLibrary.h"
 
 GCamera::GCamera()
 	:Super()
 {
-	InputComponent = CreateObject<CInputComponent>(new CInputComponent());
+
+	FCreateObjectParam Param;
+	Param.Outer = this;
+	InputComponent = CreateObject<CInputComponent>(Param, new CInputComponent());
 	
 	MouseSensitivity = 0.7f;
 	CmeraType = ECmeraType::CameraRoaming;
@@ -110,6 +115,7 @@ void GCamera::OnMouseButtonDown(int X, int Y)
 	LastMousePosition.x = X;
 	LastMousePosition.y = Y;
 
+	OnClickedScreen(X,Y);
 	SetCapture(GetMainWindowsHandle());
 
 	SetDirty(true);
@@ -202,6 +208,12 @@ void GCamera::MoveRight(float InValue)
 		XMStoreFloat3(&AT3Position, XMVectorMultiplyAdd(AmountMovement, Right, Position));
 		GetTransformationComponent()->SetPosition(AT3Position);
 	}
+}
+
+void GCamera::OnClickedScreen(int X, int Y)
+{
+	FCollisionResult CollisionResult;
+	FRaycastSystemLibrary::HitResultByScreen(GetWorld(), X, Y, CollisionResult);
 }
 
 void GCamera::RotateAroundXAxis(float InRotateDegrees)

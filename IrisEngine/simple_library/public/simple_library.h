@@ -53,3 +53,11 @@
 
 //math
 #include "simple_math/simple_core_math.h"
+
+//image
+#include "simple_image/simple_image.h"
+
+//µÚÈý·½¿â
+//xml
+#include "../third_party_library/tinyxml/tinystr.h"
+#include "../third_party_library/tinyxml/tinyxml.h"

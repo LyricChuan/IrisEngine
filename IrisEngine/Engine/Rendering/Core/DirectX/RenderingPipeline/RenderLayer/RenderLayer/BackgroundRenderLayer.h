@@ -12,4 +12,6 @@ public:
 	virtual void BuildShader();
 	virtual void BuildPSO();
 	virtual int GetRenderLayerType() const { return 3; }//∂‘”¶EMeshRenderLayerType
+
+	virtual void ResetPSO();
 };

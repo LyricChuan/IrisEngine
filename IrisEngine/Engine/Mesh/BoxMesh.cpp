@@ -5,7 +5,9 @@
 #include "../Component/Mesh/BoxMeshComponent.h"
 GBoxMesh::GBoxMesh()
 {
-	SetMeshComponent(ConstructionObject<CBoxMeshComponent>());
+	FCreateObjectParam Param;
+	Param.Outer = this;
+	SetMeshComponent(ConstructionObject<CBoxMeshComponent>(Param));
 }
 
 void GBoxMesh::Init()
@@ -13,6 +15,15 @@ void GBoxMesh::Init()
 	Super::Init();
 
 
+}
+
+void GBoxMesh::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+	//auto R = GetRotation();
+	//R.x += DeltaTime *10.f;
+	//SetRotation(R);
 }
 
 void GBoxMesh::Draw(float DeltaTime)

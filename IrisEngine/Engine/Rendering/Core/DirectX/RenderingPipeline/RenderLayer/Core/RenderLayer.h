@@ -4,6 +4,7 @@
 #include "../../../../../../Shader/Core/Shader.h"
 #include "../../Geometry/RenderingData.h"
 #include "../../../../../../Shader/Core/ShaderType.h"
+#include "../../RenderingPipelineType.h"
 
 struct FDirectXPipelineState;
 struct FGeometryMap;
@@ -26,7 +27,7 @@ public:
 	virtual void Draw(float DeltaTime);
 	virtual void PostDraw(float DeltaTime);
 
-	virtual void DrawObject(float DeltaTime, const FRenderingData& InRenderingData);
+	virtual void DrawObject(float DeltaTime,std::weak_ptr<FRenderingData>& InWeakRenderingData,ERenderingConditions RC = ERenderingConditions::RC_None);
 	virtual void FindObjectDraw(float DeltaTime, const CMeshComponent* InKey);
 
 	virtual void BuildPSO();
@@ -36,6 +37,13 @@ public:
 	virtual void BuildShaderMacro(std::vector<ShaderType::FShaderMacro> &InMacro);
 
 	virtual void UpdateCalculations(float DeltaTime, const FViewportInfo& ViewportInfo);
+
+	//单独设置PSO
+	virtual void ResetPSO();
+	virtual void ResetPSO(EPipelineState InPipelineState);
+
+	//渲染 不包含设置PSO
+	virtual void DrawMesh(float DeltaTime,ERenderingConditions RC = ERenderingConditions::RC_None);
 public:
 	const UINT GetRenderPriority()const { return RenderPriority; }
 
@@ -50,7 +58,7 @@ protected:
 	FShader PixelShader;
 	std::vector<D3D12_INPUT_ELEMENT_DESC> InputElementDesc;
 
-	std::vector<FRenderingData> RenderDatas;
+	std::vector<std::weak_ptr<FRenderingData>> RenderDatas;
 
 	FGeometryMap* GeometryMap;
 	FDirectXPipelineState* DirectXPipelineState;

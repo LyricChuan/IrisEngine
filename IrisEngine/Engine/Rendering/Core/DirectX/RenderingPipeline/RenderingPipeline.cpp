@@ -11,18 +11,19 @@ void FRenderingPipeline::BuildMesh(const size_t InMeshHash, CMeshComponent* InMe
 	GeometryMap.BuildMesh(InMeshHash,InMesh, MeshData);
 }
 
-void FRenderingPipeline::DuplicateMesh(CMeshComponent* InMesh, const FRenderingData& MeshData)
+void FRenderingPipeline::DuplicateMesh(CMeshComponent* InMesh, std::shared_ptr<FRenderingData>& MeshData)
 {
 	GeometryMap.DuplicateMesh(InMesh, MeshData);
 }
 
-bool FRenderingPipeline::FindMeshRenderingDataByHash(const size_t& InHash, FRenderingData& MeshData, int InRenderLayerIndex)
+bool FRenderingPipeline::FindMeshRenderingDataByHash(const size_t& InHash, std::shared_ptr<FRenderingData>& MeshData, int InRenderLayerIndex)
 {
 	return GeometryMap.FindMeshRenderingDataByHash(InHash, MeshData, InRenderLayerIndex);
 }
 
 void FRenderingPipeline::UpdateCalculations(float DeltaTime, const FViewportInfo& ViewportInfo)
 {
+	GeometryMap.DynamicShadowCubeMap.UpdateCalculations(DeltaTime, ViewportInfo);
 	DynamicCubeMap.UpdateCalculations(DeltaTime, ViewportInfo);
 	GeometryMap.UpdateCalculations(DeltaTime, ViewportInfo);
 	RenderLayer.UpdateCalculations(DeltaTime, ViewportInfo);
@@ -51,6 +52,16 @@ void FRenderingPipeline::BuildPipeline()
 		&DirectXPipelineState,
 		&RenderLayer);
 
+	GeometryMap.DynamicShadowMap.Init(
+		&GeometryMap,
+		&DirectXPipelineState,
+		&RenderLayer);
+
+	GeometryMap.DynamicShadowCubeMap.Init(
+		&GeometryMap,
+		&DirectXPipelineState,
+		&RenderLayer);
+
 	//构建根签名
 	RootSignature.BuildRootSignature(GeometryMap.GetDrawTexture2DResourcesNumber());
 	DirectXPipelineState.BindRootSignature(RootSignature.GetRootSignature());
@@ -64,17 +75,29 @@ void FRenderingPipeline::BuildPipeline()
 	//构建常量描述堆
 	GeometryMap.BuildDescriptorHeap();
 
+	//初始化我们的UI管线
+ 	UIPipeline.Init(
+ 		GeometryMap.GetHeap(),
+ 		GeometryMap.GetDrawTexture2DResourcesNumber() + //Texture2D
+ 		GeometryMap.GetDrawCubeMapResourcesNumber() + //静态Cube贴图
+ 		1 + //动态Cube贴图
+ 		1 + //Shadow
+ 		1);//ShadowCubeMap
+
 	//初始化CubeMap 摄像机
 	DynamicCubeMap.BuildViewport(fvector_3d(0.f, 0.f, 0.f));
-
-	//构建RTVDes
-	DynamicCubeMap.BuildRenderTargetDescriptor();
 
 	//构建深度模板描述
 	DynamicCubeMap.BuildDepthStencilDescriptor();
 
+	//构建RTVDes
+	DynamicCubeMap.BuildRenderTargetDescriptor();
+
 	//构建深度模板
 	DynamicCubeMap.BuildDepthStencil();
+
+	//构建阴影
+	GeometryMap.BuildShadow();
 
 	//构建常量缓冲区
 	GeometryMap.BuildMeshConstantBuffer();
@@ -105,11 +128,17 @@ void FRenderingPipeline::PreDraw(float DeltaTime)
 	GeometryMap.PreDraw(DeltaTime);
 	RootSignature.PreDraw(DeltaTime);
 
-	//渲染灯光材质贴图等
-	GeometryMap.Draw(DeltaTime);
-
 	//主视口清除画布
 	ClearMainSwapChainCanvas();
+
+	//渲染灯光材质贴图等(必须要放在 这个位置 否则天崩地裂)
+	GeometryMap.Draw(DeltaTime);
+
+	//渲染
+	GeometryMap.DynamicShadowCubeMap.PreDraw(DeltaTime);
+
+	//渲染阴影
+	GeometryMap.DrawShadow(DeltaTime);
 
 	//动态反射
 	if (DynamicCubeMap.IsExitDynamicReflectionMesh())
@@ -132,6 +161,9 @@ void FRenderingPipeline::Draw(float DeltaTime)
 	RenderLayer.Draw(RENDERLAYER_BACKGROUND,DeltaTime);
 	RenderLayer.Draw(RENDERLAYER_OPAQUE, DeltaTime);
 	RenderLayer.Draw(RENDERLAYER_TRANSPARENT, DeltaTime);
+
+	//渲染UI
+	UIPipeline.Draw(DeltaTime);
 
 	DirectXPipelineState.Draw(DeltaTime);
 }

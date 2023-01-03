@@ -43,6 +43,10 @@ public:
 #else
 	CEngine* GetEngine();
 #endif
+
+#if EDITOR_ENGINE
+	class CEditorEngine* GetEditorEngine();
+#endif // 0
 };
 //提供渲染内容的接口
 struct IDirectXDeviceInterface_Struct
@@ -73,6 +77,10 @@ public:
 #else
 	CEngine* GetEngine();
 #endif
+
+#if EDITOR_ENGINE
+	class CEditorEngine* GetEditorEngine();
+#endif // 0
 
 private:
 	IDirectXDeviceInterface Interface;

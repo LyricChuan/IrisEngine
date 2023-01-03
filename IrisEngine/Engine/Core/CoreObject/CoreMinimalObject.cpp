@@ -6,6 +6,7 @@ CCoreMinimalObject::CCoreMinimalObject()
 {
 	bTick = true;
 	GObjects.push_back(this);
+	Outer = NULL;
 }
 
 CCoreMinimalObject::~CCoreMinimalObject()

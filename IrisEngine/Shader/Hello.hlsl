@@ -1,6 +1,7 @@
 #include "Material.hlsl"
 #include "PBR.hlsl"
 #include "SkyFunction.hlsl"
+#include "ShadowFunction.hlsl"
 
 struct MeshVertexIn
 {
@@ -60,6 +61,11 @@ float4 PixelShaderMain(MeshVertexOut MVOut) :SV_TARGET
 {
 	MaterialConstBuffer MatConstBuffer = Materials[MaterialIndex];
 
+	if (MatConstBuffer.MaterialType == 101)
+	{
+		return float4(SimpleShadowMap.Sample(TextureSampler, MVOut.TexCoord).rrr, 1.f);
+	}
+	
 	FMaterial Material;
 
 	//获取BaseColor
@@ -278,8 +284,18 @@ float4 PixelShaderMain(MeshVertexOut MVOut) :SV_TARGET
 			}
 			else if (MatConstBuffer.MaterialType == 15)//透明物体
 			{
-				float DiffuseReflection = dot(ModelNormal, NormalizeLightDirection);
-				DotValue = max((DiffuseReflection * 0.5f + 0.5f), 0.0);//[-1,1] => [0,1]
+				////当前的公式已经对blinn-phong 模型做了很大的变形
+				//float3 ViewDirection = normalize(ViewportPosition.xyz - MVOut.WorldPosition.xyz);
+				//float3 HalfDirection = normalize(ViewDirection + NormalizeLightDirection);
+				//
+				////先半兰博特化 再减去0.2f曝光的，再平方，变得更柔和
+				////DotValue = pow(max(0.0, (dot(ModelNormal, NormalizeLightDirection) * 0.5f + 0.5f) - 0.2f), 2);
+				//
+				//float MaterialShininess = 1.f - saturate(MatConstBuffer.MaterialRoughness);
+				//float M = MaterialShininess * 100.f;
+				//
+				////c=(m+2.f/PI) 归一化系数 
+				//Specular *= saturate((M + 2.0f) * pow(max(dot(HalfDirection, ModelNormal) * DotValue, 0.f), M) / 3.1415926);
 			}
 			else if (MatConstBuffer.MaterialType == 20)//PBR
 			{
@@ -289,10 +305,10 @@ float4 PixelShaderMain(MeshVertexOut MVOut) :SV_TARGET
 				float3 N = ModelNormal;
 				
 				float PI = 3.1415926;
-				
-				float Roughness = 0.2f;
-				float3 Metallic = 0.2f;
-				
+
+				float Roughness = MatConstBuffer.MaterialRoughness;
+				float3 Metallic = MatConstBuffer.Metallicity;
+
 				float4 D = GetDistributionGGX(N, H, Roughness);
 				
 				float3 F0 = 0.04f;
@@ -300,22 +316,26 @@ float4 PixelShaderMain(MeshVertexOut MVOut) :SV_TARGET
 				float4 F = float4(FresnelSchlickMethod(F0, N, V, 5), 1.0f);
 				
 				float4 G = GSmith(N, V, L, Roughness);
-				
-				
-				float4 Kd = 1- F;
-				Kd *= 1 - float4(Metallic, 1.f);
-				
-				float3 Diffuse = Kd.rgb * GetDiffuseLambert(MatConstBuffer.BaseColor.rgb);
-				
+
+				float LoH = saturate(dot(L, H));
 				float NoV = saturate(dot(N, V));
 				float NoL = saturate(dot(N, L));
-				
+
+				float3 FIndirect = GetIndirectLight(LoH, F0, Roughness);
+				float3 IndirKS = GetDirectLight(NoV,F0, Roughness);
+
+				float4 Kd = 1 - float4(FIndirect,1.f);
+				Kd *=(1-float4(IndirKS,1.f))*(1 - float4(Metallic, 1.f));
+
+				float3 Diffuse = Kd.rgb * GetDiffuseLambert(MatConstBuffer.BaseColor.rgb);
+
 				float4 Value = (D * F * G) / (4 * (NoV * NoL));
 				Specular = float4(Value.rgb, 1.f);
 				
 				float3 Radiance = LightStrength.xyz;
 				float3 MyColor = (Diffuse + Specular.xyz) * NoL * Radiance;
-				
+
+				//IBL
 				return float4(MyColor.xyz, 1.0f);
 			}
 			//菲尼尔
@@ -333,7 +353,22 @@ float4 PixelShaderMain(MeshVertexOut MVOut) :SV_TARGET
 			float4 Diffuse = Material.BaseColor;;
 			Specular = saturate(Specular);
 
-			FinalColor += saturate((Diffuse + Specular) * LightStrength * DotValue);
+			//int IndexR = GetSampleCubeMapIndexR(MVOut.WorldPosition);
+			//return DebugCubeVieport(IndexR);
+
+			float ShadowFactor = 1.f;
+			if (SceneLights[i].LightType == 1)
+			{
+				ShadowFactor = ProcessingOmnidirectionalSampleCmpLevelZeroCubeMapShadow(MVOut.WorldPosition, SceneLights[i].Position);
+			}
+			else
+			{
+				//float ShadowFactor = GetShadowFactor(MVOut.WorldPosition, SceneLights[i].ShadowTransform);
+				//float ShadowFactor = GetShadowFactor_PCF_Sample4(MVOut.WorldPosition, SceneLights[i].ShadowTransform);
+				ShadowFactor = GetShadowFactor_PCF_Sample9(MVOut.WorldPosition, SceneLights[i].ShadowTransform);
+			}
+	
+			FinalColor += ShadowFactor * (saturate((Diffuse + Specular) * LightStrength * DotValue));
 		}
 	}
 
@@ -346,11 +381,31 @@ float4 PixelShaderMain(MeshVertexOut MVOut) :SV_TARGET
 		case 2:
 		case 3:
 		case 9:
-		case 15:
+
 		{
 			//计算天空盒反射(静态反射)
 			float3 ReflectionColor = GetReflectionColor(MatConstBuffer, ModelNormal, MVOut.WorldPosition.xyz);
 			MVOut.Color.xyz += ReflectionColor;
+			break;
+		}
+		case 15: //透明杯子
+		{
+			//先计算折射
+			float3 NewRefract = GetRefract(ModelNormal, MVOut.WorldPosition.xyz, MatConstBuffer.Refraction);
+			float3 SampleRefractColor = GetReflectionSampleColor(ModelNormal, NewRefract);
+
+			//计算反射
+			float3 NewReflect = GetReflect(ModelNormal, MVOut.WorldPosition.xyz);
+			float3 SampleReflectionColor = GetReflectionSampleColor(ModelNormal, NewReflect);
+			
+			//算A通道
+			float3 V = normalize(ViewportPosition.xyz - MVOut.WorldPosition.xyz);
+			float Shininess = GetShininess(MatConstBuffer);
+			float3 FresnelFactor = FresnelSchlickFactor(MatConstBuffer, ModelNormal, V);
+
+			float3 Color = lerp(SampleRefractColor , SampleReflectionColor, pow(Shininess * FresnelFactor,2));
+
+			MVOut.Color.xyz += Color;
 			break;
 		}
 	}

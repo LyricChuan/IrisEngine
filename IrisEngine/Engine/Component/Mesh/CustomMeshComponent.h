@@ -1,14 +1,21 @@
 #pragma once
 #include "Core/StaticMeshComponent.h"
 
+//模型读取类型
+enum EMeshLoadAssetType
+{
+	MESH_OBJ,
+	MESH_FBX,
+};
 class CCustomMeshComponent :public CStaticMeshComponent
 {
 public:
 	CCustomMeshComponent();
 
-	void CreateMesh(FMeshRenderingData& MeshData, string& InPath);
+	void CreateMesh(FMeshRenderingData& MeshData,const string& InPath);
 
 	static bool LoadObjFromBuff(char* InBuff, uint32_t InBuffSize, FMeshRenderingData& MeshData);
+	static bool LoadFBXFromBuff(const string& InPath, FMeshRenderingData& MeshData);
 
-	void BuildKey(size_t& OutHashKey,std::string& InPath);
+	void BuildKey(size_t& OutHashKey, const std::string& InPath);
 };

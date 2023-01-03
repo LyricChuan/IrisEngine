@@ -67,7 +67,7 @@ void FSimpleConnetion::Analysis()
 				}
 				default:
 				{
-					//Ω≤Ω‚∑¥…‰‘Ÿ—”
+					//todo
 					break;
 				}
 			}

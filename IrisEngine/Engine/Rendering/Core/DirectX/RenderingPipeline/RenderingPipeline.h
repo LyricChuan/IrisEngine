@@ -5,8 +5,9 @@
 #include "PipelineState/DirectXPipelineState.h"
 #include "RootSignature/DirectXRootSignature.h"
 #include "../../../../Core/Viewport/ViewportInfo.h"
-#include "CubeMap/DynamicCubeMap.h"
+#include "DynamicMap/CubeMap/DynamicReflectionCubeMap.h"
 #include "RenderLayer/RenderLayerManage.h"
+#include "UI/IMGUIPipeline.h"
 
 class CMeshComponent;
 //提供渲染内容的接口
@@ -16,8 +17,8 @@ public:
 	FRenderingPipeline();
 
 	void BuildMesh(const size_t InMeshHash, CMeshComponent *InMesh,const FMeshRenderingData& MeshData);
-	void DuplicateMesh(CMeshComponent* InMesh, const FRenderingData& MeshData);
-	bool FindMeshRenderingDataByHash(const size_t& InHash, FRenderingData& MeshData, int InRenderLayerIndex = -1);
+	void DuplicateMesh(CMeshComponent* InMesh,std::shared_ptr<FRenderingData>& MeshData);
+	bool FindMeshRenderingDataByHash(const size_t& InHash, std::shared_ptr<FRenderingData>& MeshData, int InRenderLayerIndex = -1);
 
 	virtual void UpdateCalculations(float DeltaTime, const FViewportInfo& ViewportInfo);
 
@@ -35,5 +36,6 @@ protected:
 	FDirectXRootSignature RootSignature;
 	FGeometryMap GeometryMap;
 
-	FDynamicCubeMap DynamicCubeMap;
+	FDynamicReflectionCubeMap DynamicCubeMap;
+	FIMGUIPipeline UIPipeline;
 };

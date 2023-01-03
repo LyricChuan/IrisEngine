@@ -7,12 +7,23 @@
 
 GTorusMesh::GTorusMesh()
 {
-	SetMeshComponent(ConstructionObject<CTorusMeshComponent>());
+	FCreateObjectParam Param;
+	Param.Outer = this;
+	SetMeshComponent(ConstructionObject<CTorusMeshComponent>(Param));
 }
 
 void GTorusMesh::Init()
 {
 
+}
+
+void GTorusMesh::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+	//auto R = GetRotation();
+	//R.x += DeltaTime *10.f;
+	//SetRotation(R);
 }
 
 void GTorusMesh::Draw(float DeltaTime)

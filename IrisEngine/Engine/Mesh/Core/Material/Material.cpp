@@ -12,6 +12,7 @@ CMaterial::CMaterial()
 	,MaterialTransform(EngineMath::IdentityMatrix4x4())
 	,Transparency(1.f)
 	,bDynamicReflection(false)
+	,Refractive(1.1f)
 {
 
 }
@@ -101,6 +102,20 @@ void CMaterial::SetMaterialIndex(int InNewIndex)
 void CMaterial::SetDynamicReflection(bool InDynamicReflection)
 {
 	bDynamicReflection = InDynamicReflection;
+
+	SetDirty(true);
+}
+
+void CMaterial::SetRefractiveValue(float InRefractiveValue)
+{
+	Refractive = InRefractiveValue;
+
+	SetDirty(true);
+}
+
+void CMaterial::SetMetallicity(float InMetallicity)
+{
+	Metallicity = InMetallicity;
 
 	SetDirty(true);
 }

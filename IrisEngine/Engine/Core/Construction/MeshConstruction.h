@@ -11,7 +11,7 @@ namespace MeshConstruction
             size_t HashKey = 0;
             InMesh->BuildKey(HashKey, forward<ParamTypes>(Params)...);
 
-            FRenderingData RenderingData;
+            std::shared_ptr<FRenderingData> RenderingData;
             if (InManage->GetRenderingPipeline().FindMeshRenderingDataByHash(HashKey, RenderingData, (int)InMesh->GetRenderLayerType()))
             {
                 InManage->GetRenderingPipeline().DuplicateMesh(InMesh, RenderingData);
@@ -35,11 +35,11 @@ namespace MeshConstruction
 	}
 
     template<class T, typename ...ParamTypes>
-    T* CreateMeshComponent(CMeshManage* InManage, ParamTypes &&...Params)
+    T* CreateMeshComponent(const FCreateObjectParam& InObjectParam,CMeshManage* InManage, ParamTypes &&...Params)
     {
         if (InManage)
         {
-            T* InMesh = CreateObject<T>(new T());//NewObject
+            T* InMesh = CreateObject<T>(InObjectParam,new T());//NewObject
 
             return CreateMeshComponent<T>(InManage, InMesh, Params...);
         }

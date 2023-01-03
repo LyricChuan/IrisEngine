@@ -1,0 +1,119 @@
+[LOG] [Sun Jan  1 14:59:44 2023] Log Init. 
+[LOG] [Sun Jan  1 14:59:44 2023] Engine pre initialization complete. 
+[LOG] [Sun Jan  1 14:59:44 2023] DirectXRenderingEngine pre initialization complete. 
+[LOG] [Sun Jan  1 14:59:44 2023] InitWindows complete. 
+[LOG] [Sun Jan  1 14:59:44 2023] DirectXRenderingEngine initialization complete. 
+[LOG] [Sun Jan  1 14:59:44 2023] Engine initialization complete. 
+[LOG] [Sun Jan  1 14:59:44 2023] Engine post initialization complete. 
+[LOG] [Sun Jan  1 14:59:44 2023] Engine post initialization complete. 
+[LOG] [Sun Jan  1 14:59:44 2023] Load texture root path: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Asset] 
+[LOG] [Sun Jan  1 14:59:44 2023] Load texture num: [32] 
+[LOG] [Sun Jan  1 14:59:44 2023] texture fullname: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Asset\1.mtl] 
+[LOG] [Sun Jan  1 14:59:44 2023] texture fullname: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Asset\1.obj] 
+[LOG] [Sun Jan  1 14:59:44 2023] texture fullname: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Asset\anika.obj] 
+[LOG] [Sun Jan  1 14:59:44 2023] texture fullname: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Asset\CameraObj.obj] 
+[LOG] [Sun Jan  1 14:59:44 2023] texture fullname: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Asset\Heart.fbx] 
+[LOG] [Sun Jan  1 14:59:44 2023] texture fullname: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Asset\man.mtl] 
+[LOG] [Sun Jan  1 14:59:44 2023] texture fullname: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Asset\man.obj] 
+[LOG] [Sun Jan  1 14:59:44 2023] texture fullname: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Asset\PointMesh.obj] 
+[LOG] [Sun Jan  1 14:59:44 2023] texture fullname: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Asset\SK_Mannequin.FBX] 
+[LOG] [Sun Jan  1 14:59:44 2023] texture fullname: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Asset\SpotMesh.obj] 
+[LOG] [Sun Jan  1 14:59:44 2023] texture fullname: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Asset\sunmarine.obj] 
+[LOG] [Sun Jan  1 14:59:44 2023] texture fullname: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Asset\SunMesh.mtl] 
+[LOG] [Sun Jan  1 14:59:44 2023] texture fullname: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Asset\SunMesh.obj] 
+[LOG] [Sun Jan  1 14:59:44 2023] texture fullname: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Asset\SunMesh3.obj] 
+[LOG] [Sun Jan  1 14:59:44 2023] texture fullname: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Asset/Texture/Earth.dds] 
+[LOG] [Sun Jan  1 14:59:44 2023] texture fullname: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Asset/Texture/EpicQuadPanorama_CC.dds] 
+[LOG] [Sun Jan  1 14:59:44 2023] texture fullname: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Asset/Texture/Hair.dds] 
+[LOG] [Sun Jan  1 14:59:44 2023] texture fullname: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Asset/Texture/MMOARPG.dds] 
+[LOG] [Sun Jan  1 14:59:44 2023] texture fullname: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Asset/Texture/MMOARPG_NRM.dds] 
+[LOG] [Sun Jan  1 14:59:44 2023] texture fullname: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Asset/Texture/TransparentContent.dds] 
+[LOG] [Sun Jan  1 14:59:44 2023] texture fullname: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Asset/Texture/Wood.dds] 
+[LOG] [Sun Jan  1 14:59:44 2023] texture fullname: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Asset/Texture/Wood2.dds] 
+[LOG] [Sun Jan  1 14:59:44 2023] texture fullname: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Asset/Texture/Wood2_DISP.dds] 
+[LOG] [Sun Jan  1 14:59:44 2023] texture fullname: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Asset/Texture/Wood2_Nor.dds] 
+[LOG] [Sun Jan  1 14:59:44 2023] texture fullname: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Asset\Texture\Wood2_Nor.jpg] 
+[LOG] [Sun Jan  1 14:59:44 2023] texture fullname: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Asset/Texture/Wood2_OCC.dds] 
+[LOG] [Sun Jan  1 14:59:44 2023] texture fullname: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Asset/Texture/Wood2_SPEC.dds] 
+[LOG] [Sun Jan  1 14:59:44 2023] texture fullname: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Asset/Texture/Wood_NRM.dds] 
+[LOG] [Sun Jan  1 14:59:44 2023] texture fullname: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Asset/Texture/x1_CubeMap.dds] 
+[LOG] [Sun Jan  1 14:59:44 2023] texture fullname: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Asset/Texture/Zhuan.dds] 
+[LOG] [Sun Jan  1 14:59:44 2023] texture fullname: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Asset/Texture/Zhuan_NRM.dds] 
+[LOG] [Sun Jan  1 14:59:44 2023] texture fullname: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Asset\untitled.mtl] 
+[LOG] [Sun Jan  1 14:59:44 2023] Shader path: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Shader/Sky.hlsl] 
+[ERROR] [Sun Jan  1 14:59:44 2023] C:\Users\qinchuan\source\repos\IrisEngine\IrisEngine\Shader\Sky.hlsl(34,17-69): warning X3206: 'Sample': implicit truncation of vector type
+C:\Users\qinchuan\source\repos\IrisEngine\IrisEngine\Shader\Sky.hlsl(37,10-42): warning X3206: 'GetFogValue': implicit truncation of vector type
+ 
+[LOG] [Sun Jan  1 14:59:44 2023] Shader path: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Shader/Sky.hlsl] 
+[ERROR] [Sun Jan  1 14:59:44 2023] C:\Users\qinchuan\source\repos\IrisEngine\IrisEngine\Shader\Sky.hlsl(34,17-69): warning X3206: 'Sample': implicit truncation of vector type
+C:\Users\qinchuan\source\repos\IrisEngine\IrisEngine\Shader\Sky.hlsl(37,10-42): warning X3206: 'GetFogValue': implicit truncation of vector type
+ 
+[LOG] [Sun Jan  1 14:59:44 2023] Shader path: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Shader/Shadow.hlsl] 
+[ERROR] [Sun Jan  1 14:59:44 2023] Material.hlsl(75,2-57): warning X3206: implicit truncation of vector type
+ 
+[LOG] [Sun Jan  1 14:59:44 2023] Shader path: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Shader/Shadow.hlsl] 
+[ERROR] [Sun Jan  1 14:59:44 2023] Material.hlsl(75,2-57): warning X3206: implicit truncation of vector type
+ 
+[LOG] [Sun Jan  1 14:59:44 2023] Shader path: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Shader/VientianeShadow.hlsl] 
+[ERROR] [Sun Jan  1 14:59:44 2023] Material.hlsl(75,2-57): warning X3206: implicit truncation of vector type
+ 
+[LOG] [Sun Jan  1 14:59:44 2023] Shader path: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Shader/VientianeShadow.hlsl] 
+[ERROR] [Sun Jan  1 14:59:44 2023] Material.hlsl(75,2-57): warning X3206: implicit truncation of vector type
+ 
+[LOG] [Sun Jan  1 14:59:45 2023] Shader path: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Shader/Hello.hlsl] 
+[ERROR] [Sun Jan  1 14:59:45 2023] Material.hlsl(75,2-57): warning X3206: implicit truncation of vector type
+ShadowFunction.hlsl(104,9-96): warning X3206: 'SampleCmpLevelZero': implicit truncation of vector type
+C:\Users\qinchuan\source\repos\IrisEngine\IrisEngine\Shader\Hello.hlsl(425,16-60): warning X3206: 'GetFogValue': implicit truncation of vector type
+ 
+[LOG] [Sun Jan  1 14:59:45 2023] Shader path: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Shader/Hello.hlsl] 
+[ERROR] [Sun Jan  1 14:59:45 2023] Material.hlsl(75,2-57): warning X3206: implicit truncation of vector type
+ShadowFunction.hlsl(104,9-96): warning X3206: 'SampleCmpLevelZero': implicit truncation of vector type
+C:\Users\qinchuan\source\repos\IrisEngine\IrisEngine\Shader\Hello.hlsl(425,16-60): warning X3206: 'GetFogValue': implicit truncation of vector type
+Material.hlsl(23,2): warning X4000: use of potentially uninitialized variable (GetMaterialBaseColor)
+Material.hlsl(56,2): warning X4000: use of potentially uninitialized variable (GetMaterialSpecular)
+Material.hlsl(46,2): warning X4000: use of potentially uninitialized variable (GetMaterialNormals)
+Material.hlsl(56,2): warning X4000: use of potentially uninitialized variable (GetMaterialSpecular)
+Light.hlsl(37,2): warning X4000: use of potentially uninitialized variable (GetLightDirection)
+Light.hlsl(78,3): warning X4000: use of potentially uninitialized variable (ComputeLightStrength)
+Light.hlsl(126,4): warning X4000: use of potentially uninitialized variable (ComputeLightStrength)
+Light.hlsl(127,3): warning X4000: use of potentially uninitialized variable (ComputeLightStrength)
+Light.hlsl(128,2): warning X4000: use of potentially uninitialized variable (ComputeLightStrength)
+ 
+[LOG] [Sun Jan  1 14:59:45 2023] Shader path: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Shader/Hello.hlsl] 
+[ERROR] [Sun Jan  1 14:59:45 2023] Material.hlsl(75,2-57): warning X3206: implicit truncation of vector type
+ShadowFunction.hlsl(104,9-96): warning X3206: 'SampleCmpLevelZero': implicit truncation of vector type
+C:\Users\qinchuan\source\repos\IrisEngine\IrisEngine\Shader\Hello.hlsl(425,16-60): warning X3206: 'GetFogValue': implicit truncation of vector type
+ 
+[LOG] [Sun Jan  1 14:59:45 2023] Shader path: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Shader/Hello.hlsl] 
+[ERROR] [Sun Jan  1 14:59:45 2023] Material.hlsl(75,2-57): warning X3206: implicit truncation of vector type
+ShadowFunction.hlsl(104,9-96): warning X3206: 'SampleCmpLevelZero': implicit truncation of vector type
+C:\Users\qinchuan\source\repos\IrisEngine\IrisEngine\Shader\Hello.hlsl(425,16-60): warning X3206: 'GetFogValue': implicit truncation of vector type
+Material.hlsl(23,2): warning X4000: use of potentially uninitialized variable (GetMaterialBaseColor)
+Material.hlsl(56,2): warning X4000: use of potentially uninitialized variable (GetMaterialSpecular)
+Material.hlsl(46,2): warning X4000: use of potentially uninitialized variable (GetMaterialNormals)
+Material.hlsl(56,2): warning X4000: use of potentially uninitialized variable (GetMaterialSpecular)
+Light.hlsl(37,2): warning X4000: use of potentially uninitialized variable (GetLightDirection)
+Light.hlsl(78,3): warning X4000: use of potentially uninitialized variable (ComputeLightStrength)
+Light.hlsl(126,4): warning X4000: use of potentially uninitialized variable (ComputeLightStrength)
+Light.hlsl(127,3): warning X4000: use of potentially uninitialized variable (ComputeLightStrength)
+Light.hlsl(128,2): warning X4000: use of potentially uninitialized variable (ComputeLightStrength)
+ 
+[LOG] [Sun Jan  1 14:59:45 2023] Shader path: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Shader/Hello.hlsl] 
+[ERROR] [Sun Jan  1 14:59:45 2023] Material.hlsl(75,2-57): warning X3206: implicit truncation of vector type
+ShadowFunction.hlsl(104,9-96): warning X3206: 'SampleCmpLevelZero': implicit truncation of vector type
+C:\Users\qinchuan\source\repos\IrisEngine\IrisEngine\Shader\Hello.hlsl(425,16-60): warning X3206: 'GetFogValue': implicit truncation of vector type
+ 
+[LOG] [Sun Jan  1 14:59:45 2023] Shader path: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Shader/Hello.hlsl] 
+[ERROR] [Sun Jan  1 14:59:45 2023] Material.hlsl(75,2-57): warning X3206: implicit truncation of vector type
+ShadowFunction.hlsl(104,9-96): warning X3206: 'SampleCmpLevelZero': implicit truncation of vector type
+C:\Users\qinchuan\source\repos\IrisEngine\IrisEngine\Shader\Hello.hlsl(425,16-60): warning X3206: 'GetFogValue': implicit truncation of vector type
+Material.hlsl(23,2): warning X4000: use of potentially uninitialized variable (GetMaterialBaseColor)
+Material.hlsl(56,2): warning X4000: use of potentially uninitialized variable (GetMaterialSpecular)
+Material.hlsl(46,2): warning X4000: use of potentially uninitialized variable (GetMaterialNormals)
+Material.hlsl(56,2): warning X4000: use of potentially uninitialized variable (GetMaterialSpecular)
+Light.hlsl(37,2): warning X4000: use of potentially uninitialized variable (GetLightDirection)
+Light.hlsl(78,3): warning X4000: use of potentially uninitialized variable (ComputeLightStrength)
+Light.hlsl(126,4): warning X4000: use of potentially uninitialized variable (ComputeLightStrength)
+Light.hlsl(127,3): warning X4000: use of potentially uninitialized variable (ComputeLightStrength)
+Light.hlsl(128,2): warning X4000: use of potentially uninitialized variable (ComputeLightStrength)
+ 

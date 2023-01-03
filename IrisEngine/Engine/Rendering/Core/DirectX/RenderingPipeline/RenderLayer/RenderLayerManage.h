@@ -27,6 +27,13 @@ public:
 	//排序
 	virtual void Sort();
 
+	//单独设置PSO
+	virtual void ResetPSO(int InLayer);
+	virtual void ResetPSO(int InLayer, EPipelineState InPipelineState);
+
+	//渲染 不包含设置PSO
+	virtual void DrawMesh(float DeltaTime, int InLayer, ERenderingConditions RC = ERenderingConditions::RC_None);
+
 	static std::shared_ptr<FRenderLayer> FindByRenderLayer(int InRenderLayer);
 protected:
 	static std::vector<std::shared_ptr<FRenderLayer>> RenderLayers;

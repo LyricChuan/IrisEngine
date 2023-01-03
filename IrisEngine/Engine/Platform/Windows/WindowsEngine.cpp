@@ -14,12 +14,20 @@
 #include "../../Mesh/Core/MeshManage.h"
 #include "../../Rendering/Enigne/DirectX/DirectX12RenderingEngine.h"
 
+#if EDITOR_ENGINE
+#include "../../../EditorEngine/EditorEngine.h"
+#endif
+
 #if defined(_WIN32)
 #include "WindowsMessageProcessing.h"
 
 
 CWindowsEngine::CWindowsEngine()
 	:RenderingEngine(new CDirectX12RenderingEngine())
+#if EDITOR_ENGINE
+	,EditorEngine(new CEditorEngine())
+#endif // 0
+
 {
 	
 }
@@ -56,7 +64,9 @@ int CWindowsEngine::Init(FWinMainCommandParameters InParameters)
 	RenderingEngine->Init(InParameters);
 
 	//×¢²á¶ÔÓ¦µÄworld
-	World = CreateObject<CWorld>(new CWorld());
+	FCreateObjectParam Param;
+	Param.Outer = this;
+	World = CreateObject<CWorld>(Param,new CWorld());
 	RenderingEngine->World = World;
 
 	Engine_Log("Engine initialization complete.");

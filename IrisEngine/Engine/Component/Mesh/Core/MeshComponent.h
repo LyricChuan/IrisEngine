@@ -25,4 +25,10 @@ public:
 public:
 	//¶¯Ì¬·´Éä
 	bool IsDynamicReflection() const;
+
+	void SetCastShadow(bool bNewCastShadow) { bCastShadow = bNewCastShadow; }
+	bool IsCastShadow()const {return bCastShadow;}
+
+protected:
+	bool bCastShadow;
 };

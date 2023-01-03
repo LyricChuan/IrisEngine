@@ -5,9 +5,12 @@
 
 SamplerState TextureSampler: register(s0);
 SamplerState AnisotropicSampler : register(s1);
+SamplerComparisonState ShadowSampler : register(s2);
 
-Texture2D    SimpleTexture2DMap[TEXTURE2D_MAP_NUM] : register(t1);
-TextureCube  SimpleCubeMap: register(t0);
+Texture2D    SimpleShadowMap : register(t2);//阴影贴图，还不支持多张
+Texture2D    SimpleTexture2DMap[TEXTURE2D_MAP_NUM] : register(t3);//普通纹理贴图
+TextureCube  SimpleCubeMap: register(t0);//根签名[6] 天空盒
+TextureCube  SimpleShadowCubeMap: register(t1);//点光源 四面八方的照射 根签名[8]
 
 cbuffer ObjectConstBuffer : register(b0)//b0->b14
 {
@@ -56,11 +59,14 @@ struct MaterialConstBuffer
 	float4 BaseColor;
 
 	float3 SpecularColor;
-	float Padding4;
+	float Refraction;
 
 	float3 FresnelF0;
 	float Transparency;
 	float4x4 TransformInformation;
+
+	float3 Metallicity;
+	float XXX5;
 };
 
 StructuredBuffer<MaterialConstBuffer> Materials : register(t0, Space1);

@@ -37,6 +37,9 @@ public:
 	//只提供不透明层使用
 	void ResetPSO();
 public:
+	FORCEINLINE D3D12_GRAPHICS_PIPELINE_STATE_DESC &GetGPSDesc() { return GPSDesc; }
+
+public:
 	void SetFillMode(bool bWireframe);
 
 	//渲染目标

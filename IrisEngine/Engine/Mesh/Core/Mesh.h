@@ -44,6 +44,11 @@ public:
 	}
 public:
 	virtual void SetMeshRenderLayerType(EMeshRenderLayerType InRenderLayerType);
+
+public:
+	void SetCastShadow(bool bNewCastShadow);
+	bool IsCastShadow()const;
+
 protected:
 	virtual void SetMeshComponent(CMeshComponent* InMeshComponent);
 public:

@@ -5,7 +5,9 @@
 #include "../Component/Mesh/CustomMeshComponent.h"
 GCustomMesh::GCustomMesh()
 {
-	SetMeshComponent(ConstructionObject<CCustomMeshComponent>());
+	FCreateObjectParam Param;
+	Param.Outer = this;
+	SetMeshComponent(ConstructionObject<CCustomMeshComponent>(Param));
 }
 
 void GCustomMesh::Init()
@@ -21,7 +23,7 @@ void GCustomMesh::Draw(float DeltaTime)
 
 }
 
-void GCustomMesh::CreateMesh(string& InPath)
+void GCustomMesh::CreateMesh(const string& InPath)
 {
 	CREATE_RENDER_DATA(CCustomMeshComponent, InPath);
 }

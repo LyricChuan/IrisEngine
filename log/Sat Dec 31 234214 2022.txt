@@ -1,0 +1,231 @@
+[LOG] [Sat Dec 31 23:42:14 2022] Log Init. 
+[LOG] [Sat Dec 31 23:42:14 2022] Engine pre initialization complete. 
+[LOG] [Sat Dec 31 23:42:14 2022] DirectXRenderingEngine pre initialization complete. 
+[LOG] [Sat Dec 31 23:42:16 2022] InitWindows complete. 
+[LOG] [Sat Dec 31 23:42:16 2022] DirectXRenderingEngine initialization complete. 
+[LOG] [Sat Dec 31 23:42:16 2022] Engine initialization complete. 
+[LOG] [Sat Dec 31 23:42:16 2022] Engine post initialization complete. 
+[LOG] [Sat Dec 31 23:42:16 2022] Engine post initialization complete. 
+[LOG] [Sat Dec 31 23:42:19 2022] Load texture root path: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Asset] 
+[LOG] [Sat Dec 31 23:42:19 2022] Load texture num: [27] 
+[LOG] [Sat Dec 31 23:42:19 2022] texture fullname: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Asset\1.mtl] 
+[LOG] [Sat Dec 31 23:42:19 2022] texture fullname: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Asset\1.obj] 
+[LOG] [Sat Dec 31 23:42:19 2022] texture fullname: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Asset\CameraObj.obj] 
+[LOG] [Sat Dec 31 23:42:19 2022] texture fullname: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Asset\Heart.fbx] 
+[LOG] [Sat Dec 31 23:42:19 2022] texture fullname: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Asset\man.mtl] 
+[LOG] [Sat Dec 31 23:42:19 2022] texture fullname: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Asset\man.obj] 
+[LOG] [Sat Dec 31 23:42:19 2022] texture fullname: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Asset\PointMesh.obj] 
+[LOG] [Sat Dec 31 23:42:19 2022] texture fullname: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Asset\SK_Mannequin.FBX] 
+[LOG] [Sat Dec 31 23:42:19 2022] texture fullname: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Asset\SpotMesh.obj] 
+[LOG] [Sat Dec 31 23:42:19 2022] texture fullname: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Asset\SunMesh.obj] 
+[LOG] [Sat Dec 31 23:42:19 2022] texture fullname: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Asset/Texture/Earth.dds] 
+[LOG] [Sat Dec 31 23:42:19 2022] texture fullname: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Asset/Texture/EpicQuadPanorama_CC.dds] 
+[LOG] [Sat Dec 31 23:42:19 2022] texture fullname: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Asset/Texture/Hair.dds] 
+[LOG] [Sat Dec 31 23:42:19 2022] texture fullname: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Asset/Texture/MMOARPG.dds] 
+[LOG] [Sat Dec 31 23:42:19 2022] texture fullname: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Asset/Texture/MMOARPG_NRM.dds] 
+[LOG] [Sat Dec 31 23:42:19 2022] texture fullname: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Asset/Texture/TransparentContent.dds] 
+[LOG] [Sat Dec 31 23:42:19 2022] texture fullname: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Asset/Texture/Wood.dds] 
+[LOG] [Sat Dec 31 23:42:19 2022] texture fullname: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Asset/Texture/Wood2.dds] 
+[LOG] [Sat Dec 31 23:42:19 2022] texture fullname: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Asset/Texture/Wood2_DISP.dds] 
+[LOG] [Sat Dec 31 23:42:19 2022] texture fullname: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Asset/Texture/Wood2_Nor.dds] 
+[LOG] [Sat Dec 31 23:42:19 2022] texture fullname: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Asset\Texture\Wood2_Nor.jpg] 
+[LOG] [Sat Dec 31 23:42:19 2022] texture fullname: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Asset/Texture/Wood2_OCC.dds] 
+[LOG] [Sat Dec 31 23:42:19 2022] texture fullname: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Asset/Texture/Wood2_SPEC.dds] 
+[LOG] [Sat Dec 31 23:42:19 2022] texture fullname: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Asset/Texture/Wood_NRM.dds] 
+[LOG] [Sat Dec 31 23:42:19 2022] texture fullname: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Asset/Texture/x1_CubeMap.dds] 
+[LOG] [Sat Dec 31 23:42:19 2022] texture fullname: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Asset/Texture/Zhuan.dds] 
+[LOG] [Sat Dec 31 23:42:19 2022] texture fullname: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Asset/Texture/Zhuan_NRM.dds] 
+[LOG] [Sat Dec 31 23:42:21 2022] Shader path: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Shader/Sky.hlsl] 
+[ERROR] [Sat Dec 31 23:42:21 2022] C:\Users\qinchuan\source\repos\IrisEngine\IrisEngine\Shader\Sky.hlsl(34,17-69): warning X3206: 'Sample': implicit truncation of vector type
+C:\Users\qinchuan\source\repos\IrisEngine\IrisEngine\Shader\Sky.hlsl(37,10-42): warning X3206: 'GetFogValue': implicit truncation of vector type
+ 
+[LOG] [Sat Dec 31 23:42:21 2022] Shader path: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Shader/Sky.hlsl] 
+[ERROR] [Sat Dec 31 23:42:21 2022] C:\Users\qinchuan\source\repos\IrisEngine\IrisEngine\Shader\Sky.hlsl(34,17-69): warning X3206: 'Sample': implicit truncation of vector type
+C:\Users\qinchuan\source\repos\IrisEngine\IrisEngine\Shader\Sky.hlsl(37,10-42): warning X3206: 'GetFogValue': implicit truncation of vector type
+ 
+[LOG] [Sat Dec 31 23:42:21 2022] Shader path: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Shader/Shadow.hlsl] 
+[ERROR] [Sat Dec 31 23:42:21 2022] Material.hlsl(75,2-57): warning X3206: implicit truncation of vector type
+ 
+[LOG] [Sat Dec 31 23:42:21 2022] Shader path: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Shader/Shadow.hlsl] 
+[ERROR] [Sat Dec 31 23:42:21 2022] Material.hlsl(75,2-57): warning X3206: implicit truncation of vector type
+ 
+[LOG] [Sat Dec 31 23:42:21 2022] Shader path: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Shader/VientianeShadow.hlsl] 
+[ERROR] [Sat Dec 31 23:42:21 2022] Material.hlsl(75,2-57): warning X3206: implicit truncation of vector type
+ 
+[LOG] [Sat Dec 31 23:42:21 2022] Shader path: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Shader/VientianeShadow.hlsl] 
+[ERROR] [Sat Dec 31 23:42:21 2022] Material.hlsl(75,2-57): warning X3206: implicit truncation of vector type
+ 
+[LOG] [Sat Dec 31 23:42:21 2022] Shader path: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Shader/Hello.hlsl] 
+[ERROR] [Sat Dec 31 23:42:21 2022] Material.hlsl(75,2-57): warning X3206: implicit truncation of vector type
+ShadowFunction.hlsl(104,9-96): warning X3206: 'SampleCmpLevelZero': implicit truncation of vector type
+C:\Users\qinchuan\source\repos\IrisEngine\IrisEngine\Shader\Hello.hlsl(356,17-59): warning X3206: 'GetSampleCubeMapIndexR': implicit truncation of vector type
+C:\Users\qinchuan\source\repos\IrisEngine\IrisEngine\Shader\Hello.hlsl(425,16-60): warning X3206: 'GetFogValue': implicit truncation of vector type
+ 
+[LOG] [Sat Dec 31 23:42:21 2022] Shader path: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Shader/Hello.hlsl] 
+[ERROR] [Sat Dec 31 23:42:21 2022] Material.hlsl(75,2-57): warning X3206: implicit truncation of vector type
+ShadowFunction.hlsl(104,9-96): warning X3206: 'SampleCmpLevelZero': implicit truncation of vector type
+C:\Users\qinchuan\source\repos\IrisEngine\IrisEngine\Shader\Hello.hlsl(356,17-59): warning X3206: 'GetSampleCubeMapIndexR': implicit truncation of vector type
+C:\Users\qinchuan\source\repos\IrisEngine\IrisEngine\Shader\Hello.hlsl(425,16-60): warning X3206: 'GetFogValue': implicit truncation of vector type
+Material.hlsl(23,2): warning X4000: use of potentially uninitialized variable (GetMaterialBaseColor)
+Material.hlsl(56,2): warning X4000: use of potentially uninitialized variable (GetMaterialSpecular)
+Material.hlsl(46,2): warning X4000: use of potentially uninitialized variable (GetMaterialNormals)
+Light.hlsl(37,2): warning X4000: use of potentially uninitialized variable (GetLightDirection)
+Light.hlsl(78,3): warning X4000: use of potentially uninitialized variable (ComputeLightStrength)
+Light.hlsl(126,4): warning X4000: use of potentially uninitialized variable (ComputeLightStrength)
+Light.hlsl(127,3): warning X4000: use of potentially uninitialized variable (ComputeLightStrength)
+Light.hlsl(128,2): warning X4000: use of potentially uninitialized variable (ComputeLightStrength)
+ShadowFunction.hlsl(126,9): warning X4000: use of potentially uninitialized variable (IsAngleRange)
+ShadowFunction.hlsl(127,5): warning X4000: use of potentially uninitialized variable (IsAngleRange)
+ShadowFunction.hlsl(126,9): warning X4000: use of potentially uninitialized variable (IsAngleRange)
+ShadowFunction.hlsl(127,5): warning X4000: use of potentially uninitialized variable (IsAngleRange)
+ShadowFunction.hlsl(229,13): warning X4000: use of potentially uninitialized variable (IsPointInCubeMapVieport)
+ShadowFunction.hlsl(231,5): warning X4000: use of potentially uninitialized variable (IsPointInCubeMapVieport)
+ShadowFunction.hlsl(126,9): warning X4000: use of potentially uninitialized variable (IsAngleRange)
+ShadowFunction.hlsl(127,5): warning X4000: use of potentially uninitialized variable (IsAngleRange)
+ShadowFunction.hlsl(169,17): warning X4000: use of potentially uninitialized variable (IsAngleAxisRange)
+ShadowFunction.hlsl(170,13): warning X4000: use of potentially uninitialized variable (IsAngleAxisRange)
+ShadowFunction.hlsl(179,17): warning X4000: use of potentially uninitialized variable (IsAngleAxisRange)
+ShadowFunction.hlsl(180,13): warning X4000: use of potentially uninitialized variable (IsAngleAxisRange)
+ShadowFunction.hlsl(202,13): warning X4000: use of potentially uninitialized variable (IsPointInCubeMapVieport)
+ShadowFunction.hlsl(231,5): warning X4000: use of potentially uninitialized variable (IsPointInCubeMapVieport)
+ShadowFunction.hlsl(126,9): warning X4000: use of potentially uninitialized variable (IsAngleRange)
+ShadowFunction.hlsl(127,5): warning X4000: use of potentially uninitialized variable (IsAngleRange)
+ShadowFunction.hlsl(126,9): warning X4000: use of potentially uninitialized variable (IsAngleRange)
+ShadowFunction.hlsl(127,5): warning X4000: use of potentially uninitialized variable (IsAngleRange)
+ShadowFunction.hlsl(229,13): warning X4000: use of potentially uninitialized variable (IsPointInCubeMapVieport)
+ShadowFunction.hlsl(231,5): warning X4000: use of potentially uninitialized variable (IsPointInCubeMapVieport)
+ShadowFunction.hlsl(126,9): warning X4000: use of potentially uninitialized variable (IsAngleRange)
+ShadowFunction.hlsl(127,5): warning X4000: use of potentially uninitialized variable (IsAngleRange)
+ShadowFunction.hlsl(126,9): warning X4000: use of potentially uninitialized variable (IsAngleRange)
+ShadowFunction.hlsl(127,5): warning X4000: use of potentially uninitialized variable (IsAngleRange)
+ShadowFunction.hlsl(229,13): warning X4000: use of potentially uninitialized variable (IsPointInCubeMapVieport)
+ShadowFunction.hlsl(231,5): warning X4000: use of potentially uninitialized variable (IsPointInCubeMapVieport)
+ShadowFunction.hlsl(126,9): warning X4000: use of potentially uninitialized variable (IsAngleRange)
+ShadowFunction.hlsl(127,5): warning X4000: use of potentially uninitialized variable (IsAngleRange)
+ShadowFunction.hlsl(211,17): warning X4000: use of potentially uninitialized variable (IsPointInCubeMapVieport)
+ShadowFunction.hlsl(212,13): warning X4000: use of potentially uninitialized variable (IsPointInCubeMapVieport)
+ShadowFunction.hlsl(231,5): warning X4000: use of potentially uninitialized variable (IsPointInCubeMapVieport)
+ShadowFunction.hlsl(126,9): warning X4000: use of potentially uninitialized variable (IsAngleRange)
+ShadowFunction.hlsl(127,5): warning X4000: use of potentially uninitialized variable (IsAngleRange)
+ShadowFunction.hlsl(221,17): warning X4000: use of potentially uninitialized variable (IsPointInCubeMapVieport)
+ShadowFunction.hlsl(222,13): warning X4000: use of potentially uninitialized variable (IsPointInCubeMapVieport)
+ShadowFunction.hlsl(231,5): warning X4000: use of potentially uninitialized variable (IsPointInCubeMapVieport)
+ShadowFunction.hlsl(286,5): warning X4000: use of potentially uninitialized variable (GetSampleCubeMapIndexR)
+ShadowFunction.hlsl(316,5): warning X4000: use of potentially uninitialized variable (DebugCubeVieport)
+ 
+[LOG] [Sat Dec 31 23:42:21 2022] Shader path: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Shader/Hello.hlsl] 
+[ERROR] [Sat Dec 31 23:42:21 2022] Material.hlsl(75,2-57): warning X3206: implicit truncation of vector type
+ShadowFunction.hlsl(104,9-96): warning X3206: 'SampleCmpLevelZero': implicit truncation of vector type
+C:\Users\qinchuan\source\repos\IrisEngine\IrisEngine\Shader\Hello.hlsl(356,17-59): warning X3206: 'GetSampleCubeMapIndexR': implicit truncation of vector type
+C:\Users\qinchuan\source\repos\IrisEngine\IrisEngine\Shader\Hello.hlsl(425,16-60): warning X3206: 'GetFogValue': implicit truncation of vector type
+ 
+[LOG] [Sat Dec 31 23:42:21 2022] Shader path: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Shader/Hello.hlsl] 
+[ERROR] [Sat Dec 31 23:42:22 2022] Material.hlsl(75,2-57): warning X3206: implicit truncation of vector type
+ShadowFunction.hlsl(104,9-96): warning X3206: 'SampleCmpLevelZero': implicit truncation of vector type
+C:\Users\qinchuan\source\repos\IrisEngine\IrisEngine\Shader\Hello.hlsl(356,17-59): warning X3206: 'GetSampleCubeMapIndexR': implicit truncation of vector type
+C:\Users\qinchuan\source\repos\IrisEngine\IrisEngine\Shader\Hello.hlsl(425,16-60): warning X3206: 'GetFogValue': implicit truncation of vector type
+Material.hlsl(23,2): warning X4000: use of potentially uninitialized variable (GetMaterialBaseColor)
+Material.hlsl(56,2): warning X4000: use of potentially uninitialized variable (GetMaterialSpecular)
+Material.hlsl(46,2): warning X4000: use of potentially uninitialized variable (GetMaterialNormals)
+Light.hlsl(37,2): warning X4000: use of potentially uninitialized variable (GetLightDirection)
+Light.hlsl(78,3): warning X4000: use of potentially uninitialized variable (ComputeLightStrength)
+Light.hlsl(126,4): warning X4000: use of potentially uninitialized variable (ComputeLightStrength)
+Light.hlsl(127,3): warning X4000: use of potentially uninitialized variable (ComputeLightStrength)
+Light.hlsl(128,2): warning X4000: use of potentially uninitialized variable (ComputeLightStrength)
+ShadowFunction.hlsl(126,9): warning X4000: use of potentially uninitialized variable (IsAngleRange)
+ShadowFunction.hlsl(127,5): warning X4000: use of potentially uninitialized variable (IsAngleRange)
+ShadowFunction.hlsl(126,9): warning X4000: use of potentially uninitialized variable (IsAngleRange)
+ShadowFunction.hlsl(127,5): warning X4000: use of potentially uninitialized variable (IsAngleRange)
+ShadowFunction.hlsl(229,13): warning X4000: use of potentially uninitialized variable (IsPointInCubeMapVieport)
+ShadowFunction.hlsl(231,5): warning X4000: use of potentially uninitialized variable (IsPointInCubeMapVieport)
+ShadowFunction.hlsl(126,9): warning X4000: use of potentially uninitialized variable (IsAngleRange)
+ShadowFunction.hlsl(127,5): warning X4000: use of potentially uninitialized variable (IsAngleRange)
+ShadowFunction.hlsl(169,17): warning X4000: use of potentially uninitialized variable (IsAngleAxisRange)
+ShadowFunction.hlsl(170,13): warning X4000: use of potentially uninitialized variable (IsAngleAxisRange)
+ShadowFunction.hlsl(179,17): warning X4000: use of potentially uninitialized variable (IsAngleAxisRange)
+ShadowFunction.hlsl(180,13): warning X4000: use of potentially uninitialized variable (IsAngleAxisRange)
+ShadowFunction.hlsl(202,13): warning X4000: use of potentially uninitialized variable (IsPointInCubeMapVieport)
+ShadowFunction.hlsl(231,5): warning X4000: use of potentially uninitialized variable (IsPointInCubeMapVieport)
+ShadowFunction.hlsl(126,9): warning X4000: use of potentially uninitialized variable (IsAngleRange)
+ShadowFunction.hlsl(127,5): warning X4000: use of potentially uninitialized variable (IsAngleRange)
+ShadowFunction.hlsl(126,9): warning X4000: use of potentially uninitialized variable (IsAngleRange)
+ShadowFunction.hlsl(127,5): warning X4000: use of potentially uninitialized variable (IsAngleRange)
+ShadowFunction.hlsl(229,13): warning X4000: use of potentially uninitialized variable (IsPointInCubeMapVieport)
+ShadowFunction.hlsl(231,5): warning X4000: use of potentially uninitialized variable (IsPointInCubeMapVieport)
+ShadowFunction.hlsl(126,9): warning X4000: use of potentially uninitialized variable (IsAngleRange)
+ShadowFunction.hlsl(127,5): warning X4000: use of potentially uninitialized variable (IsAngleRange)
+ShadowFunction.hlsl(126,9): warning X4000: use of potentially uninitialized variable (IsAngleRange)
+ShadowFunction.hlsl(127,5): warning X4000: use of potentially uninitialized variable (IsAngleRange)
+ShadowFunction.hlsl(229,13): warning X4000: use of potentially uninitialized variable (IsPointInCubeMapVieport)
+ShadowFunction.hlsl(231,5): warning X4000: use of potentially uninitialized variable (IsPointInCubeMapVieport)
+ShadowFunction.hlsl(126,9): warning X4000: use of potentially uninitialized variable (IsAngleRange)
+ShadowFunction.hlsl(127,5): warning X4000: use of potentially uninitialized variable (IsAngleRange)
+ShadowFunction.hlsl(211,17): warning X4000: use of potentially uninitialized variable (IsPointInCubeMapVieport)
+ShadowFunction.hlsl(212,13): warning X4000: use of potentially uninitialized variable (IsPointInCubeMapVieport)
+ShadowFunction.hlsl(231,5): warning X4000: use of potentially uninitialized variable (IsPointInCubeMapVieport)
+ShadowFunction.hlsl(126,9): warning X4000: use of potentially uninitialized variable (IsAngleRange)
+ShadowFunction.hlsl(127,5): warning X4000: use of potentially uninitialized variable (IsAngleRange)
+ShadowFunction.hlsl(221,17): warning X4000: use of potentially uninitialized variable (IsPointInCubeMapVieport)
+ShadowFunction.hlsl(222,13): warning X4000: use of potentially uninitialized variable (IsPointInCubeMapVieport)
+ShadowFunction.hlsl(231,5): warning X4000: use of potentially uninitialized variable (IsPointInCubeMapVieport)
+ShadowFunction.hlsl(286,5): warning X4000: use of potentially uninitialized variable (GetSampleCubeMapIndexR)
+ShadowFunction.hlsl(316,5): warning X4000: use of potentially uninitialized variable (DebugCubeVieport)
+ 
+[LOG] [Sat Dec 31 23:42:22 2022] Shader path: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Shader/Hello.hlsl] 
+[ERROR] [Sat Dec 31 23:42:22 2022] Material.hlsl(75,2-57): warning X3206: implicit truncation of vector type
+ShadowFunction.hlsl(104,9-96): warning X3206: 'SampleCmpLevelZero': implicit truncation of vector type
+C:\Users\qinchuan\source\repos\IrisEngine\IrisEngine\Shader\Hello.hlsl(356,17-59): warning X3206: 'GetSampleCubeMapIndexR': implicit truncation of vector type
+C:\Users\qinchuan\source\repos\IrisEngine\IrisEngine\Shader\Hello.hlsl(425,16-60): warning X3206: 'GetFogValue': implicit truncation of vector type
+ 
+[LOG] [Sat Dec 31 23:42:22 2022] Shader path: [C:/Users/qinchuan/source/repos/IrisEngine/IrisEngine/Shader/Hello.hlsl] 
+[ERROR] [Sat Dec 31 23:42:22 2022] Material.hlsl(75,2-57): warning X3206: implicit truncation of vector type
+ShadowFunction.hlsl(104,9-96): warning X3206: 'SampleCmpLevelZero': implicit truncation of vector type
+C:\Users\qinchuan\source\repos\IrisEngine\IrisEngine\Shader\Hello.hlsl(356,17-59): warning X3206: 'GetSampleCubeMapIndexR': implicit truncation of vector type
+C:\Users\qinchuan\source\repos\IrisEngine\IrisEngine\Shader\Hello.hlsl(425,16-60): warning X3206: 'GetFogValue': implicit truncation of vector type
+Material.hlsl(23,2): warning X4000: use of potentially uninitialized variable (GetMaterialBaseColor)
+Material.hlsl(56,2): warning X4000: use of potentially uninitialized variable (GetMaterialSpecular)
+Material.hlsl(46,2): warning X4000: use of potentially uninitialized variable (GetMaterialNormals)
+Light.hlsl(37,2): warning X4000: use of potentially uninitialized variable (GetLightDirection)
+Light.hlsl(78,3): warning X4000: use of potentially uninitialized variable (ComputeLightStrength)
+Light.hlsl(126,4): warning X4000: use of potentially uninitialized variable (ComputeLightStrength)
+Light.hlsl(127,3): warning X4000: use of potentially uninitialized variable (ComputeLightStrength)
+Light.hlsl(128,2): warning X4000: use of potentially uninitialized variable (ComputeLightStrength)
+ShadowFunction.hlsl(126,9): warning X4000: use of potentially uninitialized variable (IsAngleRange)
+ShadowFunction.hlsl(127,5): warning X4000: use of potentially uninitialized variable (IsAngleRange)
+ShadowFunction.hlsl(126,9): warning X4000: use of potentially uninitialized variable (IsAngleRange)
+ShadowFunction.hlsl(127,5): warning X4000: use of potentially uninitialized variable (IsAngleRange)
+ShadowFunction.hlsl(229,13): warning X4000: use of potentially uninitialized variable (IsPointInCubeMapVieport)
+ShadowFunction.hlsl(231,5): warning X4000: use of potentially uninitialized variable (IsPointInCubeMapVieport)
+ShadowFunction.hlsl(126,9): warning X4000: use of potentially uninitialized variable (IsAngleRange)
+ShadowFunction.hlsl(127,5): warning X4000: use of potentially uninitialized variable (IsAngleRange)
+ShadowFunction.hlsl(169,17): warning X4000: use of potentially uninitialized variable (IsAngleAxisRange)
+ShadowFunction.hlsl(170,13): warning X4000: use of potentially uninitialized variable (IsAngleAxisRange)
+ShadowFunction.hlsl(179,17): warning X4000: use of potentially uninitialized variable (IsAngleAxisRange)
+ShadowFunction.hlsl(180,13): warning X4000: use of potentially uninitialized variable (IsAngleAxisRange)
+ShadowFunction.hlsl(202,13): warning X4000: use of potentially uninitialized variable (IsPointInCubeMapVieport)
+ShadowFunction.hlsl(231,5): warning X4000: use of potentially uninitialized variable (IsPointInCubeMapVieport)
+ShadowFunction.hlsl(126,9): warning X4000: use of potentially uninitialized variable (IsAngleRange)
+ShadowFunction.hlsl(127,5): warning X4000: use of potentially uninitialized variable (IsAngleRange)
+ShadowFunction.hlsl(126,9): warning X4000: use of potentially uninitialized variable (IsAngleRange)
+ShadowFunction.hlsl(127,5): warning X4000: use of potentially uninitialized variable (IsAngleRange)
+ShadowFunction.hlsl(229,13): warning X4000: use of potentially uninitialized variable (IsPointInCubeMapVieport)
+ShadowFunction.hlsl(231,5): warning X4000: use of potentially uninitialized variable (IsPointInCubeMapVieport)
+ShadowFunction.hlsl(126,9): warning X4000: use of potentially uninitialized variable (IsAngleRange)
+ShadowFunction.hlsl(127,5): warning X4000: use of potentially uninitialized variable (IsAngleRange)
+ShadowFunction.hlsl(126,9): warning X4000: use of potentially uninitialized variable (IsAngleRange)
+ShadowFunction.hlsl(127,5): warning X4000: use of potentially uninitialized variable (IsAngleRange)
+ShadowFunction.hlsl(229,13): warning X4000: use of potentially uninitialized variable (IsPointInCubeMapVieport)
+ShadowFunction.hlsl(231,5): warning X4000: use of potentially uninitialized variable (IsPointInCubeMapVieport)
+ShadowFunction.hlsl(126,9): warning X4000: use of potentially uninitialized variable (IsAngleRange)
+ShadowFunction.hlsl(127,5): warning X4000: use of potentially uninitialized variable (IsAngleRange)
+ShadowFunction.hlsl(211,17): warning X4000: use of potentially uninitialized variable (IsPointInCubeMapVieport)
+ShadowFunction.hlsl(212,13): warning X4000: use of potentially uninitialized variable (IsPointInCubeMapVieport)
+ShadowFunction.hlsl(231,5): warning X4000: use of potentially uninitialized variable (IsPointInCubeMapVieport)
+ShadowFunction.hlsl(126,9): warning X4000: use of potentially uninitialized variable (IsAngleRange)
+ShadowFunction.hlsl(127,5): warning X4000: use of potentially uninitialized variable (IsAngleRange)
+ShadowFunction.hlsl(221,17): warning X4000: use of potentially uninitialized variable (IsPointInCubeMapVieport)
+ShadowFunction.hlsl(222,13): warning X4000: use of potentially uninitialized variable (IsPointInCubeMapVieport)
+ShadowFunction.hlsl(231,5): warning X4000: use of potentially uninitialized variable (IsPointInCubeMapVieport)
+ShadowFunction.hlsl(286,5): warning X4000: use of potentially uninitialized variable (GetSampleCubeMapIndexR)
+ShadowFunction.hlsl(316,5): warning X4000: use of potentially uninitialized variable (DebugCubeVieport)
+ 

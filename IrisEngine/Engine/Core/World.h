@@ -2,6 +2,7 @@
 
 #include "CoreObject/CoreMinimalObject.h"
 #include "../CodeReflection/CodeReflectionMacroTag.h"
+#include "../EngineType.h"
 
 struct FInputKey;
 class CTransformationComponent;
@@ -20,10 +21,14 @@ public:
 	T *CreateActorObject()
 	{
 		T *InArray = new T();
+		InArray->SetOuter(this);
+
 		ActorObjects.push_back(InArray);
 
 		return InArray;
 	}
+public:
+	bool LineTraceBySingle(FCollisionResult &OutResult,const fvector_3d &InStart, const fvector_3d& InEnd);
 
 protected:
 	CVARIABLE()

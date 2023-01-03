@@ -20,6 +20,7 @@ public:
 	virtual void Tick(float DeltaTime);
 	virtual void BuildViewMatrix(float DeltaTime);
 
+	void BuildOrthographicOffCenterLHMatrix(float InRadius,const fvector_3d &InTargetPosition);
 public:
 	FORCEINLINE float GetFOV() const { return YFOV; }
 	FORCEINLINE float GetAspect() const { return Aspect; }

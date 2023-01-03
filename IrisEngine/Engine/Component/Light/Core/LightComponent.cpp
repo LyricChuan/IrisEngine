@@ -10,7 +10,7 @@ CLightComponent::CLightComponent()
 
 CLightComponent::~CLightComponent()
 {
-	//以后再做
+	//todo
 }
 
 void CLightComponent::SetLightIntensity(const fvector_3d& InNewLightIntensity)
@@ -81,4 +81,7 @@ void CLightComponent::SetUpVector(const XMFLOAT3& InUpVector)
 void CLightComponent::SetLightMesh(CMeshComponent* InLightMesh)
 {
 	LightMesh = InLightMesh;
+
+	//对于灯光模型 不需要投射阴影
+	LightMesh->SetCastShadow(false);
 }

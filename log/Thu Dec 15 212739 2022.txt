@@ -1,0 +1,19 @@
+[LOG] [Thu Dec 15 21:27:39 2022] Log Init. 
+[LOG] [Thu Dec 15 21:27:39 2022] Engine pre initialization complete. 
+[LOG] [Thu Dec 15 21:27:43 2022] DirectXRenderingEngine pre initialization complete. 
+[LOG] [Thu Dec 15 21:28:10 2022] InitWindows complete. 
+[SUCCESS] [Thu Dec 15 21:28:14 2022] Success ! 
+[SUCCESS] [Thu Dec 15 21:28:14 2022] Success ! 
+[SUCCESS] [Thu Dec 15 21:28:14 2022] Success ! 
+[SUCCESS] [Thu Dec 15 21:28:14 2022] Success ! 
+[SUCCESS] [Thu Dec 15 21:28:14 2022] Success ! 
+[SUCCESS] [Thu Dec 15 21:28:14 2022] Success ! 
+[SUCCESS] [Thu Dec 15 21:28:14 2022] Success ! 
+[SUCCESS] [Thu Dec 15 21:28:14 2022] Success ! 
+[SUCCESS] [Thu Dec 15 21:28:14 2022] Success ! 
+[SUCCESS] [Thu Dec 15 21:28:14 2022] Success ! 
+[SUCCESS] [Thu Dec 15 21:28:14 2022] Success ! 
+[SUCCESS] [Thu Dec 15 21:28:14 2022] Success ! 
+[SUCCESS] [Thu Dec 15 21:28:14 2022] Success ! 
+[LOG] [Thu Dec 15 21:28:14 2022] DirectXRenderingEngine initialization complete. 
+[LOG] [Thu Dec 15 21:29:51 2022] Engine initialization complete. 

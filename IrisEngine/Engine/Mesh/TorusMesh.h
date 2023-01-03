@@ -9,7 +9,7 @@ public:
 	GTorusMesh();
 
 	virtual void Init();
-
+	virtual void Tick(float DeltaTime);
 	virtual void Draw(float DeltaTime);
 
 	void CreateMesh(
